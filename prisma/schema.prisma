@@ -1,0 +1,78 @@
+// Schéma de base de données Nardev — brouillon commun à valider en équipe.
+// cf. cahier des charges v2, section 4 : tables Service, Projet, Message, Membre, User (admin).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// Compte administrateur (back-office /admin) — auth NextAuth Credentials.
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+/// Les 4 services présentés sur / et /services (contenu géré depuis l'admin).
+/// Domaine : Mame Diarra
+model Service {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  titre       String
+  description String
+  /// Liste à puces « ce que le client reçoit » — un élément par ligne.
+  livrables   String[]
+  ordre       Int      @default(0)
+  projets     Projet[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+/// Réalisations affichées sur /portfolio et /portfolio/[slug].
+/// Domaine : Rokhaya
+model Projet {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  nom          String
+  imageUrl     String?
+  /// Besoin client + solution apportée.
+  description  String
+  technologies String[]
+  service      Service? @relation(fields: [serviceId], references: [id])
+  serviceId    String?
+  publie       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+/// Messages reçus via le formulaire /contact.
+/// Domaine : Awa Ndao
+model Message {
+  id        String   @id @default(cuid())
+  nom       String
+  entreprise String?
+  service   String?
+  contenu   String
+  lu        Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+/// Fondateurs présentés sur /a-propos.
+/// Domaine : Ndiawar
+model Membre {
+  id           String   @id @default(cuid())
+  nom          String
+  role         String
+  presentation String
+  photoUrl     String?
+  ordre        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
