@@ -26,9 +26,17 @@ model Service {
   id          String   @id @default(cuid())
   slug        String   @unique
   titre       String
+  /// Phrase courte pour la carte service sur l'accueil.
+  resume      String
+  /// Texte long (3-4 phrases) pour la page /services.
   description String
+  /// Pourquoi choisir ce service — bénéfices pour le client.
+  avantages   String[]
   /// Liste à puces « ce que le client reçoit » — un élément par ligne.
-  livrables   String[]
+  pointsCles  String[]
+  /// Photo/illustration du service. Nullable : un dégradé de remplacement
+  /// s'affiche tant que la vraie photo n'a pas été ajoutée depuis l'admin.
+  imageUrl    String?
   ordre       Int      @default(0)
   projets     Projet[]
   createdAt   DateTime @default(now())

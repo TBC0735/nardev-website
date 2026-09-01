@@ -17,6 +17,10 @@ const config: Config = {
         "fond-alt": "#F9FAFB", // fond de section alternée
         bordure: "#E5E7EB", // bordures / séparateurs
         succes: "#16A34A", // disponibilité / succès
+        // Hors palette officielle du cahier des charges (qui ne prévoit pas de
+        // couleur d'erreur) — exception technique nécessaire pour les actions
+        // destructrices et messages d'erreur, gardée à part de la marque.
+        erreur: "#DC2626",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
