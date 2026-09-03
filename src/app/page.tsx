@@ -1,61 +1,81 @@
+import { prisma } from "@/lib/prisma";
+import { Hero } from "@/components/Hero";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
+import { ServiceCard } from "@/components/ServiceCard";
+import { PortfolioPreview } from "@/components/PortfolioPreview";
+import { AboutTeaser } from "@/components/AboutTeaser";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
-const services = [
-  { title: "Sites vitrines", desc: "Une présence en ligne claire et professionnelle." },
-  { title: "Sites dynamiques", desc: "Des sites avec back-office pour gérer votre contenu." },
-  { title: "Flyers & affiches", desc: "Des supports print alignés sur votre image." },
-  { title: "Visibilité Google", desc: "Votre fiche entreprise optimisée pour être trouvé." },
-];
+export const dynamic = "force-dynamic";
 
-export default function HomePage() {
+async function getServices() {
+  try {
+    return await prisma.service.findMany({ orderBy: { ordre: "asc" }, take: 4 });
+  } catch {
+    return [];
+  }
+}
+
+async function getProjetsRecents() {
+  try {
+    return await prisma.projet.findMany({
+      where: { publie: true },
+      orderBy: { createdAt: "desc" },
+      take: 3,
+    });
+  } catch {
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const [services, projets] = await Promise.all([getServices(), getProjetsRecents()]);
+
   return (
     <>
-      <section className="bg-fond-alt">
-        <Container className="py-20">
-          <h1 className="max-w-3xl text-4xl sm:text-5xl">
-            Nardev conçoit des sites web et des supports qui font grandir votre
-            activité.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-texte-secondaire">
-            Sites vitrines, sites dynamiques, print et visibilité Google — une
-            équipe, un interlocuteur, un résultat soigné.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/contact?type=devis">Demander un devis</Button>
-            <Button href="/portfolio" variant="contour">
-              Voir nos réalisations
-            </Button>
-          </div>
-        </Container>
-      </section>
+      <Hero
+        imageUrl="/hero.jpg"
+        imageAlt="Un membre de l'équipe Nardev accompagnant un client"
+      />
 
-      <section>
+      <section id="services" className="scroll-mt-20">
         <Container className="py-16">
-          <h2 className="text-2xl">Nos services</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((s) => (
-              <a
-                key={s.title}
-                href="/services"
-                className="rounded border border-bordure p-5 no-underline transition-colors hover:border-bleu"
-              >
-                <p className="font-semibold text-marine">{s.title}</p>
-                <p className="mt-2 text-sm text-texte-secondaire">{s.desc}</p>
-              </a>
-            ))}
-          </div>
+          <Reveal>
+            <h2 className="text-2xl">Nos services</h2>
+          </Reveal>
+          {services.length === 0 ? (
+            <p className="mt-4 text-texte-secondaire">
+              Les services seront bientôt disponibles ici.
+            </p>
+          ) : (
+            <RevealGroup className="mt-8 grid gap-6 sm:grid-cols-2">
+              {services.map((service) => (
+                <RevealItem key={service.id}>
+                  <ServiceCard service={service} />
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          )}
         </Container>
       </section>
 
+      <PortfolioPreview projets={projets} />
+
+      <Reveal>
+        <AboutTeaser />
+      </Reveal>
+
       <section className="bg-fond-alt">
-        <Container className="flex flex-col items-start gap-4 py-16">
-          <h2 className="text-2xl">Un projet en tête ?</h2>
-          <p className="max-w-xl text-texte-secondaire">
-            Parlons-en. On revient vers vous rapidement avec une proposition
-            concrète.
-          </p>
-          <Button href="/contact">Nous contacter</Button>
+        <Container className="py-16">
+          <Reveal className="flex flex-col items-start gap-4">
+            <h2 className="text-2xl">Un projet en tête ?</h2>
+            <p className="max-w-xl text-texte-secondaire">
+              Parlons-en, tout simplement. On revient vers vous rapidement
+              avec une proposition concrète.
+            </p>
+            <Button href="/contact">Nous contacter</Button>
+          </Reveal>
         </Container>
       </section>
     </>
