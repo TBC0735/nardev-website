@@ -66,6 +66,9 @@ async function main() {
 
   // Services (domaine « Services & Accueil » — Mame Diarra).
   // Modifiables ensuite depuis /admin/services.
+  // imageUrl volontairement null : les vrais visuels (projets Nardev ou photos
+  // libres de droits) seront ajoutés depuis l'admin. En attendant, un aplat
+  // dégradé aux couleurs de la charte s'affiche.
   const services = [
     {
       slug: "sites-vitrines",
@@ -86,7 +89,7 @@ async function main() {
         "Jusqu'à 5 pages (accueil, services, contact, etc.)",
         "Mise en ligne incluse",
       ],
-      imageUrl: "/services/sites-vitrines.jpeg",
+      imageUrl: null,
       ordre: 1,
     },
     {
@@ -107,7 +110,7 @@ async function main() {
         "Formation à l'utilisation de l'admin",
         "Hébergement et mise en ligne accompagnés",
       ],
-      imageUrl: "/services/sites-dynamiques.webp",
+      imageUrl: null,
       ordre: 2,
     },
     {
@@ -128,7 +131,7 @@ async function main() {
         "Version adaptée aux réseaux sociaux",
         "1 à 2 allers-retours de retouches inclus",
       ],
-      imageUrl: "/services/flyers-affiches.jpg",
+      imageUrl: null,
       ordre: 3,
     },
     {
@@ -149,7 +152,7 @@ async function main() {
         "Conseils pour obtenir des avis clients",
         "Suivi de la visibilité sur un mois",
       ],
-      imageUrl: "/services/visibilite-google.jpg",
+      imageUrl: null,
       ordre: 4,
     },
   ];

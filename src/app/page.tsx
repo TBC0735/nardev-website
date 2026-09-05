@@ -34,10 +34,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero
-        imageUrl="/hero.jpg"
-        imageAlt="Un membre de l'équipe Nardev accompagnant un client"
-      />
+      <Hero />
 
       <section id="services" className="scroll-mt-20">
         <Container className="py-16">

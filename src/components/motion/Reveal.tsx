@@ -1,44 +1,67 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
-/** Apparition douce au scroll pour un bloc isolé (titres de section, bandeaux…). */
+// Charte : « pas d'effets voyants ». On se limite à un fondu discret à
+// l'apparition, joué une seule fois. Fait maison (IntersectionObserver + CSS)
+// pour ne pas embarquer de librairie d'animation.
+
+function useRevele<T extends HTMLElement>(delay = 0) {
+  const ref = useRef<T>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisible(true);
+      return;
+    }
+
+    let timer: ReturnType<typeof setTimeout>;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          timer = setTimeout(() => setVisible(true), delay);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "-40px" },
+    );
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, [delay]);
+
+  return { ref, visible };
+}
+
+const classes = (visible: boolean, className?: string) =>
+  `transition-opacity duration-500 ease-out ${visible ? "opacity-100" : "opacity-0"} ${className ?? ""}`;
+
+/** Fondu discret à l'apparition pour un bloc isolé (titres de section, bandeaux…). */
 export function Reveal({
   children,
   delay = 0,
-  y = 24,
   className,
 }: {
   children: ReactNode;
   delay?: number;
-  y?: number;
   className?: string;
 }) {
+  const { ref, visible } = useRevele<HTMLDivElement>(delay);
   return (
-    <motion.div
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={className}
-    >
+    <div ref={ref} className={classes(visible, className)}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-const containerVariants: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-};
-
-/** Conteneur qui déclenche l'apparition en cascade de ses `RevealItem` enfants. */
+/** Conteneur d'éléments révélés à l'apparition. */
 export function RevealGroup({
   children,
   className,
@@ -46,20 +69,10 @@ export function RevealGroup({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
-/** Élément d'une `RevealGroup` — fondu + léger décalage vers le haut, en cascade. */
+/** Élément d'une `RevealGroup` — même fondu discret. */
 export function RevealItem({
   children,
   className,
@@ -67,9 +80,10 @@ export function RevealItem({
   children: ReactNode;
   className?: string;
 }) {
+  const { ref, visible } = useRevele<HTMLDivElement>(0);
   return (
-    <motion.div variants={itemVariants} className={className}>
+    <div ref={ref} className={classes(visible, className)}>
       {children}
-    </motion.div>
+    </div>
   );
 }
