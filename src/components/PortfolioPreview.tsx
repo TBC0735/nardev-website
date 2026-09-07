@@ -3,25 +3,32 @@ import type { Projet } from "@prisma/client";
 import { Container } from "./Container";
 import { PhotoFrame } from "./PhotoFrame";
 import { Reveal, RevealGroup, RevealItem } from "./motion/Reveal";
+import type { Dict } from "@/i18n/dictionaries";
 
 /**
  * Aperçu de réalisations sur l'accueil. Composant purement présentationnel :
  * reçoit les projets en props (domaine Portfolio — Rokhaya) pour être
  * branché facilement une fois la table Projet alimentée.
  */
-export function PortfolioPreview({ projets }: { projets: Projet[] }) {
+export function PortfolioPreview({
+  projets,
+  dict,
+}: {
+  projets: Projet[];
+  dict: Dict;
+}) {
   if (projets.length === 0) return null;
 
   return (
     <section className="bg-fond-alt">
       <Container className="py-16">
         <Reveal className="flex items-baseline justify-between">
-          <h2 className="text-2xl">Nos réalisations</h2>
+          <h2 className="text-2xl">{dict.portfolio.previewTitle}</h2>
           <Link
             href="/portfolio"
             className="text-sm font-medium no-underline hover:underline"
           >
-            Voir tout
+            {dict.portfolio.seeAll}
           </Link>
         </Reveal>
         <RevealGroup className="mt-8 grid gap-6 sm:grid-cols-3">

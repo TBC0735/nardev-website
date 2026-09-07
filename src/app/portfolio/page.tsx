@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Container } from "@/components/Container";
 import { prisma } from "@/lib/prisma";
+import { getDict } from "@/i18n/server";
 import { PortfolioGrid } from "./PortfolioGrid";
 
 export const metadata: Metadata = { title: "Réalisations" };
@@ -27,6 +28,7 @@ async function getData() {
 }
 
 export default async function PortfolioPage() {
+  const dict = getDict();
   const { projets, services } = await getData();
 
   // Ne proposer dans le filtre que les services qui ont au moins un projet.
@@ -37,22 +39,26 @@ export default async function PortfolioPage() {
     <>
       <section className="border-b border-bordure bg-fond-alt">
         <Container className="py-16">
-          <h1 className="text-3xl sm:text-4xl">Nos réalisations</h1>
+          <h1 className="text-3xl sm:text-4xl">{dict.portfolio.title}</h1>
           <p className="mt-4 max-w-2xl text-texte-secondaire">
-            Quelques projets menés par Nardev. Chaque fiche détaille le besoin
-            du client, la solution apportée et les technologies utilisées.
+            {dict.portfolio.intro}
           </p>
         </Container>
       </section>
 
       <Container className="py-16">
         {projets.length === 0 ? (
-          <p className="text-texte-secondaire">
-            Les réalisations seront bientôt visibles ici.
-          </p>
+          <p className="text-texte-secondaire">{dict.portfolio.empty}</p>
         ) : (
           <Suspense>
-            <PortfolioGrid projets={projets} filtres={filtres} />
+            <PortfolioGrid
+              projets={projets}
+              filtres={filtres}
+              labels={{
+                all: dict.portfolio.filterAll,
+                empty: dict.portfolio.filterEmpty,
+              }}
+            />
           </Suspense>
         )}
       </Container>

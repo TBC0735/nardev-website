@@ -5,16 +5,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container } from "./Container";
 import { Button } from "./Button";
+import { LangToggle } from "./LangToggle";
+import type { Locale } from "@/i18n/config";
+import type { Dict } from "@/i18n/dictionaries";
 
-const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/a-propos", label: "À propos" },
-  { href: "/contact", label: "Contact" },
-];
-
-export function Header() {
+export function Header({ dict, locale }: { dict: Dict; locale: Locale }) {
   const pathname = usePathname();
+
+  const navLinks = [
+    { href: "/services", label: dict.nav.services },
+    { href: "/portfolio", label: dict.nav.portfolio },
+    { href: "/a-propos", label: dict.nav.about },
+    { href: "/faq", label: dict.nav.faq },
+    { href: "/contact", label: dict.nav.contact },
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-bordure bg-white">
@@ -53,7 +57,10 @@ export function Header() {
           })}
         </nav>
 
-        <Button href="/contact?type=devis">Demander un devis</Button>
+        <div className="flex items-center gap-3">
+          <LangToggle current={locale} label={dict.langToggle.label} />
+          <Button href="/contact?type=devis">{dict.cta.quote}</Button>
+        </div>
       </Container>
     </header>
   );

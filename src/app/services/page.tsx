@@ -4,6 +4,7 @@ import { Button } from "@/components/Button";
 import { PhotoFrame } from "@/components/PhotoFrame";
 import { prisma } from "@/lib/prisma";
 import { serviceIcon } from "@/lib/service-icons";
+import { getDict } from "@/i18n/server";
 
 export const metadata: Metadata = { title: "Services" };
 export const dynamic = "force-dynamic";
@@ -16,46 +17,24 @@ async function getServices() {
   }
 }
 
-const etapes = [
-  {
-    titre: "Échange & brief",
-    texte: "On prend le temps de comprendre votre activité, votre cible et ce dont vous avez vraiment besoin.",
-  },
-  {
-    titre: "Maquette validée avec vous",
-    texte: "Vous voyez à quoi ressemblera votre projet avant qu'on ne développe la moindre ligne.",
-  },
-  {
-    titre: "Réalisation",
-    texte: "On développe (ou on designe) en gardant le contact — vous suivez l'avancement, pas de surprise à la fin.",
-  },
-  {
-    titre: "Livraison & suite",
-    texte: "Mise en ligne accompagnée, et on reste disponible ensuite pour les ajustements et les évolutions.",
-  },
-];
-
 export default async function ServicesPage() {
+  const dict = getDict();
   const services = await getServices();
 
   return (
     <>
       <section className="border-b border-bordure bg-fond-alt">
         <Container className="py-16">
-          <h1 className="text-3xl sm:text-4xl">Nos services</h1>
+          <h1 className="text-3xl sm:text-4xl">{dict.services.title}</h1>
           <p className="mt-4 max-w-2xl text-texte-secondaire">
-            Quatre façons de vous accompagner, du site vitrine à la
-            visibilité locale. Chaque service peut être demandé directement
-            depuis cette page — le tarif se construit avec vous, sur devis.
+            {dict.services.intro}
           </p>
         </Container>
       </section>
 
       {services.length === 0 ? (
         <Container className="py-16">
-          <p className="text-texte-secondaire">
-            Les services seront bientôt disponibles ici.
-          </p>
+          <p className="text-texte-secondaire">{dict.services.empty}</p>
         </Container>
       ) : (
         <div className="divide-y divide-bordure">
@@ -86,7 +65,7 @@ export default async function ServicesPage() {
                       {service.avantages.length > 0 && (
                         <div className="mt-6">
                           <p className="text-sm font-semibold text-marine">
-                            Pourquoi ce service
+                            {dict.services.whyTitle}
                           </p>
                           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                             {service.avantages.map((avantage) => (
@@ -107,7 +86,7 @@ export default async function ServicesPage() {
                       {service.pointsCles.length > 0 && (
                         <div className="mt-6">
                           <p className="text-sm font-semibold text-marine">
-                            Ce que vous recevez
+                            {dict.services.receiveTitle}
                           </p>
                           <ul className="mt-3 space-y-2">
                             {service.pointsCles.map((point) => (
@@ -127,14 +106,14 @@ export default async function ServicesPage() {
 
                       <div className="mt-8 flex flex-wrap items-center gap-3">
                         <Button href={`/contact?service=${service.slug}`}>
-                          Demander ce service
+                          {dict.cta.requestService}
                         </Button>
                         <Button href={`/portfolio?service=${service.slug}`} variant="contour">
-                          Voir des exemples
+                          {dict.cta.seeExamples}
                         </Button>
                       </div>
                       <p className="mt-3 text-xs text-texte-secondaire">
-                        Tarif sur devis, adapté à votre projet.
+                        {dict.services.priceNote}
                       </p>
                     </div>
                   </div>
@@ -147,26 +126,26 @@ export default async function ServicesPage() {
 
       <section className="bg-fond-alt">
         <Container className="py-16">
-          <h2 className="text-2xl">Comment ça se passe</h2>
+          <h2 className="text-2xl">{dict.services.processTitle}</h2>
           <p className="mt-3 max-w-2xl text-texte-secondaire">
-            Le même déroulé simple, quel que soit le service choisi.
+            {dict.services.processText}
           </p>
           <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {etapes.map((etape, index) => (
+            {dict.services.steps.map((etape, index) => (
               <li
-                key={etape.titre}
+                key={etape.title}
                 className="rounded-lg border border-bordure bg-white p-5 transition-colors duration-200 hover:border-bleu"
               >
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-bleu text-sm font-semibold text-white">
                   {index + 1}
                 </span>
-                <p className="mt-3 font-semibold text-marine">{etape.titre}</p>
-                <p className="mt-2 text-sm text-texte-secondaire">{etape.texte}</p>
+                <p className="mt-3 font-semibold text-marine">{etape.title}</p>
+                <p className="mt-2 text-sm text-texte-secondaire">{etape.text}</p>
               </li>
             ))}
           </ol>
           <div className="mt-8">
-            <Button href="/contact?type=devis">Demander un devis</Button>
+            <Button href="/contact?type=devis">{dict.cta.quote}</Button>
           </div>
         </Container>
       </section>

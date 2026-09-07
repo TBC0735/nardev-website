@@ -6,6 +6,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { PortfolioPreview } from "@/components/PortfolioPreview";
 import { AboutTeaser } from "@/components/AboutTeaser";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { getDict } from "@/i18n/server";
 
 export const dynamic = "force-dynamic";
 
@@ -30,20 +31,24 @@ async function getProjetsRecents() {
 }
 
 export default async function HomePage() {
-  const [services, projets] = await Promise.all([getServices(), getProjetsRecents()]);
+  const dict = getDict();
+  const [services, projets] = await Promise.all([
+    getServices(),
+    getProjetsRecents(),
+  ]);
 
   return (
     <>
-      <Hero />
+      <Hero dict={dict} />
 
       <section id="services" className="scroll-mt-20">
         <Container className="py-16">
           <Reveal>
-            <h2 className="text-2xl">Nos services</h2>
+            <h2 className="text-2xl">{dict.home.servicesTitle}</h2>
           </Reveal>
           {services.length === 0 ? (
             <p className="mt-4 text-texte-secondaire">
-              Les services seront bientôt disponibles ici.
+              {dict.home.servicesEmpty}
             </p>
           ) : (
             <RevealGroup className="mt-8 grid gap-6 sm:grid-cols-2">
@@ -57,21 +62,18 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <PortfolioPreview projets={projets} />
+      <PortfolioPreview projets={projets} dict={dict} />
 
       <Reveal>
-        <AboutTeaser />
+        <AboutTeaser dict={dict} />
       </Reveal>
 
       <section className="bg-fond-alt">
         <Container className="py-16">
           <Reveal className="flex flex-col items-start gap-4">
-            <h2 className="text-2xl">Un projet en tête ?</h2>
-            <p className="max-w-xl text-texte-secondaire">
-              Parlons-en, tout simplement. On revient vers vous rapidement
-              avec une proposition concrète.
-            </p>
-            <Button href="/contact">Nous contacter</Button>
+            <h2 className="text-2xl">{dict.home.ctaTitle}</h2>
+            <p className="max-w-xl text-texte-secondaire">{dict.home.ctaText}</p>
+            <Button href="/contact">{dict.cta.contactUs}</Button>
           </Reveal>
         </Container>
       </section>
