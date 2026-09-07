@@ -166,6 +166,61 @@ async function main() {
   }
 
   console.log(`✔ ${services.length} services en base`);
+
+  // Réalisations (domaine « Portfolio » — Rokhaya).
+  // Exemples de départ, à remplacer par de vrais projets Nardev depuis
+  // /admin/portfolio. imageUrl volontairement null (aplat dégradé).
+  const projets = [
+    {
+      slug: "boutique-mariama-couture",
+      nom: "Mariama Couture",
+      serviceSlug: "sites-vitrines",
+      resume: "Site vitrine pour un atelier de couture à Dakar.",
+      besoin:
+        "Mariama, couturière, n'avait aucune présence en ligne et perdait des clientes qui ne trouvaient ni ses tarifs ni son adresse.",
+      solution:
+        "Un site vitrine de 4 pages : présentation de l'atelier, galerie de modèles, tarifs indicatifs et formulaire de prise de contact. Mise en ligne et prise en main incluses.",
+      technologies: ["Next.js", "Tailwind CSS", "Vercel"],
+      ordre: 1,
+    },
+    {
+      slug: "catalogue-ndiaye-electronique",
+      nom: "Ndiaye Électronique",
+      serviceSlug: "sites-dynamiques",
+      resume: "Catalogue en ligne mis à jour par le commerçant lui-même.",
+      besoin:
+        "Un magasin d'électroménager voulait présenter son stock en ligne et le tenir à jour sans repasser par un prestataire à chaque changement de prix.",
+      solution:
+        "Un site dynamique avec back-office : ajout, modification et retrait de produits en autonomie, catégories, photos et prix. Formation de l'équipe à l'administration.",
+      technologies: ["Next.js", "Prisma", "PostgreSQL", "NextAuth"],
+      ordre: 2,
+    },
+    {
+      slug: "flyers-festival-gospel",
+      nom: "Festival Gospel de Dakar",
+      serviceSlug: "flyers-affiches",
+      resume: "Affiche et flyers pour un événement culturel.",
+      besoin:
+        "L'organisation avait besoin de supports de communication cohérents pour l'affichage urbain et les réseaux sociaux, dans un délai court.",
+      solution:
+        "Une affiche A2, un flyer recto-verso et des déclinaisons carrées pour Instagram et Facebook, aux mêmes couleurs et typographies. Fichiers prêts pour l'impression fournis.",
+      technologies: ["Illustration", "Mise en page", "Préparation impression"],
+      ordre: 3,
+    },
+  ];
+
+  for (const { serviceSlug, ...projet } of projets) {
+    const service = await prisma.service.findUnique({
+      where: { slug: serviceSlug },
+    });
+    await prisma.projet.upsert({
+      where: { slug: projet.slug },
+      update: { ...projet, serviceId: service?.id ?? null },
+      create: { ...projet, serviceId: service?.id ?? null },
+    });
+  }
+
+  console.log(`✔ ${projets.length} projets en base`);
 }
 
 main()

@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE "Projet" ADD COLUMN     "besoin" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "images" TEXT[] DEFAULT ARRAY[]::TEXT[],
+ADD COLUMN     "ordre" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "resume" TEXT NOT NULL DEFAULT '',
+ADD COLUMN     "solution" TEXT NOT NULL DEFAULT '',
+ALTER COLUMN "description" SET DEFAULT '';
+
