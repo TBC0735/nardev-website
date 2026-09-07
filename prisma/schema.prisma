@@ -63,13 +63,17 @@ model Projet {
 /// Messages reçus via le formulaire /contact.
 /// Domaine : Awa Ndao
 model Message {
-  id        String   @id @default(cuid())
-  nom       String
+  id         String   @id @default(cuid())
+  nom        String
+  /// Email de la personne — indispensable pour lui répondre.
+  email      String   @default("")
+  telephone  String?
   entreprise String?
-  service   String?
-  contenu   String
-  lu        Boolean  @default(false)
-  createdAt DateTime @default(now())
+  /// Slug ou libellé du service souhaité (menu déroulant du formulaire).
+  service    String?
+  contenu    String
+  lu         Boolean  @default(false)
+  createdAt  DateTime @default(now())
 }
 
 /// Fondateurs présentés sur /a-propos.
