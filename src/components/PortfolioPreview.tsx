@@ -39,6 +39,11 @@ export function PortfolioPreview({ projets }: { projets: Projet[] }) {
                 />
                 <div className="p-4">
                   <p className="font-semibold text-marine">{projet.nom}</p>
+                  {projet.resume && (
+                    <p className="mt-1 text-sm text-texte-secondaire">
+                      {projet.resume}
+                    </p>
+                  )}
                 </div>
               </Link>
             </RevealItem>

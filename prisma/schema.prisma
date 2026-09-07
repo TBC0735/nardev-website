@@ -49,13 +49,24 @@ model Projet {
   id           String   @id @default(cuid())
   slug         String   @unique
   nom          String
+  /// Image de couverture (carte + haut de fiche). Nullable : dégradé de
+  /// remplacement tant qu'aucune vraie image n'est fournie depuis l'admin.
   imageUrl     String?
-  /// Besoin client + solution apportée.
-  description  String
+  /// Images supplémentaires de la fiche projet (galerie).
+  images       String[] @default([])
+  /// Phrase courte affichée sur la carte et l'aperçu accueil.
+  resume       String   @default("")
+  /// Contexte / besoin exprimé par le client.
+  besoin       String   @default("")
+  /// Solution apportée par Nardev.
+  solution     String   @default("")
+  /// Résumé libre (déprécié : conservé pour compat, utiliser resume/besoin/solution).
+  description  String   @default("")
   technologies String[]
   service      Service? @relation(fields: [serviceId], references: [id])
   serviceId    String?
   publie       Boolean  @default(true)
+  ordre        Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
