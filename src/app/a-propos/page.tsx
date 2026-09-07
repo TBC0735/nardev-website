@@ -4,7 +4,11 @@ import { Button } from "@/components/Button";
 import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 
-export const metadata: Metadata = { title: "À propos" };
+export const metadata: Metadata = {
+  title: "À propos",
+  description:
+    "Nardev, agence web à Dakar fondée par quatre associés pour rendre le web professionnel accessible aux petites structures.",
+};
 
 // La liste des fondateurs vient de la base (table Membre, gérée depuis /admin/equipe).
 export const dynamic = "force-dynamic";
