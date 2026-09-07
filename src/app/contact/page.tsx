@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Container } from "@/components/Container";
 import { prisma } from "@/lib/prisma";
+import { getDict } from "@/i18n/server";
 import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = { title: "Contact" };
@@ -28,46 +29,49 @@ async function getServices() {
 }
 
 export default async function ContactPage() {
+  const dict = getDict();
   const services = await getServices();
 
   return (
     <>
       <section className="border-b border-bordure bg-fond-alt">
         <Container className="py-16">
-          <h1 className="text-3xl sm:text-4xl">Nous contacter</h1>
+          <h1 className="text-3xl sm:text-4xl">{dict.contact.title}</h1>
           <p className="mt-4 max-w-2xl text-texte-secondaire">
-            Présentez-nous votre projet en quelques lignes. On revient vers vous
-            rapidement, avec une proposition concrète.
+            {dict.contact.intro}
           </p>
         </Container>
       </section>
 
       <Container className="grid gap-12 py-16 lg:grid-cols-[1fr_300px]">
         <Suspense>
-          <ContactForm services={services} />
+          <ContactForm services={services} dict={dict} />
         </Suspense>
 
         <aside className="h-fit rounded-lg border border-bordure bg-fond-alt p-6">
-          <p className="text-sm font-semibold text-marine">Coordonnées</p>
+          <p className="text-sm font-semibold text-marine">
+            {dict.contact.coordsTitle}
+          </p>
           <ul className="mt-3 space-y-3 text-sm text-texte-secondaire">
             <li>
-              <span className="block text-xs uppercase tracking-wide">Email</span>
+              <span className="block text-xs uppercase tracking-wide">
+                {dict.contact.emailLabel}
+              </span>
               <a href="mailto:contact@nardev.sn" className="no-underline hover:underline">
                 contact@nardev.sn
               </a>
             </li>
             <li>
               <span className="block text-xs uppercase tracking-wide">
-                Téléphone
+                {dict.contact.phoneLabel}
               </span>
               +221 —
             </li>
           </ul>
           <p className="mt-6 text-xs text-texte-secondaire">
-            Vos informations servent uniquement à traiter votre demande. Voir
-            les{" "}
+            {dict.contact.privacyNote}{" "}
             <a href="/mentions-legales" className="no-underline hover:underline">
-              mentions légales
+              {dict.contact.privacyLink}
             </a>
             .
           </p>

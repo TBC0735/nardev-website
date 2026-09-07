@@ -22,9 +22,11 @@ type ProjetCarte = {
 export function PortfolioGrid({
   projets,
   filtres,
+  labels,
 }: {
   projets: ProjetCarte[];
   filtres: { slug: string; titre: string }[];
+  labels: { all: string; empty: string };
 }) {
   const params = useSearchParams();
   const actif = params.get("service");
@@ -38,7 +40,7 @@ export function PortfolioGrid({
     <div>
       {filtres.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          <FiltreLien libelle="Tous" slug={null} actif={!actif} />
+          <FiltreLien libelle={labels.all} slug={null} actif={!actif} />
           {filtres.map((f) => (
             <FiltreLien
               key={f.slug}
@@ -81,9 +83,7 @@ export function PortfolioGrid({
       </div>
 
       {visibles.length === 0 && (
-        <p className="mt-8 text-sm text-texte-secondaire">
-          Aucun projet pour ce filtre.
-        </p>
+        <p className="mt-8 text-sm text-texte-secondaire">{labels.empty}</p>
       )}
     </div>
   );

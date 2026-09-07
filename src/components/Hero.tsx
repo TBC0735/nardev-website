@@ -1,6 +1,7 @@
 import { Button } from "./Button";
 import { Container } from "./Container";
 import { PhotoFrame } from "./PhotoFrame";
+import type { Dict } from "@/i18n/dictionaries";
 
 /**
  * Hero de l'accueil : photo pleine largeur avec titre superposé.
@@ -8,9 +9,11 @@ import { PhotoFrame } from "./PhotoFrame";
  * aplat dégradé aux tons de la charte (navy / bleu) tient la place.
  */
 export function Hero({
+  dict,
   imageUrl,
   imageAlt = "Nardev",
 }: {
+  dict: Dict;
   imageUrl?: string | null;
   imageAlt?: string;
 }) {
@@ -36,18 +39,13 @@ export function Hero({
       <Container className="relative z-10 flex min-h-[380px] flex-col justify-end gap-6 py-16 sm:min-h-[440px]">
         <div>
           <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
-            Nardev conçoit des sites web et des supports qui font grandir votre
-            activité.
+            {dict.hero.title}
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-white/80">
-            Sites vitrines, sites dynamiques, print et visibilité Google — une
-            équipe à taille humaine, à l&apos;écoute de votre projet du premier
-            échange jusqu&apos;à la mise en ligne.
-          </p>
+          <p className="mt-6 max-w-xl text-lg text-white/80">{dict.hero.text}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/contact?type=devis">Demander un devis</Button>
+            <Button href="/contact?type=devis">{dict.cta.quote}</Button>
             <Button href="/portfolio" variant="contour-clair">
-              Voir nos réalisations
+              {dict.cta.seeWork}
             </Button>
           </div>
         </div>

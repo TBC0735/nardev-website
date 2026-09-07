@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { getLocale, getDict } from "@/i18n/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,12 +23,15 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const locale = getLocale();
+  const dict = getDict();
+
   return (
-    <html lang="fr" className={inter.variable}>
+    <html lang={locale} className={inter.variable}>
       <body className="flex min-h-screen flex-col">
-        <Header />
+        <Header dict={dict} locale={locale} />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <Footer dict={dict} />
       </body>
     </html>
   );

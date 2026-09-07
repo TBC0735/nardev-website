@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { PhotoFrame } from "@/components/PhotoFrame";
 import { prisma } from "@/lib/prisma";
+import { getDict } from "@/i18n/server";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +26,7 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const projet = await getProjet(params.slug);
-  if (!projet) return { title: "Projet introuvable" };
+  if (!projet) return { title: getDict().portfolio.notFound };
   return {
     title: projet.nom,
     description: projet.resume || projet.description || undefined,
@@ -37,6 +38,7 @@ export default async function ProjetDetailPage({
 }: {
   params: { slug: string };
 }) {
+  const dict = getDict();
   const projet = await getProjet(params.slug);
   if (!projet) notFound();
 
@@ -56,7 +58,7 @@ export default async function ProjetDetailPage({
             }
             className="text-sm no-underline hover:underline"
           >
-            ← Retour aux réalisations
+            {dict.portfolio.back}
           </Link>
           {projet.service && (
             <p className="mt-6 text-xs font-medium uppercase tracking-wide text-bleu">
@@ -98,7 +100,7 @@ export default async function ProjetDetailPage({
           <div className="space-y-8">
             {projet.besoin && (
               <div>
-                <h2 className="text-2xl">Le besoin</h2>
+                <h2 className="text-2xl">{dict.portfolio.needTitle}</h2>
                 <p className="mt-3 whitespace-pre-line text-texte-secondaire">
                   {projet.besoin}
                 </p>
@@ -106,7 +108,7 @@ export default async function ProjetDetailPage({
             )}
             {projet.solution && (
               <div>
-                <h2 className="text-2xl">Notre solution</h2>
+                <h2 className="text-2xl">{dict.portfolio.solutionTitle}</h2>
                 <p className="mt-3 whitespace-pre-line text-texte-secondaire">
                   {projet.solution}
                 </p>
@@ -123,7 +125,7 @@ export default async function ProjetDetailPage({
             {projet.technologies.length > 0 && (
               <>
                 <p className="text-sm font-semibold text-marine">
-                  Technologies
+                  {dict.portfolio.techTitle}
                 </p>
                 <ul className="mt-2 flex flex-wrap gap-2">
                   {projet.technologies.map((tech) => (
@@ -138,7 +140,9 @@ export default async function ProjetDetailPage({
               </>
             )}
             <div className="mt-5">
-              <Button href="/contact?type=devis">Un projet similaire ?</Button>
+              <Button href="/contact?type=devis">
+                {dict.portfolio.similarCta}
+              </Button>
             </div>
           </aside>
         </div>
