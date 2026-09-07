@@ -5,7 +5,11 @@ import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 import { PortfolioGrid } from "./PortfolioGrid";
 
-export const metadata: Metadata = { title: "Réalisations" };
+export const metadata: Metadata = {
+  title: "Réalisations",
+  description:
+    "Les projets menés par Nardev : sites web, supports print et visibilité locale. Besoin client, solution apportée et technologies.",
+};
 export const dynamic = "force-dynamic";
 
 async function getData() {

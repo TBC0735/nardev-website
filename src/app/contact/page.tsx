@@ -5,7 +5,11 @@ import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 import { ContactForm } from "./ContactForm";
 
-export const metadata: Metadata = { title: "Contact" };
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Parlez-nous de votre projet. Devis gratuit et réponse rapide — Nardev, agence web à Dakar.",
+};
 export const dynamic = "force-dynamic";
 
 // Liste de repli si la table Service n'est pas encore accessible.

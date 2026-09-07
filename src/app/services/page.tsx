@@ -6,7 +6,11 @@ import { prisma } from "@/lib/prisma";
 import { serviceIcon } from "@/lib/service-icons";
 import { getDict } from "@/i18n/server";
 
-export const metadata: Metadata = { title: "Services" };
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Sites vitrines, sites dynamiques, flyers & affiches et visibilité Google. Chaque service sur devis, adapté à votre projet.",
+};
 export const dynamic = "force-dynamic";
 
 async function getServices() {
