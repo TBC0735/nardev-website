@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // Les photos (services, portfolio, équipe) sont ajoutées depuis l'admin sous
-    // forme d'URL par les différents domaines — hébergeur non figé à l'avance.
-    remotePatterns: [{ protocol: "https", hostname: "**" }],
+    // Ajouter ici l'hôte des images servies depuis l'admin (photos de services,
+    // projets, membres) une fois l'hébergeur d'images choisi, ex. :
+    //   remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
+    // Tant que rien n'est défini, seules les images du dossier /public sont acceptées.
+    remotePatterns: [],
   },
 };
 

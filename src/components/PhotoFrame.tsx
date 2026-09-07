@@ -39,12 +39,11 @@ export function PhotoFrame({
           fill
           sizes={sizes}
           priority={priority}
-          // Léger zoom quand un ancêtre .group est survolé (cartes cliquables).
-          className={`${fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-500 ease-out group-hover:scale-105`}
+          className={fit === "contain" ? "object-contain" : "object-cover"}
         />
       ) : (
         <div
-          className={`absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-110 ${iconClassName}`}
+          className={`absolute inset-0 flex items-center justify-center ${iconClassName}`}
           aria-hidden="true"
         >
           {icon}
