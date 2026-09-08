@@ -17,6 +17,9 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "overrides": {
     "@emnapi/core": "1.10.0",
     "@emnapi/runtime": "1.10.0",
