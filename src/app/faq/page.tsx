@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
+import { Reveal } from "@/components/motion/Reveal";
 import { getDict } from "@/i18n/server";
+import { FaqAccordion } from "./FaqAccordion";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -45,36 +47,13 @@ export default function FaqPage() {
       </section>
 
       <Container className="max-w-3xl py-16">
-        <div className="divide-y divide-bordure border-y border-bordure">
-          {t.items.map((item) => (
-            <details key={item.q} className="group">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-medium text-marine [&::-webkit-details-marker]:hidden">
-                <span>{item.q}</span>
-                <svg
-                  className="h-5 w-5 shrink-0 text-texte-secondaire transition-transform duration-200 group-open:rotate-180"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M6 8l4 4 4-4"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </summary>
-              <p className="pb-5 pr-9 text-sm leading-relaxed text-texte-secondaire">
-                {item.a}
-              </p>
-            </details>
-          ))}
-        </div>
+        <Reveal>
+          <FaqAccordion items={t.items} />
+        </Reveal>
 
-        <div className="mt-10">
+        <Reveal delay={120} className="mt-10">
           <Button href="/contact?type=devis">{dict.cta.quote}</Button>
-        </div>
+        </Reveal>
       </Container>
     </>
   );

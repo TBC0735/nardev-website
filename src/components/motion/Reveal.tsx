@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-// Charte : « pas d'effets voyants ». On se limite à un fondu discret à
-// l'apparition, joué une seule fois. Fait maison (IntersectionObserver + CSS)
-// pour ne pas embarquer de librairie d'animation.
+// Apparition douce au scroll : léger fondu + montée de quelques pixels, jouée
+// une seule fois. Fait maison (IntersectionObserver + CSS), sans librairie, et
+// neutralisée si l'utilisateur préfère moins de mouvement (motion-safe).
 
 function useRevele<T extends HTMLElement>(delay = 0) {
   const ref = useRef<T>(null);
@@ -27,7 +27,7 @@ function useRevele<T extends HTMLElement>(delay = 0) {
           observer.disconnect();
         }
       },
-      { rootMargin: "-40px" },
+      { rootMargin: "0px 0px -10% 0px" },
     );
     observer.observe(el);
 
@@ -41,7 +41,9 @@ function useRevele<T extends HTMLElement>(delay = 0) {
 }
 
 const classes = (visible: boolean, className?: string) =>
-  `transition-opacity duration-500 ease-out ${visible ? "opacity-100" : "opacity-0"} ${className ?? ""}`;
+  `motion-safe:transition-all motion-safe:duration-[600ms] ease-out ${
+    visible ? "opacity-100 translate-y-0" : "opacity-0 motion-safe:translate-y-3"
+  } ${className ?? ""}`;
 
 /** Fondu discret à l'apparition pour un bloc isolé (titres de section, bandeaux…). */
 export function Reveal({
@@ -72,15 +74,20 @@ export function RevealGroup({
   return <div className={className}>{children}</div>;
 }
 
-/** Élément d'une `RevealGroup` — même fondu discret. */
+/**
+ * Élément d'une `RevealGroup`. `index` décale légèrement l'apparition pour
+ * créer une cascade quand le groupe entre dans le champ de vision.
+ */
 export function RevealItem({
   children,
   className,
+  index = 0,
 }: {
   children: ReactNode;
   className?: string;
+  index?: number;
 }) {
-  const { ref, visible } = useRevele<HTMLDivElement>(0);
+  const { ref, visible } = useRevele<HTMLDivElement>(Math.min(index, 8) * 70);
   return (
     <div ref={ref} className={classes(visible, className)}>
       {children}

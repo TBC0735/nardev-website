@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Container } from "@/components/Container";
+import { Reveal } from "@/components/motion/Reveal";
 import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 import { PortfolioGrid } from "./PortfolioGrid";
@@ -54,16 +55,18 @@ export default async function PortfolioPage() {
         {projets.length === 0 ? (
           <p className="text-texte-secondaire">{dict.portfolio.empty}</p>
         ) : (
-          <Suspense>
-            <PortfolioGrid
-              projets={projets}
-              filtres={filtres}
-              labels={{
-                all: dict.portfolio.filterAll,
-                empty: dict.portfolio.filterEmpty,
-              }}
-            />
-          </Suspense>
+          <Reveal>
+            <Suspense>
+              <PortfolioGrid
+                projets={projets}
+                filtres={filtres}
+                labels={{
+                  all: dict.portfolio.filterAll,
+                  empty: dict.portfolio.filterEmpty,
+                }}
+              />
+            </Suspense>
+          </Reveal>
         )}
       </Container>
     </>
