@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 import type { Service } from "@prisma/client";
 import { Button } from "@/components/Button";
 import { PhotoFrame } from "@/components/PhotoFrame";
-import { serviceIcon } from "@/lib/service-icons";
+import { ServiceIcon } from "@/lib/service-icons";
 
 type ServiceForm = {
   slug: string;
@@ -137,7 +137,7 @@ export function ServicesManager({ servicesInitiaux }: { servicesInitiaux: Servic
                 <PhotoFrame
                   imageUrl={service.imageUrl}
                   alt={service.titre}
-                  icon={serviceIcon(service.slug)}
+                  icon={<ServiceIcon slug={service.slug} className="h-6 w-6" />}
                   className="h-16 w-20 shrink-0"
                   sizes="80px"
                 />

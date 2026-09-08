@@ -1,54 +1,59 @@
 import { Button } from "./Button";
 import { Container } from "./Container";
-import { PhotoFrame } from "./PhotoFrame";
+import { Spark } from "./ui/Spark";
+import { HeroVisual } from "./HeroVisual";
+import { CheckIcon } from "./icons";
 import type { Dict } from "@/i18n/dictionaries";
 
-/**
- * Hero de l'accueil : photo pleine largeur avec titre superposé.
- * `imageUrl` est optionnel — tant qu'aucune vraie photo n'est fournie, un
- * aplat dégradé aux tons de la charte (navy / bleu) tient la place.
- */
-export function Hero({
-  dict,
-  imageUrl,
-  imageAlt = "Nardev",
-}: {
-  dict: Dict;
-  imageUrl?: string | null;
-  imageAlt?: string;
-}) {
+export function Hero({ dict }: { dict: Dict }) {
+  const t = dict.hero;
+
   return (
     <section className="relative isolate overflow-hidden bg-marine text-white">
-      <div className="absolute inset-0">
-        <PhotoFrame
-          imageUrl={imageUrl}
-          alt={imageAlt}
-          icon=""
-          rounded={false}
-          className="h-full w-full"
-          sizes="100vw"
-          priority
-        />
-      </div>
-      {/* Voile navy pour garder le texte lisible sur la photo. */}
+      <div aria-hidden className="bg-dots absolute inset-0 opacity-60" />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-marine via-marine/80 to-marine/40"
-        aria-hidden="true"
+        aria-hidden
+        className="absolute -top-40 right-0 h-[36rem] w-[36rem] rounded-full bg-bleu/20 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="absolute -bottom-48 -left-24 h-[32rem] w-[32rem] rounded-full bg-bleu-600/15 blur-[120px]"
       />
 
-      <Container className="relative z-10 flex min-h-[380px] flex-col justify-end gap-6 py-16 sm:min-h-[440px]">
+      <Container className="relative grid items-center gap-14 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
         <div>
-          <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl">
-            {dict.hero.title}
+          <p className="eyebrow text-bleu-300">
+            <Spark className="h-3.5 w-3.5 motion-safe:animate-spark-pulse" />
+            {t.eyebrow}
+          </p>
+          <h1 className="mt-4 text-display-sm font-bold text-white sm:text-display lg:text-display-lg">
+            {t.titleLead}{" "}
+            <span className="text-gradient">{t.titleAccent}</span>
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-white/80">{dict.hero.text}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/contact?type=devis">{dict.cta.quote}</Button>
-            <Button href="/portfolio" variant="contour-clair">
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
+            {t.text}
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Button href="/contact?type=devis" size="lg">
+              {dict.cta.quote}
+            </Button>
+            <Button href="/portfolio" size="lg" variant="contour-clair">
               {dict.cta.seeWork}
             </Button>
           </div>
+
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/70">
+            {[t.trust1, t.trust2, t.trust3].map((item) => (
+              <li key={item} className="inline-flex items-center gap-2">
+                <CheckIcon className="h-4 w-4 text-bleu-300" />
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
+
+        <HeroVisual />
       </Container>
     </section>
   );

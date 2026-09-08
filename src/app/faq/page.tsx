@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { Button } from "@/components/Button";
+import { Spark } from "@/components/ui/Spark";
 import { Reveal } from "@/components/motion/Reveal";
+import { CtaPanel } from "@/components/CtaPanel";
 import { getDict } from "@/i18n/server";
 import { FaqAccordion } from "./FaqAccordion";
 
@@ -33,12 +34,22 @@ export default function FaqPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="border-b border-bordure bg-fond-alt">
-        <Container className="py-16">
-          <h1 className="text-3xl sm:text-4xl">{t.title}</h1>
-          <p className="mt-4 max-w-2xl text-texte-secondaire">
+      <section className="relative overflow-hidden bg-marine text-white">
+        <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
+        <Container className="relative py-20 lg:py-24">
+          <p className="eyebrow text-bleu-300">
+            <Spark className="h-3.5 w-3.5" />
+            {t.eyebrow}
+          </p>
+          <h1 className="mt-4 max-w-3xl text-display-sm font-bold text-white sm:text-display">
+            {t.title}
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg text-white/75">
             {t.intro}{" "}
-            <Link href="/contact" className="no-underline hover:underline">
+            <Link
+              href="/contact"
+              className="text-bleu-300 no-underline hover:text-white"
+            >
               {t.contactLink}
             </Link>
             .
@@ -46,15 +57,20 @@ export default function FaqPage() {
         </Container>
       </section>
 
-      <Container className="max-w-3xl py-16">
+      <Container className="max-w-3xl py-16 sm:py-20">
         <Reveal>
           <FaqAccordion items={t.items} />
         </Reveal>
-
-        <Reveal delay={120} className="mt-10">
-          <Button href="/contact?type=devis">{dict.cta.quote}</Button>
-        </Reveal>
       </Container>
+
+      <CtaPanel
+        title={t.stillTitle}
+        text={t.stillText}
+        primaryLabel={dict.cta.quote}
+        primaryHref="/contact?type=devis"
+        secondaryLabel={dict.cta.contactUs}
+        secondaryHref="/contact"
+      />
     </>
   );
 }

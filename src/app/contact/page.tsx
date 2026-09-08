@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Container } from "@/components/Container";
+import { Spark } from "@/components/ui/Spark";
 import { Reveal } from "@/components/motion/Reveal";
+import { MailIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 import { ContactForm } from "./ContactForm";
@@ -13,7 +15,6 @@ export const metadata: Metadata = {
 };
 export const dynamic = "force-dynamic";
 
-// Liste de repli si la table Service n'est pas encore accessible.
 const servicesParDefaut = [
   { slug: "sites-vitrines", titre: "Sites vitrines" },
   { slug: "sites-dynamiques", titre: "Sites dynamiques" },
@@ -40,79 +41,94 @@ export default async function ContactPage() {
 
   return (
     <>
-      <section className="border-b border-bordure bg-gradient-to-br from-marine to-bleu text-white">
-        <Container className="py-16">
-          <h1 className="max-w-2xl text-3xl font-bold text-white sm:text-4xl">
+      <section className="relative overflow-hidden bg-marine text-white">
+        <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
+        <div
+          aria-hidden
+          className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-bleu/20 blur-[110px]"
+        />
+        <Container className="relative py-20 lg:py-24">
+          <p className="eyebrow text-bleu-300">
+            <Spark className="h-3.5 w-3.5" />
+            {dict.nav.contact}
+          </p>
+          <h1 className="mt-4 max-w-2xl text-display-sm font-bold text-white sm:text-display">
             {t.title}
           </h1>
-          <p className="mt-4 max-w-xl text-white/80">{t.intro}</p>
-          <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium ring-1 ring-white/20">
+          <p className="mt-5 max-w-xl text-lg text-white/75">{t.intro}</p>
+          <span className="mt-7 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset ring-white/20">
             <span className="h-1.5 w-1.5 rounded-full bg-succes" />
             {t.responseBadge}
           </span>
         </Container>
       </section>
 
-      <Container className="py-16">
+      <Container className="py-16 sm:py-20">
         <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
-          <Reveal className="rounded-xl border border-bordure bg-white p-6 shadow-sm sm:p-8">
+          <Reveal className="rounded-2xl border border-bordure bg-white p-6 shadow-card sm:p-8">
             <h2 className="text-lg font-semibold text-marine">{t.formTitle}</h2>
-            <div className="mt-5">
+            <div className="mt-6">
               <Suspense>
                 <ContactForm services={services} dict={dict} />
               </Suspense>
             </div>
           </Reveal>
 
-          <Reveal
-            delay={120}
-            className="h-fit rounded-xl border border-bordure bg-fond-alt p-6 sm:p-7"
-          >
-            <p className="text-sm font-semibold text-marine">{t.coordsTitle}</p>
-            <ul className="mt-4 space-y-4 text-sm">
-              <li>
-                <span className="block text-xs uppercase tracking-wide text-texte-secondaire">
-                  {t.emailLabel}
-                </span>
-                <a
-                  href="mailto:contact@nardev.sn"
-                  className="font-medium no-underline hover:underline"
-                >
-                  contact@nardev.sn
-                </a>
-              </li>
-              <li>
-                <span className="block text-xs uppercase tracking-wide text-texte-secondaire">
-                  {t.phoneLabel}
-                </span>
-                <span className="font-medium text-texte">+221 —</span>
-              </li>
-            </ul>
-
-            <hr className="my-6 border-bordure" />
-
-            <p className="text-sm font-semibold text-marine">{t.reasonsTitle}</p>
-            <ul className="mt-3 space-y-2 text-sm text-texte-secondaire">
-              {[t.reason1, t.reason2, t.reason3].map((r) => (
-                <li key={r} className="flex items-start gap-2">
-                  <span className="mt-0.5 text-bleu" aria-hidden>
-                    →
-                  </span>
-                  {r}
+          <Reveal delay={120} className="h-fit space-y-4">
+            <div className="rounded-2xl border border-bordure bg-fond-alt p-6">
+              <p className="text-sm font-semibold text-marine">
+                {t.coordsTitle}
+              </p>
+              <ul className="mt-4 space-y-3 text-sm">
+                <li>
+                  <a
+                    href="mailto:contact@nardev.sn"
+                    className="inline-flex items-center gap-2 font-medium text-texte no-underline hover:text-bleu"
+                  >
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
+                      <MailIcon className="h-4 w-4" />
+                    </span>
+                    contact@nardev.sn
+                  </a>
                 </li>
-              ))}
-            </ul>
+                <li className="inline-flex items-center gap-2 font-medium text-texte">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
+                    <PhoneIcon className="h-4 w-4" />
+                  </span>
+                  +221 —
+                </li>
+                <li className="inline-flex items-center gap-2 text-texte-secondaire">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
+                    <WhatsappIcon className="h-4 w-4" />
+                  </span>
+                  WhatsApp {dict.footer.soon}
+                </li>
+              </ul>
+            </div>
 
-            <p className="mt-6 text-xs text-texte-secondaire">
-              {t.privacyNote}{" "}
-              <a
-                href="/mentions-legales"
-                className="no-underline hover:underline"
-              >
-                {t.privacyLink}
-              </a>
-              .
-            </p>
+            <div className="rounded-2xl border border-bordure bg-white p-6">
+              <p className="text-sm font-semibold text-marine">
+                {t.reasonsTitle}
+              </p>
+              <ul className="mt-3 space-y-2.5 text-sm text-texte-secondaire">
+                {[t.reason1, t.reason2, t.reason3].map((r) => (
+                  <li key={r} className="flex items-start gap-2.5">
+                    <Spark className="mt-1 h-3 w-3 shrink-0 text-bleu" />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs text-texte-secondaire">
+                {t.privacyNote}{" "}
+                <a
+                  href="/mentions-legales"
+                  className="no-underline hover:underline"
+                >
+                  {t.privacyLink}
+                </a>
+                .
+              </p>
+            </div>
           </Reveal>
         </div>
       </Container>

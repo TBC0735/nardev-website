@@ -6,11 +6,13 @@ import type { Locale } from "./config";
 const fr = {
   nav: {
     services: "Services",
-    portfolio: "Portfolio",
+    portfolio: "Réalisations",
     about: "À propos",
     contact: "Contact",
     faq: "FAQ",
     legal: "Mentions légales",
+    menu: "Menu",
+    close: "Fermer",
   },
   cta: {
     quote: "Demander un devis",
@@ -21,41 +23,91 @@ const fr = {
     seeExamples: "Voir des exemples",
     send: "Envoyer",
     sending: "Envoi…",
+    startProject: "Démarrer un projet",
   },
   langToggle: { label: "Langue", fr: "Français", en: "English" },
   footer: {
     tagline:
-      "Agence web — sites vitrines, sites dynamiques, print et visibilité Google.",
-    navTitle: "Navigation",
+      "Agence web à Dakar. On conçoit des sites, des supports et de la visibilité qui font grandir votre activité.",
+    navTitle: "Le site",
     contactTitle: "Contact",
     rights: "Tous droits réservés.",
+    location: "Basés à Dakar, Sénégal",
+    soon: "(bientôt)",
+    builtWith: "Conçu et développé par Nardev",
   },
   hero: {
-    title:
-      "Nardev conçoit des sites web et des supports qui font grandir votre activité.",
-    text: "Sites vitrines, sites dynamiques, print et visibilité Google — une équipe à taille humaine, à l'écoute de votre projet du premier échange jusqu'à la mise en ligne.",
+    eyebrow: "Agence web · Dakar",
+    titleLead: "Votre activité mérite mieux qu'une",
+    titleAccent: "simple page Facebook.",
+    text: "Nardev conçoit des sites vitrines, des sites dynamiques, des supports print et votre visibilité sur Google. Une équipe, un interlocuteur, un résultat soigné — du premier échange à la mise en ligne.",
+    trust1: "Devis gratuit",
+    trust2: "Réponse sous 48 h",
+    trust3: "Un seul interlocuteur",
   },
   home: {
-    servicesTitle: "Nos services",
+    stats: [
+      { value: "3 à 5 j", label: "pour un site vitrine" },
+      { value: "24-48 h", label: "pour un flyer ou une affiche" },
+      { value: "1", label: "interlocuteur du début à la fin" },
+      { value: "0", label: "coût caché, jamais" },
+    ],
+    servicesEyebrow: "Ce qu'on fait",
+    servicesTitle: "Quatre façons de vous rendre visible",
+    servicesLead:
+      "Du site vitrine à la fiche Google, chaque prestation se commande directement en ligne et se construit avec vous, sur devis.",
     servicesEmpty: "Les services seront bientôt disponibles ici.",
+    processEyebrow: "Notre méthode",
+    processTitle: "Comment ça se passe",
+    processLead:
+      "Le même déroulé simple, quel que soit le projet : vous savez toujours où on en est.",
+    whyEyebrow: "Pourquoi Nardev",
+    whyTitle: "Une agence à taille humaine, pas une usine",
+    whyLead:
+      "On a réuni développement, design et communication dans une seule équipe pour vous éviter de jongler entre plusieurs prestataires.",
+    why: [
+      {
+        title: "Un interlocuteur unique",
+        text: "La même personne vous suit du brief à la livraison. Pas de service commercial qui passe le relais.",
+      },
+      {
+        title: "Plusieurs expertises réunies",
+        text: "Dev, design et com' dans la même équipe : votre projet est cohérent de bout en bout.",
+      },
+      {
+        title: "Une maquette avant tout",
+        text: "Vous validez le rendu avant qu'on développe la moindre ligne. Aucune mauvaise surprise à la fin.",
+      },
+      {
+        title: "Des délais tenus",
+        text: "On annonce une date au devis et on s'y tient. Vous suivez l'avancement en continu.",
+      },
+    ],
     ctaTitle: "Un projet en tête ?",
     ctaText:
-      "Parlons-en, tout simplement. On revient vers vous rapidement avec une proposition concrète.",
+      "Parlez-nous-en en quelques lignes. On revient vers vous rapidement, avec une proposition concrète et un devis clair.",
   },
   aboutTeaser: {
-    title: "Qui sommes-nous",
-    text: "Nardev est une agence à taille humaine. On préfère les échanges directs aux process compliqués, et un site qui vous ressemble vraiment plutôt qu'un modèle recopié — du premier brief jusqu'à la mise en ligne, et après.",
+    eyebrow: "Qui sommes-nous",
+    title: "Quatre associés, une seule équipe",
+    text: "Nardev est né de l'envie de rendre le web professionnel accessible aux petites structures du Sénégal. Plutôt que de travailler chacun dans notre coin, on a mis nos compétences en commun — et on met en avant nos réalisations pour vous prouver ce qu'on sait faire.",
   },
   about: {
-    title: "À propos de Nardev",
+    eyebrow: "À propos",
+    title: "L'agence web qu'on aurait aimé trouver",
     intro:
-      "Nardev est née de l'envie de rendre le web professionnel accessible aux petites structures : commerces, artisans, associations et jeunes entreprises. Plutôt que de sous-traiter chacun de notre côté, nous avons réuni nos compétences — développement, design et communication — dans une seule équipe, avec un interlocuteur unique pour chaque client.",
-    teamTitle: "L'équipe",
+      "Nardev rend le web professionnel accessible aux commerces, artisans, associations et jeunes entreprises du Sénégal.",
+    storyTitle: "Notre histoire",
+    storyText:
+      "On s'est rencontrés en formation, on a livré des projets chacun de notre côté, et on a fait le même constat : les petites structures n'ont pas les moyens d'une grosse agence, et se retrouvent souvent avec un site bâclé ou jamais fini. Nardev, c'est notre réponse — une équipe qui réunit développement, design et communication, avec un interlocuteur unique et des tarifs transparents.",
+    teamEyebrow: "L'équipe",
+    teamTitle: "Les fondateurs",
     teamText:
-      "Quatre fondateurs, chacun responsable d'un pan du projet de bout en bout.",
+      "Quatre associés, chacun responsable d'un pan du projet de bout en bout.",
     teamEmpty:
       "La présentation de l'équipe sera visible dès que les membres auront été ajoutés depuis le back-office.",
-    valuesTitle: "Nos valeurs",
+    valuesEyebrow: "Nos valeurs",
+    valuesTitle: "Ce qui ne change jamais chez nous",
     values: [
       {
         title: "Proximité",
@@ -74,15 +126,17 @@ const fr = {
     ctaText: "Présentez-nous votre projet, on revient vers vous rapidement.",
   },
   services: {
-    title: "Nos services",
+    eyebrow: "Nos services",
+    title: "Des prestations claires, un tarif sur devis",
     intro:
-      "Quatre façons de vous accompagner, du site vitrine à la visibilité locale. Chaque service peut être demandé directement depuis cette page — le tarif se construit avec vous, sur devis.",
+      "Quatre façons de vous accompagner, du site vitrine à la visibilité locale. Chaque service peut être demandé directement depuis cette page — le tarif se construit avec vous.",
     empty: "Les services seront bientôt disponibles ici.",
     whyTitle: "Pourquoi ce service",
     receiveTitle: "Ce que vous recevez",
     priceNote: "Tarif sur devis, adapté à votre projet.",
-    processTitle: "Comment ça se passe",
-    processText: "Le même déroulé simple, quel que soit le service choisi.",
+    jumpTo: "Aller à",
+  },
+  process: {
     steps: [
       {
         title: "Échange & brief",
@@ -103,25 +157,29 @@ const fr = {
     ],
   },
   portfolio: {
-    title: "Nos réalisations",
+    eyebrow: "Réalisations",
+    title: "Ce qu'on a déjà livré",
     intro:
-      "Quelques projets menés par Nardev. Chaque fiche détaille le besoin du client, la solution apportée et les technologies utilisées.",
+      "Chez Nardev, on met en commun les projets menés par chacun des associés. Chaque fiche détaille le besoin du client, la solution apportée et les technologies utilisées.",
     empty: "Les réalisations seront bientôt visibles ici.",
     filterAll: "Tous",
     filterEmpty: "Aucun projet pour ce filtre.",
-    previewTitle: "Nos réalisations",
+    previewEyebrow: "Réalisations",
+    previewTitle: "Un aperçu de notre travail",
     seeAll: "Voir tout",
-    back: "← Retour aux réalisations",
+    back: "Retour aux réalisations",
     needTitle: "Le besoin",
     solutionTitle: "Notre solution",
     techTitle: "Technologies",
     similarCta: "Un projet similaire ?",
+    similarText: "Parlez-nous du vôtre, on vous répond sous 48 h.",
     notFound: "Projet introuvable",
+    viewProject: "Voir le projet",
   },
   contact: {
-    title: "Nous contacter",
+    title: "Parlons de votre projet",
     intro:
-      "Présentez-nous votre projet en quelques lignes. On revient vers vous rapidement, avec une proposition concrète.",
+      "Présentez-nous votre besoin en quelques lignes. On revient vers vous rapidement, avec une proposition concrète et un devis clair.",
     devisNote:
       "Demande de devis — précisez votre besoin, on vous répond avec une estimation.",
     name: "Nom",
@@ -150,10 +208,13 @@ const fr = {
     reason3: "Une maquette validée avec vous avant tout développement",
   },
   faq: {
+    eyebrow: "FAQ",
     title: "Questions fréquentes",
     intro:
       "Les réponses aux questions qu'on nous pose le plus souvent. Une autre question ?",
     contactLink: "Écrivez-nous",
+    stillTitle: "Vous ne trouvez pas votre réponse ?",
+    stillText: "On répond à toutes les questions avant même le devis.",
     items: [
       {
         q: "Combien de temps faut-il pour créer un site vitrine ?",
@@ -235,121 +296,180 @@ export type Dict = typeof fr;
 const en: Dict = {
   nav: {
     services: "Services",
-    portfolio: "Portfolio",
+    portfolio: "Work",
     about: "About",
     contact: "Contact",
     faq: "FAQ",
     legal: "Legal notice",
+    menu: "Menu",
+    close: "Close",
   },
   cta: {
-    quote: "Request a quote",
-    contactUs: "Get in touch",
+    quote: "Get a quote",
+    contactUs: "Contact us",
     learnMore: "Learn more",
     seeWork: "See our work",
     requestService: "Request this service",
     seeExamples: "See examples",
     send: "Send",
     sending: "Sending…",
+    startProject: "Start a project",
   },
   langToggle: { label: "Language", fr: "Français", en: "English" },
   footer: {
     tagline:
-      "Web agency — showcase sites, dynamic sites, print and Google visibility.",
-    navTitle: "Navigation",
+      "Web agency in Dakar. We build sites, materials and visibility that grow your business.",
+    navTitle: "The site",
     contactTitle: "Contact",
     rights: "All rights reserved.",
+    location: "Based in Dakar, Senegal",
+    soon: "(soon)",
+    builtWith: "Designed and built by Nardev",
   },
   hero: {
-    title: "Nardev builds websites and materials that help your business grow.",
-    text: "Showcase sites, dynamic sites, print and Google visibility — a small, hands-on team that listens to your project from the first conversation to going live.",
+    eyebrow: "Web agency · Dakar",
+    titleLead: "Your business deserves more than a",
+    titleAccent: "plain Facebook page.",
+    text: "Nardev builds showcase sites, dynamic sites, print materials and your visibility on Google. One team, one point of contact, a polished result — from the first conversation to going live.",
+    trust1: "Free quote",
+    trust2: "Reply within 48 h",
+    trust3: "A single point of contact",
   },
   home: {
-    servicesTitle: "Our services",
+    stats: [
+      { value: "3 to 5 d", label: "for a showcase site" },
+      { value: "24-48 h", label: "for a flyer or poster" },
+      { value: "1", label: "point of contact, start to finish" },
+      { value: "0", label: "hidden costs, ever" },
+    ],
+    servicesEyebrow: "What we do",
+    servicesTitle: "Four ways to get you seen",
+    servicesLead:
+      "From a showcase site to a Google listing, every service is ordered online and built with you, on a quote basis.",
     servicesEmpty: "Services will be available here soon.",
-    ctaTitle: "Have a project in mind?",
+    processEyebrow: "Our method",
+    processTitle: "How it works",
+    processLead:
+      "The same simple flow for every project — you always know where things stand.",
+    whyEyebrow: "Why Nardev",
+    whyTitle: "A human-sized agency, not a factory",
+    whyLead:
+      "We brought development, design and communication into one team so you don't have to juggle several providers.",
+    why: [
+      {
+        title: "A single point of contact",
+        text: "The same person follows you from brief to delivery. No sales rep handing you off.",
+      },
+      {
+        title: "Several skills, one team",
+        text: "Dev, design and comms under one roof: your project stays coherent end to end.",
+      },
+      {
+        title: "A mock-up first",
+        text: "You approve the look before we write a single line of code. No nasty surprises at the end.",
+      },
+      {
+        title: "Deadlines we keep",
+        text: "We announce a date in the quote and stick to it. You follow progress throughout.",
+      },
+    ],
+    ctaTitle: "Got a project in mind?",
     ctaText:
-      "Let's talk it through. We'll get back to you quickly with a concrete proposal.",
+      "Tell us about it in a few lines. We'll get back to you quickly with a concrete proposal and a clear quote.",
   },
   aboutTeaser: {
-    title: "Who we are",
-    text: "Nardev is a small, hands-on agency. We prefer direct conversations over heavy processes, and a site that truly fits you rather than a copied template — from the first brief to launch, and beyond.",
+    eyebrow: "Who we are",
+    title: "Four partners, one team",
+    text: "Nardev started from a wish to make professional web accessible to small organisations in Senegal. Rather than each working alone, we pooled our skills — and we showcase our work to prove what we can do.",
   },
   about: {
-    title: "About Nardev",
+    eyebrow: "About",
+    title: "The web agency we wish we'd found",
     intro:
-      "Nardev was born from the wish to make professional web work accessible to small organisations: shops, craftspeople, associations and young businesses. Rather than each subcontracting on our own, we brought our skills together — development, design and communication — into a single team, with one point of contact for every client.",
-    teamTitle: "The team",
+      "Nardev makes professional web accessible to shops, craftspeople, associations and young companies in Senegal.",
+    storyTitle: "Our story",
+    storyText:
+      "We met in training, delivered projects each on our own, and reached the same conclusion: small organisations can't afford a big agency and often end up with a rushed or unfinished site. Nardev is our answer — a team that combines development, design and communication, with a single point of contact and transparent pricing.",
+    teamEyebrow: "The team",
+    teamTitle: "The founders",
     teamText:
-      "Four founders, each responsible for one part of the project end to end.",
+      "Four partners, each responsible for one part of the project end to end.",
     teamEmpty:
       "The team will appear here as soon as members are added from the back office.",
-    valuesTitle: "Our values",
+    valuesEyebrow: "Our values",
+    valuesTitle: "What never changes here",
     values: [
       {
         title: "Closeness",
-        text: "One point of contact, clear communication and regular check-ins, from the first meeting to launch.",
+        text: "One point of contact, clear exchanges and regular check-ins, from the first meeting to going live.",
       },
       {
         title: "Careful work",
-        text: "Fast sites, readable on mobile and easy to evolve — no needless effects or clutter.",
+        text: "Sites that are fast, readable on mobile and easy to evolve — no needless effects or bloat.",
       },
       {
         title: "Transparency",
-        text: "Detailed quotes, deadlines announced and met, and no hidden costs along the way.",
+        text: "Detailed quotes, deadlines announced and kept, and no hidden costs along the way.",
       },
     ],
     ctaTitle: "Want to work with us?",
-    ctaText: "Tell us about your project and we'll get back to you quickly.",
+    ctaText: "Tell us about your project, we'll get back to you quickly.",
   },
   services: {
-    title: "Our services",
+    eyebrow: "Our services",
+    title: "Clear services, quote-based pricing",
     intro:
-      "Four ways to help you, from a showcase site to local visibility. Each service can be requested directly from this page — pricing is built with you, on a quote basis.",
+      "Four ways to support you, from a showcase site to local visibility. Every service can be requested right from this page — pricing is built with you.",
     empty: "Services will be available here soon.",
     whyTitle: "Why this service",
     receiveTitle: "What you get",
-    priceNote: "Price on quote, tailored to your project.",
-    processTitle: "How it works",
-    processText: "The same simple flow, whichever service you choose.",
+    priceNote: "Quote-based pricing, tailored to your project.",
+    jumpTo: "Jump to",
+  },
+  process: {
     steps: [
       {
-        title: "Conversation & brief",
-        text: "We take the time to understand your business, your audience and what you actually need.",
+        title: "Talk & brief",
+        text: "We take the time to understand your business, your audience and what you really need.",
       },
       {
-        title: "Mock-up validated with you",
+        title: "Mock-up approved with you",
         text: "You see what your project will look like before we write a single line of code.",
       },
       {
         title: "Build",
-        text: "We build (or design) while keeping in touch — you follow the progress, no surprises at the end.",
+        text: "We build (or design) while staying in touch — you follow progress, no surprise at the end.",
       },
       {
-        title: "Delivery & follow-up",
-        text: "Guided launch, and we stay available afterwards for adjustments and future changes.",
+        title: "Delivery & beyond",
+        text: "Guided go-live, and we stay available afterwards for adjustments and improvements.",
       },
     ],
   },
   portfolio: {
-    title: "Our work",
+    eyebrow: "Work",
+    title: "What we've already delivered",
     intro:
-      "A few projects delivered by Nardev. Each page details the client's need, the solution provided and the technologies used.",
+      "At Nardev we pool the projects led by each partner. Every case study details the client's need, the solution and the technologies used.",
     empty: "Our work will be visible here soon.",
     filterAll: "All",
     filterEmpty: "No project for this filter.",
-    previewTitle: "Our work",
+    previewEyebrow: "Work",
+    previewTitle: "A glimpse of our work",
     seeAll: "See all",
-    back: "← Back to our work",
+    back: "Back to work",
     needTitle: "The need",
     solutionTitle: "Our solution",
     techTitle: "Technologies",
     similarCta: "A similar project?",
+    similarText: "Tell us about yours, we reply within 48 h.",
     notFound: "Project not found",
+    viewProject: "View project",
   },
   contact: {
-    title: "Get in touch",
+    title: "Let's talk about your project",
     intro:
-      "Tell us about your project in a few lines. We'll get back to you quickly with a concrete proposal.",
+      "Tell us about your need in a few lines. We'll get back to you quickly with a concrete proposal and a clear quote.",
     devisNote:
       "Quote request — describe your need and we'll reply with an estimate.",
     name: "Name",
@@ -378,10 +498,13 @@ const en: Dict = {
     reason3: "A mock-up approved with you before any development",
   },
   faq: {
+    eyebrow: "FAQ",
     title: "Frequently asked questions",
     intro:
-      "Answers to the questions we get asked most often. Another question?",
+      "Answers to the questions we get asked most. Another question?",
     contactLink: "Write to us",
+    stillTitle: "Can't find your answer?",
+    stillText: "We answer every question, even before the quote.",
     items: [
       {
         q: "How long does it take to build a showcase site?",
@@ -434,24 +557,24 @@ const en: Dict = {
     editorDirector: "Publication director: Ndiawar Thiaw",
     editorContact: "Contact:",
     editorRegistration:
-      "The NINEA and RCCM numbers will be added once the registration process is complete.",
+      "The NINEA and RCCM numbers will be added once registration is complete.",
     hostTitle: "Hosting",
     hostBody:
       "The site is hosted by Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA — vercel.com. The database is hosted by Neon (Neon Inc.), within the European Union.",
     ipTitle: "Intellectual property",
     ipBody:
-      "Unless stated otherwise, all site content (text, visuals, logo, code) is the property of Nardev. Any reproduction or reuse without prior written permission is prohibited. The projects shown in the “Work” section are published with the agreement of the clients concerned.",
+      "Unless stated otherwise, all site content (text, visuals, logo, code) is the property of Nardev. Any reproduction or reuse without prior written permission is prohibited. Projects shown in the “Work” section are published with the agreement of the clients concerned.",
     dataTitle: "Personal data (contact form)",
     dataIntro:
-      "The form on the Contact page collects the information you enter: name, email address, phone (optional), company name (optional), service of interest and the content of your message.",
+      "The Contact page form collects the information you enter: name, email address, phone (optional), company name (optional), service of interest and the content of your message.",
     dataPurpose:
-      "Purpose: to handle your request and get back to you. This data is neither sold nor passed to third parties for commercial purposes.",
+      "Purpose: to handle your request and get back to you. This data is neither sold nor shared with third parties for commercial purposes.",
     dataRecipients:
-      "Recipients: the Nardev team only. A notification may be sent by email via the provider Resend (Resend, Inc.).",
+      "Recipients: the Nardev team only. A notification is sent by email via the provider Resend (Resend, Inc.) where applicable.",
     dataRetention:
-      "Retention: messages are kept for as long as needed to follow up on the request, then deleted at the latest 24 months after the last exchange.",
+      "Retention: messages are kept as long as needed to handle the request, then deleted at the latest 24 months after the last exchange.",
     dataRights:
-      "Your rights: under Senegalese law no. 2008-12 of 25 January 2008 on the protection of personal data, you have a right to access, rectify and delete your data. Write to contact@nardev.sn. You may also contact Senegal's Personal Data Protection Commission (CDP).",
+      "Your rights: under Senegalese law no. 2008-12 of 25 January 2008 on personal data protection, you have a right of access, rectification and deletion of your data. Write to contact@nardev.sn. You may also contact Senegal's Personal Data Protection Commission (CDP).",
     cookiesTitle: "Cookies",
     cookiesBody:
       "The public site sets no analytics or advertising cookies. A session cookie is used only in the team's admin area, to keep you signed in.",

@@ -1,15 +1,16 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
+import { Spark } from "./ui/Spark";
 
 /**
- * Cadre photo réutilisable (hero, cartes service, portfolio…).
- * Tant qu'aucune vraie photo n'est fournie (`imageUrl` vide), affiche un
- * dégradé doux dans les tons de la charte plutôt qu'un rectangle gris terne.
+ * Cadre visuel réutilisable (hero, cartes service, portfolio…).
+ * Sans photo (`imageUrl` vide), affiche un aplat dégradé navy → bleu avec un
+ * motif de points et, au centre, l'icône fournie (ou l'étincelle par défaut).
  */
 export function PhotoFrame({
   imageUrl,
   alt,
-  icon = "✨",
-  iconClassName = "text-5xl",
+  icon,
   className = "",
   sizes = "100vw",
   priority = false,
@@ -18,19 +19,22 @@ export function PhotoFrame({
 }: {
   imageUrl?: string | null;
   alt: string;
-  icon?: string;
-  iconClassName?: string;
+  icon?: ReactNode;
   className?: string;
   sizes?: string;
   priority?: boolean;
-  /** Désactiver pour un usage plein-bleed (ex: hero pleine largeur). */
   rounded?: boolean;
-  /** "contain" pour une capture d'écran de site (ne rien couper, texte lisible). */
   fit?: "cover" | "contain";
 }) {
   return (
     <div
-      className={`relative overflow-hidden ${rounded ? "rounded-lg" : ""} ${imageUrl ? "bg-fond-alt" : "bg-gradient-to-br from-marine via-bleu to-marine/70"} ${className}`}
+      className={`group/frame relative overflow-hidden ${
+        rounded ? "rounded-xl" : ""
+      } ${
+        imageUrl
+          ? "bg-fond-alt"
+          : "bg-gradient-to-br from-marine via-marine-700 to-bleu-600"
+      } ${className}`}
     >
       {imageUrl ? (
         <Image
@@ -44,12 +48,18 @@ export function PhotoFrame({
           } motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out group-hover:motion-safe:scale-[1.03]`}
         />
       ) : (
-        <div
-          className={`absolute inset-0 flex items-center justify-center ${iconClassName} motion-safe:transition-transform motion-safe:duration-500 group-hover:motion-safe:scale-105`}
-          aria-hidden="true"
-        >
-          {icon}
-        </div>
+        <>
+          <div
+            aria-hidden
+            className="bg-dots absolute inset-0 opacity-70"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 flex items-center justify-center text-white/90 motion-safe:transition-transform motion-safe:duration-500 group-hover:motion-safe:scale-105"
+          >
+            {icon ?? <Spark className="h-10 w-10 animate-spark-pulse" />}
+          </div>
+        </>
       )}
     </div>
   );

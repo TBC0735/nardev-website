@@ -3,12 +3,13 @@
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { Button } from "@/components/Button";
+import { CheckIcon } from "@/components/icons";
 import type { Dict } from "@/i18n/dictionaries";
 
 type Service = { slug: string; titre: string };
 
-const inputClass =
-  "mt-1.5 w-full rounded-lg border border-bordure bg-white px-3.5 py-2.5 text-sm transition-colors placeholder:text-texte-secondaire/70 focus:border-bleu focus:outline-none focus:ring-2 focus:ring-bleu/20";
+const field =
+  "mt-1.5 w-full rounded-lg border border-bordure bg-white px-3.5 py-2.5 text-sm text-texte transition-colors placeholder:text-texte-secondaire/70 focus:border-bleu focus:outline-none focus:ring-2 focus:ring-bleu/20";
 
 export function ContactForm({
   services,
@@ -49,7 +50,6 @@ export function ContactForm({
     });
 
     setEnCours(false);
-
     if (!res.ok) {
       const data = await res.json().catch(() => null);
       setErreur(data?.error ?? t.error);
@@ -62,20 +62,7 @@ export function ContactForm({
     return (
       <div className="flex flex-col items-center rounded-xl border border-succes/30 bg-succes/5 px-6 py-10 text-center">
         <span className="animate-pop-in flex h-14 w-14 items-center justify-center rounded-full bg-succes text-white">
-          <svg
-            viewBox="0 0 24 24"
-            className="h-7 w-7"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M5 13l4 4L19 7"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <CheckIcon className="h-7 w-7" />
         </span>
         <p className="animate-rise-in mt-4 font-semibold text-marine">
           {t.sentTitle}
@@ -90,7 +77,7 @@ export function ContactForm({
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       {devis && (
-        <p className="rounded-lg border border-bleu/20 bg-bleu/5 px-3.5 py-2.5 text-sm text-marine">
+        <p className="rounded-lg border border-bleu/20 bg-ciel px-3.5 py-2.5 text-sm text-marine">
           {t.devisNote}
         </p>
       )}
@@ -103,14 +90,17 @@ export function ContactForm({
       </div>
 
       <div>
-        <label htmlFor="service" className="block text-sm font-medium text-marine">
+        <label
+          htmlFor="service"
+          className="block text-sm font-medium text-marine"
+        >
           {t.serviceLabel}
         </label>
         <select
           id="service"
           name="service"
           defaultValue={serviceInitial}
-          className={inputClass}
+          className={field}
         >
           <option value="">{t.serviceDefault}</option>
           {services.map((s) => (
@@ -122,7 +112,10 @@ export function ContactForm({
       </div>
 
       <div>
-        <label htmlFor="contenu" className="block text-sm font-medium text-marine">
+        <label
+          htmlFor="contenu"
+          className="block text-sm font-medium text-marine"
+        >
           {t.message}
         </label>
         <textarea
@@ -131,20 +124,30 @@ export function ContactForm({
           required
           rows={6}
           minLength={10}
-          className={inputClass}
+          className={field}
           placeholder={t.messagePlaceholder}
         />
       </div>
 
-      {/* Champ piège anti-spam — masqué aux humains. */}
       <div aria-hidden="true" className="hidden">
         <label htmlFor="siteweb">Ne rien saisir ici</label>
-        <input id="siteweb" name="siteweb" type="text" tabIndex={-1} autoComplete="off" />
+        <input
+          id="siteweb"
+          name="siteweb"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
       {erreur && <p className="text-sm text-erreur">{erreur}</p>}
 
-      <Button type="submit" disabled={enCours} className="w-full sm:w-auto">
+      <Button
+        type="submit"
+        size="lg"
+        disabled={enCours}
+        className="w-full sm:w-auto"
+      >
         {enCours ? dict.cta.sending : dict.cta.send}
       </Button>
     </form>
@@ -172,7 +175,7 @@ function Champ({
         name={name}
         type={type}
         required={required}
-        className={inputClass}
+        className={field}
       />
     </div>
   );

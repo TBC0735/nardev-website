@@ -1,69 +1,71 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ElementType,
+  type ReactNode,
+} from "react";
 
-// Apparition douce au scroll : léger fondu + montée de quelques pixels, jouée
-// une seule fois. Fait maison (IntersectionObserver + CSS), sans librairie, et
-// neutralisée si l'utilisateur préfère moins de mouvement (motion-safe).
+// Apparition douce au scroll : fondu + légère montée, jouée une seule fois.
+// IntersectionObserver + animation CSS (.reveal / .is-visible), sans librairie,
+// neutralisée par prefers-reduced-motion (voir globals.css).
 
-function useRevele<T extends HTMLElement>(delay = 0) {
+function useInView<T extends HTMLElement>() {
   const ref = useRef<T>(null);
-  const [visible, setVisible] = useState(false);
+  const [seen, setSeen] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(true);
-      return;
-    }
-
-    let timer: ReturnType<typeof setTimeout>;
-    const observer = new IntersectionObserver(
+    if (!el || seen) return;
+    const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          timer = setTimeout(() => setVisible(true), delay);
-          observer.disconnect();
+          setSeen(true);
+          io.disconnect();
         }
       },
-      { rootMargin: "0px 0px -10% 0px" },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.05 },
     );
-    observer.observe(el);
+    io.observe(el);
+    return () => io.disconnect();
+  }, [seen]);
 
-    return () => {
-      observer.disconnect();
-      clearTimeout(timer);
-    };
-  }, [delay]);
-
-  return { ref, visible };
+  return { ref, seen };
 }
 
-const classes = (visible: boolean, className?: string) =>
-  `motion-safe:transition-all motion-safe:duration-[600ms] ease-out ${
-    visible ? "opacity-100 translate-y-0" : "opacity-0 motion-safe:translate-y-3"
-  } ${className ?? ""}`;
+type RevealProps = {
+  children: ReactNode;
+  className?: string;
+  /** Retard en ms avant l'apparition (utile pour une cascade). */
+  delay?: number;
+  as?: ElementType;
+};
 
-/** Fondu discret à l'apparition pour un bloc isolé (titres de section, bandeaux…). */
 export function Reveal({
   children,
+  className = "",
   delay = 0,
-  className,
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const { ref, visible } = useRevele<HTMLDivElement>(delay);
+  as: Tag = "div",
+}: RevealProps) {
+  const { ref, seen } = useInView<HTMLElement>();
+  const style: CSSProperties = delay
+    ? { animationDelay: `${delay}ms` }
+    : {};
   return (
-    <div ref={ref} className={classes(visible, className)}>
+    <Tag
+      ref={ref}
+      style={style}
+      className={`reveal ${seen ? "is-visible" : ""} ${className}`}
+    >
       {children}
-    </div>
+    </Tag>
   );
 }
 
-/** Conteneur d'éléments révélés à l'apparition. */
+/** Conteneur d'une cascade — passer `index` à chaque `RevealItem`. */
 export function RevealGroup({
   children,
   className,
@@ -74,23 +76,18 @@ export function RevealGroup({
   return <div className={className}>{children}</div>;
 }
 
-/**
- * Élément d'une `RevealGroup`. `index` décale légèrement l'apparition pour
- * créer une cascade quand le groupe entre dans le champ de vision.
- */
 export function RevealItem({
   children,
-  className,
+  className = "",
   index = 0,
 }: {
   children: ReactNode;
   className?: string;
   index?: number;
 }) {
-  const { ref, visible } = useRevele<HTMLDivElement>(Math.min(index, 8) * 70);
   return (
-    <div ref={ref} className={classes(visible, className)}>
+    <Reveal delay={Math.min(index, 10) * 65} className={className}>
       {children}
-    </div>
+    </Reveal>
   );
 }

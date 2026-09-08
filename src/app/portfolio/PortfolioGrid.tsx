@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { PhotoFrame } from "@/components/PhotoFrame";
+import { Badge } from "@/components/ui/Badge";
+import { ArrowRightIcon } from "@/components/icons";
 
 type ProjetCarte = {
   id: string;
@@ -16,8 +18,7 @@ type ProjetCarte = {
 
 /**
  * Grille des réalisations + filtre par type de service.
- * Le filtre actif est porté par l'URL (?service=slug) pour rester partageable
- * et cohérent avec les liens « Voir des exemples » depuis /services.
+ * Le filtre actif est porté par l'URL (?service=slug) pour rester partageable.
  */
 export function PortfolioGrid({
   projets,
@@ -26,7 +27,7 @@ export function PortfolioGrid({
 }: {
   projets: ProjetCarte[];
   filtres: { slug: string; titre: string }[];
-  labels: { all: string; empty: string };
+  labels: { all: string; empty: string; view: string };
 }) {
   const params = useSearchParams();
   const actif = params.get("service");
@@ -57,26 +58,28 @@ export function PortfolioGrid({
           <Link
             key={projet.id}
             href={`/portfolio/${projet.slug}`}
-            className="group block overflow-hidden rounded-lg border border-bordure bg-white no-underline transition-all duration-200 hover:border-bleu hover:shadow-sm motion-safe:hover:-translate-y-0.5"
+            className="group flex h-full flex-col overflow-hidden rounded-xl border border-bordure bg-white no-underline shadow-card transition-all duration-200 hover:border-bleu/40 hover:shadow-card-hover motion-safe:hover:-translate-y-1"
           >
             <PhotoFrame
               imageUrl={projet.imageUrl}
               alt={projet.nom}
-              className="aspect-[4/3] w-full"
+              className="aspect-[16/10] w-full"
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 90vw"
             />
-            <div className="p-4">
+            <div className="flex flex-1 flex-col p-5">
               {projet.service && (
-                <p className="text-xs font-medium uppercase tracking-wide text-bleu">
-                  {projet.service.titre}
-                </p>
+                <Badge variant="bleu">{projet.service.titre}</Badge>
               )}
-              <p className="mt-1 font-semibold text-marine">{projet.nom}</p>
+              <p className="mt-2.5 font-semibold text-marine">{projet.nom}</p>
               {projet.resume && (
-                <p className="mt-1 text-sm text-texte-secondaire">
+                <p className="mt-1 flex-1 text-sm text-texte-secondaire">
                   {projet.resume}
                 </p>
               )}
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-bleu">
+                {labels.view}
+                <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
             </div>
           </Link>
         ))}
@@ -102,10 +105,10 @@ function FiltreLien({
     <Link
       href={slug ? `/portfolio?service=${slug}` : "/portfolio"}
       scroll={false}
-      className={`rounded border px-3 py-1.5 text-sm no-underline transition-colors ${
+      className={`rounded-full border px-4 py-1.5 text-sm no-underline transition-colors ${
         actif
           ? "border-bleu bg-bleu text-white"
-          : "border-bordure text-texte hover:border-bleu"
+          : "border-bordure bg-white text-texte hover:border-bleu hover:text-bleu"
       }`}
     >
       {libelle}
