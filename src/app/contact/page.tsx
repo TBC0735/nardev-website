@@ -40,27 +40,21 @@ export default async function ContactPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-marine via-marine to-bleu text-white">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/5"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-32 left-1/3 h-80 w-80 rounded-full bg-white/5"
-        />
-        <Container className="relative py-20">
-          <h1 className="max-w-2xl text-3xl font-bold sm:text-4xl">{t.title}</h1>
+      <section className="border-b border-bordure bg-gradient-to-br from-marine to-bleu text-white">
+        <Container className="py-16">
+          <h1 className="max-w-2xl text-3xl font-bold text-white sm:text-4xl">
+            {t.title}
+          </h1>
           <p className="mt-4 max-w-xl text-white/80">{t.intro}</p>
-          <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white ring-1 ring-white/20">
+          <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium ring-1 ring-white/20">
             <span className="h-1.5 w-1.5 rounded-full bg-succes" />
             {t.responseBadge}
           </span>
         </Container>
       </section>
 
-      <Container className="pb-20">
-        <div className="-mt-12 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+      <Container className="py-16">
+        <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
           <Reveal className="rounded-xl border border-bordure bg-white p-6 shadow-sm sm:p-8">
             <h2 className="text-lg font-semibold text-marine">{t.formTitle}</h2>
             <div className="mt-5">
