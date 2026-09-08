@@ -32,8 +32,8 @@ export function PortfolioPreview({
           </Link>
         </Reveal>
         <RevealGroup className="mt-8 grid gap-6 sm:grid-cols-3">
-          {projets.map((projet) => (
-            <RevealItem key={projet.id}>
+          {projets.map((projet, i) => (
+            <RevealItem key={projet.id} index={i}>
               <Link
                 href={`/portfolio/${projet.slug}`}
                 className="group block overflow-hidden rounded-lg border border-bordure bg-white no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-bleu hover:shadow-sm"

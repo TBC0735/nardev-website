@@ -57,7 +57,7 @@ export function PortfolioGrid({
           <Link
             key={projet.id}
             href={`/portfolio/${projet.slug}`}
-            className="group block overflow-hidden rounded-lg border border-bordure bg-white no-underline transition-colors hover:border-bleu"
+            className="group block overflow-hidden rounded-lg border border-bordure bg-white no-underline transition-all duration-200 hover:border-bleu hover:shadow-sm motion-safe:hover:-translate-y-0.5"
           >
             <PhotoFrame
               imageUrl={projet.imageUrl}

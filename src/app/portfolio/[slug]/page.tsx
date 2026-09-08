@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { PhotoFrame } from "@/components/PhotoFrame";
+import { Reveal } from "@/components/motion/Reveal";
 import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 
@@ -75,13 +76,15 @@ export default async function ProjetDetailPage({
       </section>
 
       <Container className="py-16">
-        <PhotoFrame
-          imageUrl={galerie[0] ?? null}
-          alt={projet.nom}
-          className="aspect-[16/9] w-full"
-          sizes="(min-width: 1024px) 960px, 100vw"
-          priority
-        />
+        <Reveal>
+          <PhotoFrame
+            imageUrl={galerie[0] ?? null}
+            alt={projet.nom}
+            className="aspect-[16/9] w-full"
+            sizes="(min-width: 1024px) 960px, 100vw"
+            priority
+          />
+        </Reveal>
         {galerie.length > 1 && (
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
             {galerie.slice(1).map((src, i) => (
@@ -96,7 +99,7 @@ export default async function ProjetDetailPage({
           </div>
         )}
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_260px]">
+        <Reveal className="mt-12 grid gap-10 lg:grid-cols-[1fr_260px]">
           <div className="space-y-8">
             {projet.besoin && (
               <div>
@@ -145,7 +148,7 @@ export default async function ProjetDetailPage({
               </Button>
             </div>
           </aside>
-        </div>
+        </Reveal>
       </Container>
     </>
   );

@@ -52,8 +52,8 @@ export default async function HomePage() {
             </p>
           ) : (
             <RevealGroup className="mt-8 grid gap-6 sm:grid-cols-2">
-              {services.map((service) => (
-                <RevealItem key={service.id}>
+              {services.map((service, i) => (
+                <RevealItem key={service.id} index={i}>
                   <ServiceCard service={service} />
                 </RevealItem>
               ))}

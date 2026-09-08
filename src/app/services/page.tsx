@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { PhotoFrame } from "@/components/PhotoFrame";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { prisma } from "@/lib/prisma";
 import { serviceIcon } from "@/lib/service-icons";
 import { getDict } from "@/i18n/server";
@@ -51,7 +52,7 @@ export default async function ServicesPage() {
                 className={inverse ? "scroll-mt-20 bg-fond-alt" : "scroll-mt-20"}
               >
                 <Container className="py-16">
-                  <div className="grid items-start gap-10 lg:grid-cols-2">
+                  <Reveal className="grid items-start gap-10 lg:grid-cols-2">
                     <PhotoFrame
                       imageUrl={service.imageUrl}
                       alt={service.titre}
@@ -120,7 +121,7 @@ export default async function ServicesPage() {
                         {dict.services.priceNote}
                       </p>
                     </div>
-                  </div>
+                  </Reveal>
                 </Container>
               </section>
             );
@@ -130,24 +131,27 @@ export default async function ServicesPage() {
 
       <section className="bg-fond-alt">
         <Container className="py-16">
-          <h2 className="text-2xl">{dict.services.processTitle}</h2>
-          <p className="mt-3 max-w-2xl text-texte-secondaire">
-            {dict.services.processText}
-          </p>
-          <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Reveal>
+            <h2 className="text-2xl">{dict.services.processTitle}</h2>
+            <p className="mt-3 max-w-2xl text-texte-secondaire">
+              {dict.services.processText}
+            </p>
+          </Reveal>
+          <RevealGroup className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {dict.services.steps.map((etape, index) => (
-              <li
-                key={etape.title}
-                className="rounded-lg border border-bordure bg-white p-5 transition-colors duration-200 hover:border-bleu"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-bleu text-sm font-semibold text-white">
-                  {index + 1}
-                </span>
-                <p className="mt-3 font-semibold text-marine">{etape.title}</p>
-                <p className="mt-2 text-sm text-texte-secondaire">{etape.text}</p>
-              </li>
+              <RevealItem key={etape.title} index={index}>
+                <div className="h-full rounded-lg border border-bordure bg-white p-5 transition-colors duration-200 hover:border-bleu">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-bleu text-sm font-semibold text-white">
+                    {index + 1}
+                  </span>
+                  <p className="mt-3 font-semibold text-marine">{etape.title}</p>
+                  <p className="mt-2 text-sm text-texte-secondaire">
+                    {etape.text}
+                  </p>
+                </div>
+              </RevealItem>
             ))}
-          </ol>
+          </RevealGroup>
           <div className="mt-8">
             <Button href="/contact?type=devis">{dict.cta.quote}</Button>
           </div>
