@@ -183,7 +183,7 @@ async function main() {
       solution:
         "Une plateforme web unique qui regroupe l'orientation vers des écoles accréditées (CAMES, ANAQ-SUP), la recherche de logements vérifiés et l'organisation du transport (aéroport / gare). Recherche par filière, comptes étudiants, et un mode public consultable sans inscription.",
       technologies: ["Next.js", "React", "Tailwind CSS", "PostgreSQL"],
-      imageUrl: "/projets/sunuetude.jpg",
+      imageUrl: "/projets/sunuetude.png",
       ordre: 1,
     },
     {
@@ -197,7 +197,7 @@ async function main() {
       solution:
         "Une plateforme web qui suit chaque tontine de bout en bout : adhésion des membres, calendrier des cotisations, ordre de perception, historique consultable par tous. Plus de transparence et de sécurité au sein du groupe, depuis le Sénégal.",
       technologies: ["Next.js", "React", "Tailwind CSS", "PostgreSQL"],
-      imageUrl: "/projets/nattbi.jpg",
+      imageUrl: "/projets/nattbi.png",
       ordre: 2,
     },
   ];
