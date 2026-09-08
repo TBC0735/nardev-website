@@ -142,6 +142,12 @@ const fr = {
     phoneLabel: "Téléphone",
     privacyNote: "Vos informations servent uniquement à traiter votre demande.",
     privacyLink: "mentions légales",
+    formTitle: "Parlez-nous de votre projet",
+    responseBadge: "Réponse sous 48 h ouvrées",
+    reasonsTitle: "Pourquoi nous écrire",
+    reason1: "Un devis gratuit et détaillé, sans engagement",
+    reason2: "Un interlocuteur unique du début à la livraison",
+    reason3: "Une maquette validée avec vous avant tout développement",
   },
   faq: {
     title: "Questions fréquentes",
@@ -150,12 +156,20 @@ const fr = {
     contactLink: "Écrivez-nous",
     items: [
       {
-        q: "Combien coûte un site ?",
-        a: "Chaque projet est différent, donc chaque tarif l'est aussi. On établit un devis détaillé et gratuit après un premier échange, en fonction du nombre de pages, des fonctionnalités et du contenu à préparer. Pas de coût caché.",
+        q: "Combien de temps faut-il pour créer un site vitrine ?",
+        a: "Une fois vos contenus reçus (textes, photos, logo), on livre un site vitrine en 3 à 5 jours ouvrés. Une semaine grand maximum pour les demandes plus fournies. Et on valide une maquette avec vous avant de lancer : le délai annoncé est celui qui est tenu.",
       },
       {
-        q: "En combien de temps le site est-il prêt ?",
-        a: "Comptez 2 à 4 semaines pour un site vitrine, un peu plus pour un site dynamique avec back-office. Le délai dépend surtout de la rapidité avec laquelle vous nous fournissez les textes et les images.",
+        q: "Quel est le délai pour un site dynamique ou une application web ?",
+        a: "À partir de 2 semaines pour un site dynamique avec back-office. Pour un projet plus complexe ou entièrement sur mesure, comptez 1 à 2 mois selon l'ampleur. On vous donne un planning clair dès le devis et vous suivez l'avancement en continu.",
+      },
+      {
+        q: "En combien de temps livrez-vous un flyer ou une affiche ?",
+        a: "24 à 48 h ouvrées après validation du brief et réception de vos éléments. Vous recevez une première proposition rapidement, puis les fichiers prêts à imprimer une fois les retouches faites.",
+      },
+      {
+        q: "Combien coûte un site ?",
+        a: "Chaque projet est différent, donc chaque tarif l'est aussi. On établit un devis détaillé et gratuit après un premier échange, en fonction du nombre de pages, des fonctionnalités et du contenu à préparer. Pas de coût caché.",
       },
       {
         q: "Est-ce que je pourrai modifier le site moi-même ensuite ?",
@@ -356,6 +370,12 @@ const en: Dict = {
     phoneLabel: "Phone",
     privacyNote: "Your information is only used to handle your request.",
     privacyLink: "legal notice",
+    formTitle: "Tell us about your project",
+    responseBadge: "Reply within 48 business hours",
+    reasonsTitle: "Why write to us",
+    reason1: "A free, detailed quote with no commitment",
+    reason2: "One point of contact from start to delivery",
+    reason3: "A mock-up approved with you before any development",
   },
   faq: {
     title: "Frequently asked questions",
@@ -364,12 +384,20 @@ const en: Dict = {
     contactLink: "Write to us",
     items: [
       {
-        q: "How much does a website cost?",
-        a: "Every project is different, so every price is too. We provide a detailed, free quote after a first conversation, based on the number of pages, the features and the content to prepare. No hidden costs.",
+        q: "How long does it take to build a showcase site?",
+        a: "Once we have your content (text, photos, logo), we deliver a showcase site in 3 to 5 business days. One week at most for larger requests. And we validate a mock-up with you before starting: the deadline we announce is the one we meet.",
       },
       {
-        q: "How long until the site is ready?",
-        a: "Around 2 to 4 weeks for a showcase site, a bit more for a dynamic site with a back office. The timeline mostly depends on how quickly you provide the texts and images.",
+        q: "What is the timeline for a dynamic site or web app?",
+        a: "From 2 weeks for a dynamic site with a back office. For a more complex or fully custom project, allow 1 to 2 months depending on scope. You get a clear schedule with the quote and follow progress throughout.",
+      },
+      {
+        q: "How fast do you deliver a flyer or poster?",
+        a: "24 to 48 business hours after the brief is approved and your assets are received. You get a first proposal quickly, then print-ready files once revisions are done.",
+      },
+      {
+        q: "How much does a website cost?",
+        a: "Every project is different, so every price is too. We provide a detailed, free quote after a first conversation, based on the number of pages, the features and the content to prepare. No hidden costs.",
       },
       {
         q: "Will I be able to edit the site myself afterwards?",

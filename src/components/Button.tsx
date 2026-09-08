@@ -18,13 +18,14 @@ export function Button({
   href,
   variant = "plein",
   children,
+  className: extra = "",
   ...props
 }: {
   href?: string;
   variant?: Variant;
   children: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>) {
-  const className = `${base} ${variants[variant]}`;
+  const className = `${base} ${variants[variant]} ${extra}`.trim();
 
   if (href) {
     return (
