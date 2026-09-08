@@ -28,6 +28,7 @@ async function main() {
       role: "Développement & infrastructure",
       presentation:
         "Met en place les fondations techniques du projet et gère le déploiement continu du site.",
+      photoUrl: "/equipe/ndiawar-thiaw.jpg",
       ordre: 1,
     },
     {
@@ -167,47 +168,52 @@ async function main() {
 
   console.log(`✔ ${services.length} services en base`);
 
-  // Réalisations (domaine « Portfolio » — Rokhaya).
-  // Exemples de départ, à remplacer par de vrais projets Nardev depuis
-  // /admin/portfolio. imageUrl volontairement null (aplat dégradé).
+  // Réalisations (domaine « Portfolio »). Chez Nardev on met en commun les
+  // projets menés par chacun des associés. Ajouter les captures d'écran dans
+  // /public/projets/ puis renseigner imageUrl (ou via /admin/portfolio).
   const projets = [
     {
-      slug: "boutique-mariama-couture",
-      nom: "Mariama Couture",
-      serviceSlug: "sites-vitrines",
-      resume: "Site vitrine pour un atelier de couture à Dakar.",
+      slug: "sunuetude",
+      nom: "SunuEtude",
+      serviceSlug: "sites-dynamiques",
+      resume:
+        "Plateforme d'accompagnement des étudiants au Sénégal : orientation, inscription, logement et accueil.",
       besoin:
-        "Mariama, couturière, n'avait aucune présence en ligne et perdait des clientes qui ne trouvaient ni ses tarifs ni son adresse.",
+        "Les nouveaux étudiants au Sénégal jonglent entre des démarches dispersées : trouver une école reconnue, s'inscrire, se loger, organiser leur arrivée. Aucun outil ne réunissait tout ça au même endroit, ce qui multipliait les erreurs et les mauvaises adresses.",
       solution:
-        "Un site vitrine de 4 pages : présentation de l'atelier, galerie de modèles, tarifs indicatifs et formulaire de prise de contact. Mise en ligne et prise en main incluses.",
-      technologies: ["Next.js", "Tailwind CSS", "Vercel"],
+        "Une plateforme web unique qui regroupe l'orientation vers des écoles accréditées (CAMES, ANAQ-SUP), la recherche de logements vérifiés et l'organisation du transport (aéroport / gare). Recherche par filière, comptes étudiants, et un mode public consultable sans inscription.",
+      technologies: ["Next.js", "React", "Tailwind CSS", "PostgreSQL"],
+      imageUrl: "/projets/sunuetude.jpg",
       ordre: 1,
     },
     {
-      slug: "catalogue-ndiaye-electronique",
-      nom: "Ndiaye Électronique",
+      slug: "nattbi",
+      nom: "NattBi",
       serviceSlug: "sites-dynamiques",
-      resume: "Catalogue en ligne mis à jour par le commerçant lui-même.",
+      resume:
+        "Plateforme de gestion des tontines : adhésion, cotisations et suivi transparent pour toute la communauté.",
       besoin:
-        "Un magasin d'électroménager voulait présenter son stock en ligne et le tenir à jour sans repasser par un prestataire à chaque changement de prix.",
+        "Les tontines se gèrent souvent sur des cahiers : oublis, erreurs de comptes, litiges sur qui a cotisé et qui doit recevoir. Les organisateurs manquent d'un outil fiable et partagé par tous les membres.",
       solution:
-        "Un site dynamique avec back-office : ajout, modification et retrait de produits en autonomie, catégories, photos et prix. Formation de l'équipe à l'administration.",
-      technologies: ["Next.js", "Prisma", "PostgreSQL", "NextAuth"],
+        "Une plateforme web qui suit chaque tontine de bout en bout : adhésion des membres, calendrier des cotisations, ordre de perception, historique consultable par tous. Plus de transparence et de sécurité au sein du groupe, depuis le Sénégal.",
+      technologies: ["Next.js", "React", "Tailwind CSS", "PostgreSQL"],
+      imageUrl: "/projets/nattbi.jpg",
       ordre: 2,
     },
-    {
-      slug: "flyers-festival-gospel",
-      nom: "Festival Gospel de Dakar",
-      serviceSlug: "flyers-affiches",
-      resume: "Affiche et flyers pour un événement culturel.",
-      besoin:
-        "L'organisation avait besoin de supports de communication cohérents pour l'affichage urbain et les réseaux sociaux, dans un délai court.",
-      solution:
-        "Une affiche A2, un flyer recto-verso et des déclinaisons carrées pour Instagram et Facebook, aux mêmes couleurs et typographies. Fichiers prêts pour l'impression fournis.",
-      technologies: ["Illustration", "Mise en page", "Préparation impression"],
-      ordre: 3,
-    },
   ];
+
+  // Nettoie les exemples fictifs de la première version du seed.
+  await prisma.projet.deleteMany({
+    where: {
+      slug: {
+        in: [
+          "boutique-mariama-couture",
+          "catalogue-ndiaye-electronique",
+          "flyers-festival-gospel",
+        ],
+      },
+    },
+  });
 
   for (const { serviceSlug, ...projet } of projets) {
     const service = await prisma.service.findUnique({

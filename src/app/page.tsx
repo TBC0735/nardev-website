@@ -1,11 +1,17 @@
 import { prisma } from "@/lib/prisma";
 import { Hero } from "@/components/Hero";
 import { Container } from "@/components/Container";
-import { Button } from "@/components/Button";
+import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Stat } from "@/components/ui/Stat";
 import { ServiceCard } from "@/components/ServiceCard";
 import { PortfolioPreview } from "@/components/PortfolioPreview";
 import { AboutTeaser } from "@/components/AboutTeaser";
+import { Steps } from "@/components/Steps";
+import { FeatureGrid } from "@/components/FeatureGrid";
+import { CtaPanel } from "@/components/CtaPanel";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { UserIcon, EyeIcon, ShieldIcon, LayersIcon } from "@/components/icons";
 import { getDict } from "@/i18n/server";
 
 export const dynamic = "force-dynamic";
@@ -22,8 +28,9 @@ async function getProjetsRecents() {
   try {
     return await prisma.projet.findMany({
       where: { publie: true },
-      orderBy: { createdAt: "desc" },
+      orderBy: [{ ordre: "asc" }, { createdAt: "desc" }],
       take: 3,
+      include: { service: { select: { slug: true, titre: true } } },
     });
   } catch {
     return [];
@@ -32,51 +39,83 @@ async function getProjetsRecents() {
 
 export default async function HomePage() {
   const dict = getDict();
+  const t = dict.home;
   const [services, projets] = await Promise.all([
     getServices(),
     getProjetsRecents(),
   ]);
 
+  const whyIcons = [UserIcon, LayersIcon, EyeIcon, ShieldIcon];
+  const features = t.why.map((w, i) => ({ ...w, Icon: whyIcons[i] ?? UserIcon }));
+
   return (
     <>
       <Hero dict={dict} />
 
-      <section id="services" className="scroll-mt-20">
-        <Container className="py-16">
-          <Reveal>
-            <h2 className="text-2xl">{dict.home.servicesTitle}</h2>
-          </Reveal>
-          {services.length === 0 ? (
-            <p className="mt-4 text-texte-secondaire">
-              {dict.home.servicesEmpty}
-            </p>
-          ) : (
-            <RevealGroup className="mt-8 grid gap-6 sm:grid-cols-2">
-              {services.map((service, i) => (
-                <RevealItem key={service.id} index={i}>
-                  <ServiceCard service={service} />
-                </RevealItem>
-              ))}
-            </RevealGroup>
-          )}
+      {/* Chiffres-clés — engagements concrets */}
+      <div className="border-b border-bordure bg-white">
+        <Container className="py-10">
+          <RevealGroup className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+            {t.stats.map((s, i) => (
+              <RevealItem key={s.label} index={i}>
+                <Stat value={s.value} label={s.label} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </Container>
-      </section>
+      </div>
+
+      <Section id="services" tone="muted">
+        <SectionHeading
+          eyebrow={t.servicesEyebrow}
+          title={t.servicesTitle}
+          lead={t.servicesLead}
+        />
+        {services.length === 0 ? (
+          <p className="mt-8 text-texte-secondaire">{t.servicesEmpty}</p>
+        ) : (
+          <RevealGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((service, i) => (
+              <RevealItem key={service.id} index={i}>
+                <ServiceCard service={service} moreLabel={dict.cta.learnMore} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        )}
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow={t.processEyebrow}
+          title={t.processTitle}
+          lead={t.processLead}
+        />
+        <Steps steps={dict.process.steps} />
+      </Section>
 
       <PortfolioPreview projets={projets} dict={dict} />
+
+      <Section tone="muted">
+        <SectionHeading
+          eyebrow={t.whyEyebrow}
+          title={t.whyTitle}
+          lead={t.whyLead}
+        />
+        <FeatureGrid features={features} columns={4} />
+      </Section>
 
       <Reveal>
         <AboutTeaser dict={dict} />
       </Reveal>
 
-      <section className="bg-fond-alt">
-        <Container className="py-16">
-          <Reveal className="flex flex-col items-start gap-4">
-            <h2 className="text-2xl">{dict.home.ctaTitle}</h2>
-            <p className="max-w-xl text-texte-secondaire">{dict.home.ctaText}</p>
-            <Button href="/contact">{dict.cta.contactUs}</Button>
-          </Reveal>
-        </Container>
-      </section>
+      <CtaPanel
+        title={t.ctaTitle}
+        text={t.ctaText}
+        primaryLabel={dict.cta.quote}
+        primaryHref="/contact?type=devis"
+        secondaryLabel={dict.cta.seeWork}
+        secondaryHref="/portfolio"
+      />
     </>
   );
 }

@@ -2,59 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes pop-in {
-  0% {
-    transform: scale(0.4);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.08);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes rise-in {
-  from {
-    transform: translateY(8px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-pop-in,
-  .animate-rise-in {
-    animation: none;
-  }
-}
-
 @layer base {
   body {
     @apply bg-white text-texte font-sans antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     @apply font-semibold text-marine;
   }
 
-  a {
-    @apply text-bleu;
+  ::selection {
+    @apply bg-bleu/20 text-marine;
+  }
+
+  /* Ancres (nav interne) : compenser le header collant. */
+  :target {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@layer components {
+  /* Sur-titre de section : petit label bleu en capitales. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-bleu-600;
+  }
+
+  /* Lien texte discret avec soulignement animé. */
+  .link-underline {
+    @apply relative no-underline;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-300;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
   }
 }
 
 @layer utilities {
-  .animate-pop-in {
-    animation: pop-in 0.35s ease-out both;
+  /* Mot mis en avant dans un titre : dégradé navy → bleu. */
+  .text-gradient {
+    @apply bg-gradient-to-r from-bleu-500 to-bleu-300 bg-clip-text text-transparent;
   }
-  .animate-rise-in {
-    animation: rise-in 0.4s ease-out both;
+
+  /* Fond « grille de points » pour les sections sombres. */
+  .bg-dots {
+    background-image: theme("backgroundImage.grid-dots");
+    background-size: 22px 22px;
+  }
+  .bg-dots-dark {
+    background-image: theme("backgroundImage.grid-dots-dark");
+    background-size: 22px 22px;
+  }
+
+  /* Apparition au scroll (piloté par la classe .is-visible via Reveal). */
+  .reveal {
+    opacity: 0;
+  }
+  .reveal.is-visible {
+    animation: reveal-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .animate-spark-pulse,
+  .animate-float,
+  .animate-pop-in {
+    animation: none !important;
   }
 }

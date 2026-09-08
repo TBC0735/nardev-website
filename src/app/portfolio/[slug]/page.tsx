@@ -4,7 +4,10 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { PhotoFrame } from "@/components/PhotoFrame";
+import { Badge } from "@/components/ui/Badge";
+import { Spark } from "@/components/ui/Spark";
 import { Reveal } from "@/components/motion/Reveal";
+import { ArrowRightIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 
@@ -40,42 +43,46 @@ export default async function ProjetDetailPage({
   params: { slug: string };
 }) {
   const dict = getDict();
+  const t = dict.portfolio;
   const projet = await getProjet(params.slug);
   if (!projet) notFound();
 
   const galerie = [projet.imageUrl, ...projet.images].filter(
     (src): src is string => Boolean(src),
   );
+  const backHref = projet.service
+    ? `/portfolio?service=${projet.service.slug}`
+    : "/portfolio";
 
   return (
     <>
-      <section className="border-b border-bordure bg-fond-alt">
-        <Container className="py-16">
+      <section className="relative overflow-hidden bg-marine text-white">
+        <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
+        <Container className="relative py-16 lg:py-20">
           <Link
-            href={
-              projet.service
-                ? `/portfolio?service=${projet.service.slug}`
-                : "/portfolio"
-            }
-            className="text-sm no-underline hover:underline"
+            href={backHref}
+            className="inline-flex items-center gap-1.5 text-sm text-white/70 no-underline transition-colors hover:text-white"
           >
-            {dict.portfolio.back}
+            <ArrowRightIcon className="h-4 w-4 rotate-180" />
+            {t.back}
           </Link>
           {projet.service && (
-            <p className="mt-6 text-xs font-medium uppercase tracking-wide text-bleu">
-              {projet.service.titre}
-            </p>
+            <div className="mt-6">
+              <Badge variant="clair">{projet.service.titre}</Badge>
+            </div>
           )}
-          <h1 className="mt-1 text-3xl sm:text-4xl">{projet.nom}</h1>
+          <h1 className="mt-3 text-display-sm font-bold text-white sm:text-display">
+            {projet.nom}
+          </h1>
           {projet.resume && (
-            <p className="mt-4 max-w-2xl text-texte-secondaire">
+            <p className="mt-4 max-w-2xl text-lg text-white/75">
               {projet.resume}
             </p>
           )}
         </Container>
       </section>
 
-      <Container className="py-16">
+      <Container className="py-16 sm:py-20">
         <Reveal>
           <PhotoFrame
             imageUrl={galerie[0] ?? null}
@@ -91,7 +98,7 @@ export default async function ProjetDetailPage({
               <PhotoFrame
                 key={src}
                 imageUrl={src}
-                alt={`${projet.nom} — visuel ${i + 2}`}
+                alt={`${projet.nom} — ${i + 2}`}
                 className="aspect-[4/3] w-full"
                 sizes="(min-width: 640px) 30vw, 90vw"
               />
@@ -99,56 +106,63 @@ export default async function ProjetDetailPage({
           </div>
         )}
 
-        <Reveal className="mt-12 grid gap-10 lg:grid-cols-[1fr_260px]">
-          <div className="space-y-8">
+        <div className="mt-14 grid gap-12 lg:grid-cols-[1fr_280px]">
+          <Reveal className="space-y-10">
             {projet.besoin && (
               <div>
-                <h2 className="text-2xl">{dict.portfolio.needTitle}</h2>
-                <p className="mt-3 whitespace-pre-line text-texte-secondaire">
+                <p className="eyebrow">
+                  <Spark className="h-3.5 w-3.5" />
+                  {t.needTitle}
+                </p>
+                <p className="mt-3 whitespace-pre-line leading-relaxed text-texte-secondaire">
                   {projet.besoin}
                 </p>
               </div>
             )}
             {projet.solution && (
               <div>
-                <h2 className="text-2xl">{dict.portfolio.solutionTitle}</h2>
-                <p className="mt-3 whitespace-pre-line text-texte-secondaire">
+                <p className="eyebrow">
+                  <Spark className="h-3.5 w-3.5" />
+                  {t.solutionTitle}
+                </p>
+                <p className="mt-3 whitespace-pre-line leading-relaxed text-texte-secondaire">
                   {projet.solution}
                 </p>
               </div>
             )}
             {!projet.besoin && !projet.solution && projet.description && (
-              <p className="whitespace-pre-line text-texte-secondaire">
+              <p className="whitespace-pre-line leading-relaxed text-texte-secondaire">
                 {projet.description}
               </p>
             )}
-          </div>
+          </Reveal>
 
-          <aside className="h-fit rounded-lg border border-bordure p-5">
-            {projet.technologies.length > 0 && (
-              <>
-                <p className="text-sm font-semibold text-marine">
-                  {dict.portfolio.techTitle}
-                </p>
-                <ul className="mt-2 flex flex-wrap gap-2">
-                  {projet.technologies.map((tech) => (
-                    <li
-                      key={tech}
-                      className="rounded border border-bordure px-2 py-1 text-xs text-texte-secondaire"
-                    >
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-            <div className="mt-5">
-              <Button href="/contact?type=devis">
-                {dict.portfolio.similarCta}
+          <Reveal delay={120}>
+            <aside className="h-fit rounded-xl border border-bordure bg-fond-alt p-6">
+              {projet.technologies.length > 0 && (
+                <>
+                  <p className="text-sm font-semibold text-marine">
+                    {t.techTitle}
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {projet.technologies.map((tech) => (
+                      <li key={tech}>
+                        <Badge variant="neutre">{tech}</Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              <p className="mt-6 font-semibold text-marine">{t.similarCta}</p>
+              <p className="mt-1 text-sm text-texte-secondaire">
+                {t.similarText}
+              </p>
+              <Button href="/contact?type=devis" className="mt-4 w-full">
+                {dict.cta.quote}
               </Button>
-            </div>
-          </aside>
-        </Reveal>
+            </aside>
+          </Reveal>
+        </div>
       </Container>
     </>
   );
