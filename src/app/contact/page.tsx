@@ -50,14 +50,18 @@ export default async function ContactPage() {
 
       <Container className="py-16 sm:py-20">
         <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
-          <Reveal className="rounded-2xl border border-bordure bg-white p-6 shadow-card sm:p-8">
-            <h2 className="text-lg font-semibold text-marine">{t.formTitle}</h2>
-            <div className="mt-6">
-              <Suspense>
-                <ContactForm services={services} dict={dict} />
-              </Suspense>
-            </div>
-          </Reveal>
+          <div id="formulaire" className="scroll-mt-24">
+            <Reveal className="rounded-2xl border border-bordure bg-white p-6 shadow-card sm:p-8">
+              <h2 className="text-lg font-semibold text-marine">
+                {t.formTitle}
+              </h2>
+              <div className="mt-6">
+                <Suspense>
+                  <ContactForm services={services} dict={dict} />
+                </Suspense>
+              </div>
+            </Reveal>
+          </div>
 
           <Reveal delay={120} className="h-fit space-y-4">
             <div className="rounded-2xl border border-bordure bg-fond-alt p-6">

@@ -61,7 +61,7 @@ export default function FaqPage() {
         title={t.stillTitle}
         text={t.stillText}
         primaryLabel={dict.cta.quote}
-        primaryHref="/contact?type=devis"
+        primaryHref="/contact?type=devis#formulaire"
         secondaryLabel={dict.cta.contactUs}
         secondaryHref="/contact"
       />

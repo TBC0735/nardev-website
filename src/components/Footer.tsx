@@ -35,7 +35,7 @@ export function Footer({ dict }: { dict: Dict }) {
             <p className="text-xl font-bold tracking-tight">{t.ctaTitle}</p>
             <p className="mt-1 text-sm text-white/60">{t.ctaText}</p>
           </div>
-          <Button href="/contact?type=devis" variant="clair" size="lg">
+          <Button href="/contact?type=devis#formulaire" variant="clair" size="lg">
             {dict.cta.quote}
           </Button>
         </div>

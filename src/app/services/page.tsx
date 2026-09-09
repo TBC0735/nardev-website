@@ -138,7 +138,9 @@ export default async function ServicesPage() {
                       )}
 
                       <div className="mt-8 flex flex-wrap items-center gap-3">
-                        <Button href={`/contact?service=${service.slug}`}>
+                        <Button
+                          href={`/contact?service=${service.slug}#formulaire`}
+                        >
                           {dict.cta.requestService}
                         </Button>
                         <Link
@@ -174,7 +176,7 @@ export default async function ServicesPage() {
         title={dict.home.ctaTitle}
         text={dict.home.ctaText}
         primaryLabel={dict.cta.quote}
-        primaryHref="/contact?type=devis"
+        primaryHref="/contact?type=devis#formulaire"
         secondaryLabel={dict.nav.faq}
         secondaryHref="/faq"
       />
