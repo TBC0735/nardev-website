@@ -104,7 +104,7 @@ export default async function PortfolioPage() {
         title={dict.home.ctaTitle}
         text={dict.home.ctaText}
         primaryLabel={dict.cta.quote}
-        primaryHref="/contact?type=devis"
+        primaryHref="/contact?type=devis#formulaire"
       />
     </>
   );

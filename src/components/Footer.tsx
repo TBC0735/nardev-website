@@ -35,7 +35,7 @@ export function Footer({ dict }: { dict: Dict }) {
             <p className="text-xl font-bold tracking-tight">{t.ctaTitle}</p>
             <p className="mt-1 text-sm text-white/60">{t.ctaText}</p>
           </div>
-          <Button href="/contact?type=devis" variant="clair" size="lg">
+          <Button href="/contact?type=devis#formulaire" variant="clair" size="lg">
             {dict.cta.quote}
           </Button>
         </div>
@@ -43,13 +43,17 @@ export function Footer({ dict }: { dict: Dict }) {
         {/* Colonnes */}
         <div className="grid gap-10 py-14 md:grid-cols-[1.5fr_1fr_1fr_1.1fr] lg:gap-12">
           <div>
-            <Link href="/" className="inline-block no-underline">
+            <Link
+              href="/"
+              className="inline-flex rounded-lg bg-white px-3 py-2 no-underline"
+              aria-label="Nardev"
+            >
               <Image
                 src="/logo.png"
                 alt="Nardev"
                 width={1636}
                 height={240}
-                className="h-7 w-auto brightness-0 invert"
+                className="h-6 w-auto"
               />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">

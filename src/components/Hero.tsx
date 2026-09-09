@@ -32,7 +32,7 @@ export function Hero({ dict }: { dict: Dict }) {
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">
-            <Button href="/contact?type=devis" size="lg">
+            <Button href="/contact?type=devis#formulaire" size="lg">
               {dict.cta.quote}
             </Button>
             <Button href="/portfolio" size="lg" variant="contour-clair">

@@ -112,7 +112,7 @@ export default async function HomePage() {
         title={t.ctaTitle}
         text={t.ctaText}
         primaryLabel={dict.cta.quote}
-        primaryHref="/contact?type=devis"
+        primaryHref="/contact?type=devis#formulaire"
         secondaryLabel={dict.cta.seeWork}
         secondaryHref="/portfolio"
       />

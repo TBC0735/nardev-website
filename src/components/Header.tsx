@@ -79,7 +79,7 @@ export function Header({ dict, locale }: { dict: Dict; locale: Locale }) {
         <div className="flex items-center gap-2 sm:gap-3">
           <LangToggle current={locale} label={dict.langToggle.label} />
           <div className="hidden sm:block">
-            <Button href="/contact?type=devis" size="md">
+            <Button href="/contact?type=devis#formulaire" size="md">
               {dict.cta.quote}
             </Button>
           </div>
@@ -119,7 +119,7 @@ export function Header({ dict, locale }: { dict: Dict; locale: Locale }) {
               {link.label}
             </Link>
           ))}
-          <Button href="/contact?type=devis" className="mt-2 w-full">
+          <Button href="/contact?type=devis#formulaire" className="mt-2 w-full">
             {dict.cta.quote}
           </Button>
         </Container>
