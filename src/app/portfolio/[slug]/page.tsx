@@ -173,7 +173,7 @@ export default async function ProjetDetailPage({
               <p className="mt-1 text-sm text-texte-secondaire">
                 {t.similarText}
               </p>
-              <Button href="/contact?type=devis" className="mt-4 w-full">
+              <Button href="/contact?type=devis#formulaire" className="mt-4 w-full">
                 {dict.cta.quote}
               </Button>
             </aside>

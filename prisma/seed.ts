@@ -180,27 +180,31 @@ async function main() {
       nom: "SunuEtude",
       serviceSlug: "sites-dynamiques",
       resume:
-        "Plateforme d'accompagnement des étudiants au Sénégal : orientation, inscription, logement et accueil.",
+        "Plateforme web pour accompagner les étudiants au Sénégal dans leurs démarches : inscription, choix d'établissement, logement et accueil.",
       besoin:
-        "Les nouveaux étudiants au Sénégal jonglent entre des démarches dispersées : trouver une école reconnue, s'inscrire, se loger, organiser leur arrivée. Aucun outil ne réunissait tout ça au même endroit, ce qui multipliait les erreurs et les mauvaises adresses.",
+        "Les étudiants au Sénégal doivent gérer séparément plusieurs démarches liées à leurs études : s'inscrire, choisir un établissement, trouver un logement et organiser leur arrivée. Il n'existait pas d'outil unique pour suivre tout cela.",
       solution:
-        "Une plateforme web unique qui regroupe l'orientation vers des écoles accréditées (CAMES, ANAQ-SUP), la recherche de logements vérifiés et l'organisation du transport (aéroport / gare). Recherche par filière, comptes étudiants, et un mode public consultable sans inscription.",
-      technologies: ["Next.js", "React", "Tailwind CSS", "PostgreSQL"],
-      imageUrl: "/projets/sunuetude.jpg",
+        "Une plateforme web qui réunit ces démarches au même endroit : authentification et gestion des utilisateurs, gestion des étudiants et des écoles, inscriptions en ligne, gestion des logements et des bailleurs, paiements en ligne, notifications, tableaux de bord selon les profils et gestion administrative.",
+      role: "Conception et développement de la plateforme web, de l'architecture technique jusqu'aux différentes fonctionnalités.",
+      technologies: ["Laravel", "Angular", "PostgreSQL"],
+      lienUrl: "https://memoire-ndiawar-thiaw.vercel.app/",
+      imageUrl: "/projets/sunuetude.png",
+      publie: true,
       ordre: 1,
     },
     {
+      // Brouillon : à compléter par l'équipe (besoin, solution, rôle, techno,
+      // lien, capture) puis publier depuis /admin/portfolio.
       slug: "nattbi",
       nom: "NattBi",
       serviceSlug: "sites-dynamiques",
-      resume:
-        "Plateforme de gestion des tontines : adhésion, cotisations et suivi transparent pour toute la communauté.",
-      besoin:
-        "Les tontines se gèrent souvent sur des cahiers : oublis, erreurs de comptes, litiges sur qui a cotisé et qui doit recevoir. Les organisateurs manquent d'un outil fiable et partagé par tous les membres.",
-      solution:
-        "Une plateforme web qui suit chaque tontine de bout en bout : adhésion des membres, calendrier des cotisations, ordre de perception, historique consultable par tous. Plus de transparence et de sécurité au sein du groupe, depuis le Sénégal.",
-      technologies: ["Next.js", "React", "Tailwind CSS", "PostgreSQL"],
-      imageUrl: "/projets/nattbi.jpg",
+      resume: "Plateforme de gestion des tontines.",
+      besoin: "",
+      solution: "",
+      role: "",
+      technologies: [] as string[],
+      imageUrl: "/projets/nattbi.png",
+      publie: false,
       ordre: 2,
     },
   ];
