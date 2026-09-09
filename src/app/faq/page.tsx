@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { Spark } from "@/components/ui/Spark";
+import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { CtaPanel } from "@/components/CtaPanel";
 import { getDict } from "@/i18n/server";
@@ -34,17 +34,11 @@ export default function FaqPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="relative overflow-hidden bg-marine text-white">
-        <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
-        <Container className="relative py-20 lg:py-24">
-          <p className="eyebrow text-bleu-300">
-            <Spark className="h-3.5 w-3.5" />
-            {t.eyebrow}
-          </p>
-          <h1 className="mt-4 max-w-3xl text-display-sm font-bold text-white sm:text-display">
-            {t.title}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-white/75">
+      <PageHero
+        eyebrow={t.eyebrow}
+        title={t.title}
+        lead={
+          <>
             {t.intro}{" "}
             <Link
               href="/contact"
@@ -53,9 +47,9 @@ export default function FaqPage() {
               {t.contactLink}
             </Link>
             .
-          </p>
-        </Container>
-      </section>
+          </>
+        }
+      />
 
       <Container className="max-w-3xl py-16 sm:py-20">
         <Reveal>

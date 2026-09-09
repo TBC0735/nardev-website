@@ -20,6 +20,8 @@ const updateSchema = z.object({
   resume: z.string().trim().max(200).optional(),
   besoin: z.string().trim().max(2000).optional(),
   solution: z.string().trim().max(2000).optional(),
+  role: z.string().trim().max(300).optional(),
+  lienUrl: z.string().trim().url("Lien invalide.").or(z.literal("")).optional(),
   description: z.string().trim().max(2000).optional(),
   technologies: z.array(z.string().trim().min(1)).optional(),
   images: z.array(z.string().trim().url("URL d'image invalide.")).optional(),
@@ -57,9 +59,10 @@ export async function PUT(request: Request, { params }: Params) {
     );
   }
 
-  const { imageUrl, serviceId, ...rest } = parsed.data;
+  const { imageUrl, serviceId, lienUrl, ...rest } = parsed.data;
   const data: Prisma.ProjetUpdateInput = { ...rest };
   if (imageUrl !== undefined) data.imageUrl = imageUrl || null;
+  if (lienUrl !== undefined) data.lienUrl = lienUrl || null;
   if (serviceId !== undefined) {
     data.service = serviceId
       ? { connect: { id: serviceId } }

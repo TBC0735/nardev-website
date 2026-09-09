@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Container } from "@/components/Container";
-import { Spark } from "@/components/ui/Spark";
+import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
-import { MailIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
+import { CheckIcon, MailIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 import { ContactForm } from "./ContactForm";
@@ -41,27 +41,12 @@ export default async function ContactPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-marine text-white">
-        <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
-        <div
-          aria-hidden
-          className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-bleu/20 blur-[110px]"
-        />
-        <Container className="relative py-20 lg:py-24">
-          <p className="eyebrow text-bleu-300">
-            <Spark className="h-3.5 w-3.5" />
-            {dict.nav.contact}
-          </p>
-          <h1 className="mt-4 max-w-2xl text-display-sm font-bold text-white sm:text-display">
-            {t.title}
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-white/75">{t.intro}</p>
-          <span className="mt-7 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset ring-white/20">
-            <span className="h-1.5 w-1.5 rounded-full bg-succes" />
-            {t.responseBadge}
-          </span>
-        </Container>
-      </section>
+      <PageHero eyebrow={dict.nav.contact} title={t.title} lead={t.intro}>
+        <span className="mt-7 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-medium ring-1 ring-inset ring-white/20">
+          <span className="h-1.5 w-1.5 rounded-full bg-succes" />
+          {t.responseBadge}
+        </span>
+      </PageHero>
 
       <Container className="py-16 sm:py-20">
         <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
@@ -113,7 +98,7 @@ export default async function ContactPage() {
               <ul className="mt-3 space-y-2.5 text-sm text-texte-secondaire">
                 {[t.reason1, t.reason2, t.reason3].map((r) => (
                   <li key={r} className="flex items-start gap-2.5">
-                    <Spark className="mt-1 h-3 w-3 shrink-0 text-bleu" />
+                    <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-bleu" />
                     {r}
                   </li>
                 ))}

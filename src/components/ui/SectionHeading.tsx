@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { Spark } from "./Spark";
+import { Eyebrow } from "./Eyebrow";
 import { Reveal } from "@/components/motion/Reveal";
 
-/** En-tête de section : sur-titre (eyebrow + étincelle), titre, texte d'intro. */
+/** En-tête de section : sur-titre, titre, texte d'intro. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -21,17 +21,10 @@ export function SectionHeading({
       className={`max-w-2xl ${align === "center" ? "mx-auto text-center" : ""}`}
     >
       {eyebrow && (
-        <p
-          className={`eyebrow ${dark ? "text-bleu-300" : ""} ${
-            align === "center" ? "justify-center" : ""
-          }`}
-        >
-          <Spark className="h-3.5 w-3.5" />
-          {eyebrow}
-        </p>
+        <Eyebrow tone={dark ? "light" : "default"}>{eyebrow}</Eyebrow>
       )}
       <h2
-        className={`mt-3 text-3xl font-bold tracking-tight sm:text-4xl ${
+        className={`mt-4 text-3xl font-bold tracking-tight sm:text-4xl ${
           dark ? "text-white" : "text-marine"
         }`}
       >

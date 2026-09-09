@@ -11,6 +11,8 @@ type ProjetForm = {
   resume: string;
   besoin: string;
   solution: string;
+  role: string;
+  lienUrl: string;
   technologies: string;
   images: string;
   imageUrl: string;
@@ -25,6 +27,8 @@ const formVide: ProjetForm = {
   resume: "",
   besoin: "",
   solution: "",
+  role: "",
+  lienUrl: "",
   technologies: "",
   images: "",
   imageUrl: "",
@@ -40,6 +44,8 @@ function toForm(projet: Projet): ProjetForm {
     resume: projet.resume,
     besoin: projet.besoin,
     solution: projet.solution,
+    role: projet.role,
+    lienUrl: projet.lienUrl ?? "",
     technologies: projet.technologies.join("\n"),
     images: projet.images.join("\n"),
     imageUrl: projet.imageUrl ?? "",
@@ -91,6 +97,8 @@ export function PortfolioManager({
       resume: form.resume,
       besoin: form.besoin,
       solution: form.solution,
+      role: form.role,
+      lienUrl: form.lienUrl,
       technologies: lignes(form.technologies),
       images: lignes(form.images),
       imageUrl: form.imageUrl,
@@ -229,6 +237,17 @@ export function PortfolioManager({
             value={form.solution}
             onChange={(v) => setForm({ ...form, solution: v })}
             rows={3}
+          />
+          <Champ
+            label="Notre rôle sur le projet"
+            value={form.role}
+            onChange={(v) => setForm({ ...form, role: v })}
+          />
+          <Champ
+            label="Lien vers le projet en ligne (optionnel)"
+            value={form.lienUrl}
+            onChange={(v) => setForm({ ...form, lienUrl: v })}
+            type="url"
           />
           <Zone
             label="Technologies (une par ligne)"

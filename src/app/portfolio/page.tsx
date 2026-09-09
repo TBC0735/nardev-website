@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Container } from "@/components/Container";
-import { Spark } from "@/components/ui/Spark";
-import { Reveal } from "@/components/motion/Reveal";
+import { PageHero } from "@/components/ui/PageHero";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Section } from "@/components/ui/Section";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { CtaPanel } from "@/components/CtaPanel";
+import { EyeIcon, PenRulerIcon, RocketIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
 import { getDict } from "@/i18n/server";
 import { PortfolioGrid } from "./PortfolioGrid";
@@ -11,7 +14,7 @@ import { PortfolioGrid } from "./PortfolioGrid";
 export const metadata: Metadata = {
   title: "Réalisations",
   description:
-    "Les projets menés par Nardev : sites web, supports print et visibilité locale. Besoin client, solution apportée et technologies.",
+    "Les projets que Nardev a conçus et réalisés : sites web, plateformes et supports. Besoin, solution, technologies.",
 };
 export const dynamic = "force-dynamic";
 
@@ -44,25 +47,15 @@ export default async function PortfolioPage() {
   );
   const filtres = services.filter((s) => slugsUtilises.has(s.slug));
 
+  const approche = [
+    { Icon: EyeIcon, ...t.approach[0] },
+    { Icon: PenRulerIcon, ...t.approach[1] },
+    { Icon: RocketIcon, ...t.approach[2] },
+  ];
+
   return (
     <>
-      <section className="relative overflow-hidden bg-marine text-white">
-        <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
-        <div
-          aria-hidden
-          className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-bleu/20 blur-[110px]"
-        />
-        <Container className="relative py-20 lg:py-24">
-          <p className="eyebrow text-bleu-300">
-            <Spark className="h-3.5 w-3.5" />
-            {t.eyebrow}
-          </p>
-          <h1 className="mt-4 max-w-3xl text-display-sm font-bold text-white sm:text-display">
-            {t.title}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-white/75">{t.intro}</p>
-        </Container>
-      </section>
+      <PageHero eyebrow={t.eyebrow} title={t.title} lead={t.intro} />
 
       <Container className="py-16 sm:py-20">
         {projets.length === 0 ? (
@@ -83,6 +76,29 @@ export default async function PortfolioPage() {
           </Reveal>
         )}
       </Container>
+
+      <Section tone="muted">
+        <SectionHeading
+          eyebrow={t.approachEyebrow}
+          title={t.approachTitle}
+          lead={t.approachLead}
+        />
+        <RevealGroup className="mt-12 grid gap-6 sm:grid-cols-3">
+          {approche.map((a, i) => (
+            <RevealItem key={a.title} index={i}>
+              <div className="h-full rounded-xl border border-bordure bg-white p-6 shadow-card">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-ciel text-bleu">
+                  <a.Icon className="h-5 w-5" />
+                </span>
+                <p className="mt-4 font-semibold text-marine">{a.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-texte-secondaire">
+                  {a.text}
+                </p>
+              </div>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </Section>
 
       <CtaPanel
         title={dict.home.ctaTitle}

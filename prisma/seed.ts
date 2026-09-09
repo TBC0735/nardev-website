@@ -25,31 +25,34 @@ async function main() {
   const membres = [
     {
       nom: "Ndiawar Thiaw",
-      role: "Développement & infrastructure",
+      role: "Co-fondateur · Responsable technique",
       presentation:
-        "Met en place les fondations techniques du projet et gère le déploiement continu du site.",
+        "Il met en place les fondations techniques des projets et suit le développement jusqu'à la mise en ligne.",
       photoUrl: "/equipe/ndiawar-thiaw.jpg",
       ordre: 1,
     },
     {
       nom: "Mame Diarra",
-      role: "Services & contenu",
+      role: "Co-fondatrice · Responsable administrative & financière",
       presentation:
-        "Traduit les besoins des clients en offres claires et fait vivre le contenu du site.",
+        "Elle gère le suivi administratif et financier de l'agence et cadre chaque projet côté organisation.",
+      photoUrl: "/equipe/Mame_Diarra_Nardev.jpg",
       ordre: 2,
     },
     {
       nom: "Rokhaya",
-      role: "Réalisations & design",
+      role: "Co-fondatrice · Développement & communication",
       presentation:
-        "Documente les projets livrés et veille à la cohérence visuelle de chaque réalisation.",
+        "Elle participe au développement des projets et à la présentation du travail de l'agence.",
+      photoUrl: "/equipe/Rokhaya_Nardev.jpg",
       ordre: 3,
     },
     {
       nom: "Awa Ndao",
-      role: "Relation client & communication",
+      role: "Co-fondatrice · Développement & communication",
       presentation:
-        "Premier point de contact de l'agence, elle assure le suivi des demandes entrantes.",
+        "Elle contribue au développement des projets et au suivi des échanges avec les clients.",
+      photoUrl: "/equipe/Awa_Nardev.jpg",
       ordre: 4,
     },
   ];
