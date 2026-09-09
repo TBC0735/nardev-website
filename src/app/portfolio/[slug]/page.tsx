@@ -5,7 +5,7 @@ import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { PhotoFrame } from "@/components/PhotoFrame";
 import { Badge } from "@/components/ui/Badge";
-import { Spark } from "@/components/ui/Spark";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/motion/Reveal";
 import { ArrowRightIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
@@ -57,8 +57,8 @@ export default async function ProjetDetailPage({
   return (
     <>
       <section className="relative overflow-hidden bg-marine text-white">
-        <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
-        <Container className="relative py-16 lg:py-20">
+        <div aria-hidden className="bg-dots absolute inset-0 opacity-45" />
+        <Container className="relative py-14 lg:py-20">
           <Link
             href={backHref}
             className="inline-flex items-center gap-1.5 text-sm text-white/70 no-underline transition-colors hover:text-white"
@@ -79,19 +79,33 @@ export default async function ProjetDetailPage({
               {projet.resume}
             </p>
           )}
+          {projet.lienUrl && (
+            <a
+              href={projet.lienUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-2 text-sm font-medium text-white no-underline transition-colors hover:bg-white/10"
+            >
+              {t.liveLink}
+              <ArrowRightIcon className="h-4 w-4 -rotate-45" />
+            </a>
+          )}
         </Container>
       </section>
 
       <Container className="py-16 sm:py-20">
-        <Reveal>
-          <PhotoFrame
-            imageUrl={galerie[0] ?? null}
-            alt={projet.nom}
-            className="aspect-[16/9] w-full"
-            sizes="(min-width: 1024px) 960px, 100vw"
-            priority
-          />
-        </Reveal>
+        {galerie.length > 0 && (
+          <Reveal>
+            <PhotoFrame
+              imageUrl={galerie[0]}
+              alt={projet.nom}
+              browser
+              className="w-full"
+              sizes="(min-width: 1024px) 960px, 100vw"
+              priority
+            />
+          </Reveal>
+        )}
         {galerie.length > 1 && (
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
             {galerie.slice(1).map((src, i) => (
@@ -110,10 +124,7 @@ export default async function ProjetDetailPage({
           <Reveal className="space-y-10">
             {projet.besoin && (
               <div>
-                <p className="eyebrow">
-                  <Spark className="h-3.5 w-3.5" />
-                  {t.needTitle}
-                </p>
+                <Eyebrow>{t.needTitle}</Eyebrow>
                 <p className="mt-3 whitespace-pre-line leading-relaxed text-texte-secondaire">
                   {projet.besoin}
                 </p>
@@ -121,12 +132,17 @@ export default async function ProjetDetailPage({
             )}
             {projet.solution && (
               <div>
-                <p className="eyebrow">
-                  <Spark className="h-3.5 w-3.5" />
-                  {t.solutionTitle}
-                </p>
+                <Eyebrow>{t.solutionTitle}</Eyebrow>
                 <p className="mt-3 whitespace-pre-line leading-relaxed text-texte-secondaire">
                   {projet.solution}
+                </p>
+              </div>
+            )}
+            {projet.role && (
+              <div>
+                <Eyebrow>{t.roleTitle}</Eyebrow>
+                <p className="mt-3 leading-relaxed text-texte-secondaire">
+                  {projet.role}
                 </p>
               </div>
             )}

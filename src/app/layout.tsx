@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { BackToTop } from "@/components/BackToTop";
 import { getLocale, getDict } from "@/i18n/server";
 import { site, organizationJsonLd } from "@/lib/site";
 
@@ -58,9 +60,11 @@ export default function RootLayout({
             __html: JSON.stringify(organizationJsonLd()),
           }}
         />
+        <ScrollProgress />
         <Header dict={dict} locale={locale} />
         <main className="flex-1">{children}</main>
         <Footer dict={dict} />
+        <BackToTop label={dict.nav.backToTop} />
       </body>
     </html>
   );

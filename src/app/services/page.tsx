@@ -4,7 +4,8 @@ import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Spark } from "@/components/ui/Spark";
+import { PageHero } from "@/components/ui/PageHero";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Steps } from "@/components/Steps";
 import { CtaPanel } from "@/components/CtaPanel";
 import { Reveal } from "@/components/motion/Reveal";
@@ -36,38 +37,22 @@ export default async function ServicesPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-marine text-white">
-        <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
-        <div
-          aria-hidden
-          className="absolute -right-20 -top-32 h-96 w-96 rounded-full bg-bleu/20 blur-[110px]"
-        />
-        <Container className="relative py-20 lg:py-24">
-          <p className="eyebrow text-bleu-300">
-            <Spark className="h-3.5 w-3.5" />
-            {t.eyebrow}
-          </p>
-          <h1 className="mt-4 max-w-3xl text-display-sm font-bold text-white sm:text-display">
-            {t.title}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-white/75">{t.intro}</p>
-
-          {services.length > 0 && (
-            <div className="mt-8 flex flex-wrap gap-2">
-              {services.map((s) => (
-                <a
-                  key={s.id}
-                  href={`#${s.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/80 no-underline transition-colors hover:border-white/40 hover:text-white"
-                >
-                  <ServiceIcon slug={s.slug} className="h-4 w-4" />
-                  {s.titre}
-                </a>
-              ))}
-            </div>
-          )}
-        </Container>
-      </section>
+      <PageHero eyebrow={t.eyebrow} title={t.title} lead={t.intro}>
+        {services.length > 0 && (
+          <div className="mt-8 flex flex-wrap gap-2">
+            {services.map((s) => (
+              <a
+                key={s.id}
+                href={`#${s.slug}`}
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/80 no-underline transition-colors hover:border-white/40 hover:text-white"
+              >
+                <ServiceIcon slug={s.slug} className="h-4 w-4" />
+                {s.titre}
+              </a>
+            ))}
+          </div>
+        )}
+      </PageHero>
 
       {services.length === 0 ? (
         <Container className="py-20">
@@ -118,14 +103,14 @@ export default async function ServicesPage() {
 
                       {service.avantages.length > 0 && (
                         <div className="mt-7">
-                          <p className="eyebrow">{t.whyTitle}</p>
+                          <Eyebrow>{t.whyTitle}</Eyebrow>
                           <ul className="mt-3 grid gap-2.5 sm:grid-cols-2">
                             {service.avantages.map((a) => (
                               <li
                                 key={a}
                                 className="flex items-start gap-2 text-sm text-texte-secondaire"
                               >
-                                <Spark className="mt-1 h-3 w-3 shrink-0 text-bleu" />
+                                <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-bleu" />
                                 {a}
                               </li>
                             ))}

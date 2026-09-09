@@ -1,6 +1,6 @@
 import { Button } from "./Button";
 import { Container } from "./Container";
-import { Spark } from "./ui/Spark";
+import { Eyebrow } from "./ui/Eyebrow";
 import type { Dict } from "@/i18n/dictionaries";
 
 /** Bloc « Qui sommes-nous » de l'accueil. */
@@ -11,11 +11,8 @@ export function AboutTeaser({ dict }: { dict: Dict }) {
       <Container>
         <div className="grid items-center gap-10 rounded-2xl border border-bordure bg-fond-alt p-8 sm:p-12 lg:grid-cols-[1.4fr_auto]">
           <div>
-            <p className="eyebrow">
-              <Spark className="h-3.5 w-3.5" />
-              {t.eyebrow}
-            </p>
-            <h2 className="mt-3 text-2xl font-bold tracking-tight text-marine sm:text-3xl">
+            <Eyebrow>{t.eyebrow}</Eyebrow>
+            <h2 className="mt-4 text-2xl font-bold tracking-tight text-marine sm:text-3xl">
               {t.title}
             </h2>
             <p className="mt-4 max-w-2xl leading-relaxed text-texte-secondaire">

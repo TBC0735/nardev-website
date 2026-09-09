@@ -60,6 +60,10 @@ model Projet {
   besoin       String   @default("")
   /// Solution apportée par Nardev.
   solution     String   @default("")
+  /// Le rôle de Nardev sur le projet (conception, dev, design…).
+  role         String   @default("")
+  /// Lien vers le projet en ligne, si disponible.
+  lienUrl      String?
   /// Résumé libre (déprécié : conservé pour compat, utiliser resume/besoin/solution).
   description  String   @default("")
   technologies String[]

@@ -18,6 +18,8 @@ const projetSchema = z.object({
   resume: z.string().trim().max(200).default(""),
   besoin: z.string().trim().max(2000).default(""),
   solution: z.string().trim().max(2000).default(""),
+  role: z.string().trim().max(300).default(""),
+  lienUrl: z.string().trim().url("Lien invalide.").or(z.literal("")).optional(),
   description: z.string().trim().max(2000).default(""),
   technologies: z.array(z.string().trim().min(1)).default([]),
   images: z.array(z.string().trim().url("URL d'image invalide.")).default([]),
@@ -49,11 +51,12 @@ export async function POST(request: Request) {
     );
   }
 
-  const { imageUrl, serviceId, ...rest } = parsed.data;
+  const { imageUrl, serviceId, lienUrl, ...rest } = parsed.data;
   const projet = await prisma.projet.create({
     data: {
       ...rest,
       imageUrl: imageUrl || null,
+      lienUrl: lienUrl || null,
       serviceId: serviceId || null,
     },
   });

@@ -19,18 +19,12 @@
     @apply bg-bleu/20 text-marine;
   }
 
-  /* Ancres (nav interne) : compenser le header collant. */
   :target {
     scroll-margin-top: 6rem;
   }
 }
 
 @layer components {
-  /* Sur-titre de section : petit label bleu en capitales. */
-  .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-bleu-600;
-  }
-
   /* Lien texte discret avec soulignement animé. */
   .link-underline {
     @apply relative no-underline;
@@ -47,10 +41,10 @@
 @layer utilities {
   /* Mot mis en avant dans un titre : dégradé navy → bleu. */
   .text-gradient {
-    @apply bg-gradient-to-r from-bleu-500 to-bleu-300 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-bleu-400 to-bleu-300 bg-clip-text text-transparent;
   }
 
-  /* Fond « grille de points » pour les sections sombres. */
+  /* Fond « grille de points » pour les sections sombres / claires. */
   .bg-dots {
     background-image: theme("backgroundImage.grid-dots");
     background-size: 22px 22px;
@@ -60,7 +54,7 @@
     background-size: 22px 22px;
   }
 
-  /* Apparition au scroll (piloté par la classe .is-visible via Reveal). */
+  /* Apparition au scroll (piloté par Reveal via .is-visible). */
   .reveal {
     opacity: 0;
   }
@@ -75,9 +69,9 @@
     opacity: 1 !important;
     animation: none !important;
   }
-  .animate-spark-pulse,
   .animate-float,
-  .animate-pop-in {
+  .animate-pop-in,
+  .animate-spark-pulse {
     animation: none !important;
   }
 }

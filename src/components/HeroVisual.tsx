@@ -1,21 +1,20 @@
-import { Spark } from "./ui/Spark";
+import { CheckIcon } from "./icons";
 
 /**
  * Visuel du hero — composition 100 % SVG/CSS, sans photo : une fenêtre de
- * navigateur stylisée « en construction », reliée par un trait animé (le motif
- * du maillon / lien) à une carte plus petite, avec l'étincelle du logo.
+ * navigateur stylisée « en construction », reliée par un trait animé à une
+ * carte de statut. Sobre, cohérent avec la charte.
  */
 export function HeroVisual() {
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-      {/* Halo */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 rounded-full bg-bleu/25 blur-3xl"
+        className="absolute inset-0 -z-10 rounded-full bg-bleu/20 blur-3xl"
       />
 
       <div className="relative motion-safe:animate-float">
-        {/* Fenêtre principale */}
+        {/* Fenêtre navigateur */}
         <div className="overflow-hidden rounded-2xl border border-white/15 bg-marine-800/90 shadow-glow backdrop-blur">
           <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
             <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
@@ -57,25 +56,22 @@ export function HeroVisual() {
           <circle cx="56" cy="12" r="4" fill="currentColor" />
         </svg>
 
-        {/* Carte secondaire */}
+        {/* Carte de statut */}
         <div className="absolute -bottom-6 right-1 w-36 rounded-xl border border-white/15 bg-white p-3 text-marine shadow-card-hover sm:-bottom-8 sm:-right-8 sm:w-40">
           <div className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ciel text-bleu">
-              <Spark className="h-4 w-4" />
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-succes/15 text-succes">
+              <CheckIcon className="h-4 w-4" />
             </span>
             <div className="flex-1">
               <div className="h-2 w-full rounded bg-marine/15" />
               <div className="mt-1 h-2 w-2/3 rounded bg-marine/10" />
             </div>
           </div>
-          <div className="mt-2 h-1.5 w-full rounded bg-succes/30" />
+          <div className="mt-2 h-1.5 w-full rounded bg-succes/25" />
           <p className="mt-1.5 text-[10px] font-medium text-succes">
             En ligne · 48 h
           </p>
         </div>
-
-        {/* Étincelle flottante */}
-        <Spark className="absolute -left-2 -top-3 h-8 w-8 text-bleu-300 motion-safe:animate-spark-pulse sm:-left-5 sm:-top-5 sm:h-9 sm:w-9" />
       </div>
     </div>
   );

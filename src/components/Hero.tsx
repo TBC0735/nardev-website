@@ -1,6 +1,6 @@
 import { Button } from "./Button";
 import { Container } from "./Container";
-import { Spark } from "./ui/Spark";
+import { Eyebrow } from "./ui/Eyebrow";
 import { HeroVisual } from "./HeroVisual";
 import { CheckIcon } from "./icons";
 import type { Dict } from "@/i18n/dictionaries";
@@ -10,23 +10,20 @@ export function Hero({ dict }: { dict: Dict }) {
 
   return (
     <section className="relative isolate overflow-hidden bg-marine text-white">
-      <div aria-hidden className="bg-dots absolute inset-0 opacity-60" />
+      <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
       <div
         aria-hidden
-        className="absolute -top-40 right-0 h-[36rem] w-[36rem] rounded-full bg-bleu/20 blur-[120px]"
+        className="absolute -top-40 right-0 h-[36rem] w-[36rem] rounded-full bg-bleu/20 blur-[130px]"
       />
       <div
         aria-hidden
-        className="absolute -bottom-48 -left-24 h-[32rem] w-[32rem] rounded-full bg-bleu-600/15 blur-[120px]"
+        className="absolute -bottom-48 -left-24 h-[32rem] w-[32rem] rounded-full bg-bleu-600/15 blur-[130px]"
       />
 
       <Container className="relative grid items-center gap-14 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
         <div>
-          <p className="eyebrow text-bleu-300">
-            <Spark className="h-3.5 w-3.5 motion-safe:animate-spark-pulse" />
-            {t.eyebrow}
-          </p>
-          <h1 className="mt-4 text-display-sm font-bold text-white sm:text-display lg:text-display-lg">
+          <Eyebrow tone="light">{t.eyebrow}</Eyebrow>
+          <h1 className="mt-5 text-display-sm font-bold text-white sm:text-display lg:text-display-lg">
             {t.titleLead}{" "}
             <span className="text-gradient">{t.titleAccent}</span>
           </h1>

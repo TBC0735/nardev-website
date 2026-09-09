@@ -1,6 +1,5 @@
 import { Container } from "./Container";
 import { Button } from "./Button";
-import { Spark } from "./ui/Spark";
 import { Reveal } from "./motion/Reveal";
 
 /** Bandeau d'appel à l'action — panneau dégradé navy → bleu. */
@@ -24,9 +23,13 @@ export function CtaPanel({
       <Container>
         <Reveal className="relative isolate overflow-hidden rounded-2xl bg-gradient-to-br from-marine via-marine-700 to-bleu-600 px-6 py-14 text-center text-white sm:px-12">
           <div aria-hidden className="bg-dots absolute inset-0 opacity-50" />
-          <Spark
+          <div
             aria-hidden
-            className="absolute -right-6 -top-6 h-24 w-24 text-white/10"
+            className="absolute -right-10 -top-10 h-40 w-40 rounded-full border border-white/10"
+          />
+          <div
+            aria-hidden
+            className="absolute -bottom-16 -left-10 h-48 w-48 rounded-full border border-white/10"
           />
           <div className="relative mx-auto max-w-xl">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">{title}</h2>

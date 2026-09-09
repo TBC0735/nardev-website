@@ -13,6 +13,7 @@ const fr = {
     legal: "Mentions légales",
     menu: "Menu",
     close: "Fermer",
+    backToTop: "Revenir en haut de la page",
   },
   cta: {
     quote: "Demander un devis",
@@ -35,6 +36,8 @@ const fr = {
     location: "Basés à Dakar, Sénégal",
     soon: "(bientôt)",
     builtWith: "Conçu et développé par Nardev",
+    ctaTitle: "Un projet à lancer ?",
+    ctaText: "On en discute et on vous fait un devis clair.",
   },
   hero: {
     eyebrow: "Agence web · Dakar",
@@ -97,15 +100,68 @@ const fr = {
     title: "L'agence web qu'on aurait aimé trouver",
     intro:
       "Nardev rend le web professionnel accessible aux commerces, artisans, associations et jeunes entreprises du Sénégal.",
-    storyTitle: "Notre histoire",
+
+    storyEyebrow: "Notre histoire",
+    storyTitle: "Pourquoi on a créé Nardev",
     storyText:
-      "On s'est rencontrés en formation, on a livré des projets chacun de notre côté, et on a fait le même constat : les petites structures n'ont pas les moyens d'une grosse agence, et se retrouvent souvent avec un site bâclé ou jamais fini. Nardev, c'est notre réponse — une équipe qui réunit développement, design et communication, avec un interlocuteur unique et des tarifs transparents.",
+      "On s'est connus en formation à l'ISI Dakar. Chacun a mené ses projets de son côté — des sites, des plateformes, des supports — et on a fini par faire le même constat : autour de nous, les petites structures n'ont pas les moyens d'une grosse agence, et se retrouvent souvent avec un site bâclé, jamais fini, ou impossible à modifier.\n\nNardev, c'est notre réponse. On a mis nos compétences en commun — développement, design, organisation, communication — pour proposer un accompagnement sérieux, à un prix clair, avec un seul interlocuteur du début à la fin.",
+    storyQuote:
+      "On voulait une agence qui explique, qui tient ses délais et qui ne disparaît pas après la livraison. Comme on n'en trouvait pas, on l'a montée.",
+
+    missionEyebrow: "Notre mission",
+    missionTitle: "Rendre le digital professionnel accessible",
+    missionText:
+      "Permettre aux entreprises, commerces, artisans, associations et jeunes structures d'avoir une présence en ligne solide, moderne et adaptée à leurs besoins réels — sans budget d'agence internationale et sans jargon.",
+
+    expertiseEyebrow: "Nos expertises",
+    expertiseTitle: "Trois métiers, une seule équipe",
+    expertiseLead:
+      "Vous n'avez pas à coordonner un développeur, un graphiste et un chargé de com'. On s'en occupe ensemble.",
+    expertise: [
+      {
+        title: "Développement",
+        text: "Des sites et plateformes web modernes, rapides, responsive et faciles à faire évoluer.",
+      },
+      {
+        title: "Design",
+        text: "Des interfaces claires et cohérentes avec votre identité — pensées pour vos visiteurs, pas pour faire joli.",
+      },
+      {
+        title: "Communication",
+        text: "De l'aide sur les contenus, la présentation du projet et votre présence en ligne.",
+      },
+    ],
+
+    processEyebrow: "Notre méthode",
+    processTitle: "Comment nous travaillons",
+    processLead:
+      "Un déroulé simple, transparent, où vous savez toujours où on en est.",
+    process: [
+      {
+        title: "Écouter",
+        text: "Comprendre votre activité, vos besoins, vos contraintes et vos objectifs avant de proposer quoi que ce soit.",
+      },
+      {
+        title: "Concevoir",
+        text: "Transformer les idées en une solution claire et structurée, validée avec vous sous forme de maquette.",
+      },
+      {
+        title: "Développer",
+        text: "Construire une solution moderne, performante et lisible sur tous les écrans.",
+      },
+      {
+        title: "Livrer & accompagner",
+        text: "Mettre le projet en ligne et rester disponible pour les évolutions, la maintenance et les besoins futurs.",
+      },
+    ],
+
     teamEyebrow: "L'équipe",
     teamTitle: "Les fondateurs",
     teamText:
-      "Quatre associés, chacun responsable d'un pan du projet de bout en bout.",
+      "Quatre profils complémentaires réunis autour d'une même idée : des solutions digitales utiles, accessibles et bien conçues.",
     teamEmpty:
       "La présentation de l'équipe sera visible dès que les membres auront été ajoutés depuis le back-office.",
+
     valuesEyebrow: "Nos valeurs",
     valuesTitle: "Ce qui ne change jamais chez nous",
     values: [
@@ -121,7 +177,41 @@ const fr = {
         title: "Transparence",
         text: "Des devis détaillés, des délais annoncés et tenus, et aucun coût caché en cours de route.",
       },
+      {
+        title: "Engagement",
+        text: "Chaque projet est suivi avec sérieux, de la première discussion jusqu'à sa mise en ligne — et après.",
+      },
     ],
+
+    whyEyebrow: "Pourquoi Nardev",
+    whyTitle: "Ce qui nous rend différents",
+    why: [
+      {
+        title: "Une équipe locale",
+        text: "Basés à Dakar, on connaît le contexte, les usages et les contraintes du marché sénégalais.",
+      },
+      {
+        title: "Un accompagnement humain",
+        text: "On parle simplement, on explique nos choix, on reste joignable — avant, pendant et après le projet.",
+      },
+      {
+        title: "Des solutions adaptées",
+        text: "On part de votre besoin réel, pas d'un modèle recopié. Vous ne payez pas pour des fonctions inutiles.",
+      },
+      {
+        title: "Une seule équipe",
+        text: "Développement, design et communication au même endroit : votre projet reste cohérent de bout en bout.",
+      },
+    ],
+
+    statsEyebrow: "En bref",
+    statsTitle: "Nardev en quelques chiffres",
+    stats: [
+      { value: "4", label: "associés" },
+      { value: "3", label: "expertises complémentaires" },
+      { value: "1", label: "équipe pour tout le projet" },
+    ],
+
     ctaTitle: "Envie de travailler avec nous ?",
     ctaText: "Présentez-nous votre projet, on revient vers vous rapidement.",
   },
@@ -158,9 +248,9 @@ const fr = {
   },
   portfolio: {
     eyebrow: "Réalisations",
-    title: "Ce qu'on a déjà livré",
+    title: "Nos réalisations",
     intro:
-      "Chez Nardev, on met en commun les projets menés par chacun des associés. Chaque fiche détaille le besoin du client, la solution apportée et les technologies utilisées.",
+      "Découvrez les projets que nous avons conçus et réalisés pour donner vie aux idées.",
     empty: "Les réalisations seront bientôt visibles ici.",
     filterAll: "Tous",
     filterEmpty: "Aucun projet pour ce filtre.",
@@ -175,6 +265,26 @@ const fr = {
     similarText: "Parlez-nous du vôtre, on vous répond sous 48 h.",
     notFound: "Projet introuvable",
     viewProject: "Voir le projet",
+    roleTitle: "Notre rôle",
+    liveLink: "Voir le projet en ligne",
+    approachEyebrow: "Notre approche",
+    approachTitle: "Comment on aborde un projet",
+    approachLead:
+      "Chaque réalisation suit la même logique : comprendre, concevoir, mettre en ligne.",
+    approach: [
+      {
+        title: "Comprendre le besoin",
+        text: "On part du problème réel du client, pas d'un modèle tout fait : à quoi doit servir le projet, pour qui, dans quel contexte.",
+      },
+      {
+        title: "Concevoir et développer",
+        text: "On valide une maquette, puis on construit une solution moderne, rapide et lisible sur mobile.",
+      },
+      {
+        title: "Mettre en ligne et suivre",
+        text: "On accompagne la mise en ligne et on reste joignable ensuite pour les ajustements.",
+      },
+    ],
   },
   contact: {
     title: "Parlons de votre projet",
@@ -303,6 +413,7 @@ const en: Dict = {
     legal: "Legal notice",
     menu: "Menu",
     close: "Close",
+    backToTop: "Back to top",
   },
   cta: {
     quote: "Get a quote",
@@ -325,6 +436,8 @@ const en: Dict = {
     location: "Based in Dakar, Senegal",
     soon: "(soon)",
     builtWith: "Designed and built by Nardev",
+    ctaTitle: "Got a project to launch?",
+    ctaText: "Let's talk it through and get you a clear quote.",
   },
   hero: {
     eyebrow: "Web agency · Dakar",
@@ -387,15 +500,68 @@ const en: Dict = {
     title: "The web agency we wish we'd found",
     intro:
       "Nardev makes professional web accessible to shops, craftspeople, associations and young companies in Senegal.",
-    storyTitle: "Our story",
+
+    storyEyebrow: "Our story",
+    storyTitle: "Why we started Nardev",
     storyText:
-      "We met in training, delivered projects each on our own, and reached the same conclusion: small organisations can't afford a big agency and often end up with a rushed or unfinished site. Nardev is our answer — a team that combines development, design and communication, with a single point of contact and transparent pricing.",
+      "We met in training at ISI Dakar. Each of us ran our own projects — sites, platforms, materials — and we ended up with the same observation: around us, small organisations can't afford a big agency, and often end up with a rushed, unfinished or unmaintainable site.\n\nNardev is our answer. We pooled our skills — development, design, organisation, communication — to offer serious support, at a clear price, with a single point of contact from start to finish.",
+    storyQuote:
+      "We wanted an agency that explains things, keeps its deadlines and doesn't vanish after delivery. We couldn't find one, so we built it.",
+
+    missionEyebrow: "Our mission",
+    missionTitle: "Making professional digital accessible",
+    missionText:
+      "Helping companies, shops, craftspeople, associations and young organisations get a solid, modern online presence that fits their real needs — without an international-agency budget and without jargon.",
+
+    expertiseEyebrow: "Our expertise",
+    expertiseTitle: "Three crafts, one team",
+    expertiseLead:
+      "You don't have to coordinate a developer, a designer and a comms person. We handle it together.",
+    expertise: [
+      {
+        title: "Development",
+        text: "Modern web sites and platforms that are fast, responsive and easy to evolve.",
+      },
+      {
+        title: "Design",
+        text: "Clear interfaces consistent with your identity — built for your visitors, not just to look nice.",
+      },
+      {
+        title: "Communication",
+        text: "Help with content, presenting the project and your online presence.",
+      },
+    ],
+
+    processEyebrow: "Our method",
+    processTitle: "How we work",
+    processLead:
+      "A simple, transparent flow where you always know where things stand.",
+    process: [
+      {
+        title: "Listen",
+        text: "Understand your business, your needs, your constraints and your goals before proposing anything.",
+      },
+      {
+        title: "Design",
+        text: "Turn ideas into a clear, structured solution, approved with you as a mock-up.",
+      },
+      {
+        title: "Build",
+        text: "Build a modern, performant solution that reads well on every screen.",
+      },
+      {
+        title: "Deliver & support",
+        text: "Take the project live and stay available for improvements, maintenance and future needs.",
+      },
+    ],
+
     teamEyebrow: "The team",
     teamTitle: "The founders",
     teamText:
-      "Four partners, each responsible for one part of the project end to end.",
+      "Four complementary profiles around one idea: digital solutions that are useful, accessible and well made.",
     teamEmpty:
       "The team will appear here as soon as members are added from the back office.",
+
     valuesEyebrow: "Our values",
     valuesTitle: "What never changes here",
     values: [
@@ -411,7 +577,41 @@ const en: Dict = {
         title: "Transparency",
         text: "Detailed quotes, deadlines announced and kept, and no hidden costs along the way.",
       },
+      {
+        title: "Commitment",
+        text: "Every project is followed seriously, from the first talk to going live — and after.",
+      },
     ],
+
+    whyEyebrow: "Why Nardev",
+    whyTitle: "What sets us apart",
+    why: [
+      {
+        title: "A local team",
+        text: "Based in Dakar, we know the context, habits and constraints of the Senegalese market.",
+      },
+      {
+        title: "Human support",
+        text: "We speak plainly, explain our choices and stay reachable — before, during and after the project.",
+      },
+      {
+        title: "Tailored solutions",
+        text: "We start from your real need, not a copied template. You don't pay for features you won't use.",
+      },
+      {
+        title: "One single team",
+        text: "Development, design and communication in one place: your project stays coherent end to end.",
+      },
+    ],
+
+    statsEyebrow: "In short",
+    statsTitle: "Nardev in a few figures",
+    stats: [
+      { value: "4", label: "partners" },
+      { value: "3", label: "complementary skills" },
+      { value: "1", label: "team for the whole project" },
+    ],
+
     ctaTitle: "Want to work with us?",
     ctaText: "Tell us about your project, we'll get back to you quickly.",
   },
@@ -448,9 +648,9 @@ const en: Dict = {
   },
   portfolio: {
     eyebrow: "Work",
-    title: "What we've already delivered",
+    title: "Our work",
     intro:
-      "At Nardev we pool the projects led by each partner. Every case study details the client's need, the solution and the technologies used.",
+      "Take a look at the projects we've designed and built to bring ideas to life.",
     empty: "Our work will be visible here soon.",
     filterAll: "All",
     filterEmpty: "No project for this filter.",
@@ -465,6 +665,26 @@ const en: Dict = {
     similarText: "Tell us about yours, we reply within 48 h.",
     notFound: "Project not found",
     viewProject: "View project",
+    roleTitle: "Our role",
+    liveLink: "View the live project",
+    approachEyebrow: "Our approach",
+    approachTitle: "How we tackle a project",
+    approachLead:
+      "Every project follows the same logic: understand, design, ship.",
+    approach: [
+      {
+        title: "Understand the need",
+        text: "We start from the client's real problem, not a template: what the project is for, who it serves, in what context.",
+      },
+      {
+        title: "Design and build",
+        text: "We validate a mock-up, then build a modern, fast solution that reads well on mobile.",
+      },
+      {
+        title: "Ship and support",
+        text: "We support the go-live and stay reachable afterwards for adjustments.",
+      },
+    ],
   },
   contact: {
     title: "Let's talk about your project",
