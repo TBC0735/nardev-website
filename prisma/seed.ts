@@ -198,13 +198,17 @@ async function main() {
       slug: "nattbi",
       nom: "NattBi",
       serviceSlug: "sites-dynamiques",
-      resume: "Plateforme de gestion des tontines.",
+      resume:
+        "Plateforme de gestion des tontines, avec paiements mobiles intégrés (Wave, Orange Money).",
+      // Besoin/solution : à compléter par l'équipe (voir /admin/portfolio).
       besoin: "",
       solution: "",
-      role: "",
-      technologies: [] as string[],
+      role:
+        "Développement de la plateforme : architecture MVC avec Laravel 12 (PHP 8.2) et Blade, Tailwind CSS pour le frontend, MySQL pour la base de données, intégration des paiements mobiles Wave et Orange Money via PayTech.",
+      technologies: ["Laravel 12", "PHP", "Blade", "Tailwind CSS", "MySQL", "PayTech"],
+      lienUrl: "https://nattbi.onrender.com/",
       imageUrl: "/projets/nattbi.png",
-      publie: false,
+      publie: true,
       ordre: 2,
     },
   ];
