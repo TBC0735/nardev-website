@@ -10,6 +10,7 @@ import { Steps } from "@/components/Steps";
 import { CtaPanel } from "@/components/CtaPanel";
 import { Reveal } from "@/components/motion/Reveal";
 import { PhotoFrame } from "@/components/PhotoFrame";
+import { SmoothAnchors } from "@/components/SmoothAnchors";
 import { ServiceIcon } from "@/lib/service-icons";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
@@ -38,20 +39,7 @@ export default async function ServicesPage() {
   return (
     <>
       <PageHero eyebrow={t.eyebrow} title={t.title} lead={t.intro}>
-        {services.length > 0 && (
-          <div className="mt-8 flex flex-wrap gap-2">
-            {services.map((s) => (
-              <a
-                key={s.id}
-                href={`#${s.slug}`}
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/80 no-underline transition-colors hover:border-white/40 hover:text-white"
-              >
-                <ServiceIcon slug={s.slug} className="h-4 w-4" />
-                {s.titre}
-              </a>
-            ))}
-          </div>
-        )}
+        {services.length > 0 && <SmoothAnchors items={services} />}
       </PageHero>
 
       {services.length === 0 ? (
