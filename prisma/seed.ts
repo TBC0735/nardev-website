@@ -200,9 +200,10 @@ async function main() {
       serviceSlug: "sites-dynamiques",
       resume:
         "Plateforme de gestion des tontines, avec paiements mobiles intégrés (Wave, Orange Money).",
-      // Besoin/solution : à compléter par l'équipe (voir /admin/portfolio).
-      besoin: "",
-      solution: "",
+      besoin:
+        "Les tontines se gèrent le plus souvent à la main : calculs sur cahier, suivi des cotisations et des tours de paiement peu fiable, risque d'erreurs.",
+      solution:
+        "Une application qui simplifie la gestion d'une tontine au quotidien : suivi des membres, des cotisations et des tours de paiement, avec les paiements mobiles (Wave, Orange Money) intégrés directement, sans plus dépendre du calcul manuel.",
       role:
         "Développement de la plateforme : architecture MVC avec Laravel 12 (PHP 8.2) et Blade, Tailwind CSS pour le frontend, MySQL pour la base de données, intégration des paiements mobiles Wave et Orange Money via PayTech.",
       technologies: ["Laravel 12", "PHP", "Blade", "Tailwind CSS", "MySQL", "PayTech"],
