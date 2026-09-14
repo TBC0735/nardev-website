@@ -94,7 +94,7 @@ async function main() {
         "Mise en ligne incluse",
       ],
       // Capture TBCode (site d'auto-formation HTML/CSS/JS avec quiz).
-      imageUrl: "/services/tbcode.jpg",
+      imageUrl: "/services/tbcode.png",
       ordre: 1,
     },
     {
