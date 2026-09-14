@@ -63,19 +63,34 @@ export default async function ServicesPage() {
                         inverse ? "lg:order-2" : ""
                       }`}
                     >
-                      <PhotoFrame
-                        imageUrl={service.imageUrl}
-                        alt={service.titre}
-                        icon={
-                          <ServiceIcon
-                            slug={service.slug}
-                            className="h-14 w-14"
+                      {(() => {
+                        // Captures de sites (vitrines/dynamiques) : cadre navigateur,
+                        // cadré par le haut, qui remplit tout l'espace. Une affiche
+                        // (flyer) reste entière, sans découpe.
+                        const estUneCapture =
+                          service.slug === "sites-vitrines" ||
+                          service.slug === "sites-dynamiques";
+                        return (
+                          <PhotoFrame
+                            imageUrl={service.imageUrl}
+                            alt={service.titre}
+                            icon={
+                              <ServiceIcon
+                                slug={service.slug}
+                                className="h-14 w-14"
+                              />
+                            }
+                            browser={estUneCapture}
+                            fit="contain"
+                            className={
+                              estUneCapture && service.imageUrl
+                                ? "w-full"
+                                : "aspect-[4/3] w-full"
+                            }
+                            sizes="(min-width: 1024px) 560px, 100vw"
                           />
-                        }
-                        fit="contain"
-                        className="aspect-[4/3] w-full"
-                        sizes="(min-width: 1024px) 560px, 100vw"
-                      />
+                        );
+                      })()}
                     </div>
 
                     <div className={inverse ? "lg:order-1" : undefined}>
