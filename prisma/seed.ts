@@ -93,7 +93,8 @@ async function main() {
         "Jusqu'à 5 pages (accueil, services, contact, etc.)",
         "Mise en ligne incluse",
       ],
-      imageUrl: null,
+      // Capture TBCode (site d'auto-formation HTML/CSS/JS avec quiz).
+      imageUrl: "/services/tbcode.jpg",
       ordre: 1,
     },
     {
@@ -114,7 +115,8 @@ async function main() {
         "Formation à l'utilisation de l'admin",
         "Hébergement et mise en ligne accompagnés",
       ],
-      imageUrl: null,
+      // Capture SunuEtude, exemple de site dynamique réel livré par l'équipe.
+      imageUrl: "/projets/sunuetude.png",
       ordre: 2,
     },
     {
@@ -135,7 +137,8 @@ async function main() {
         "Version adaptée aux réseaux sociaux",
         "1 à 2 allers-retours de retouches inclus",
       ],
-      imageUrl: null,
+      // Affiche promotionnelle réelle (abonnements Netflix).
+      imageUrl: "/services/flyer-netflix.jpg",
       ordre: 3,
     },
     {
