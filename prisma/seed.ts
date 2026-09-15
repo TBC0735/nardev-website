@@ -215,6 +215,22 @@ async function main() {
       publie: true,
       ordre: 2,
     },
+    {
+      slug: "tresca",
+      nom: "TRESCA",
+      serviceSlug: "sites-vitrines",
+      resume:
+        "Site vitrine pour TRESCA, entreprise de Bâtiment et Travaux Publics (BTP).",
+      besoin:
+        "TRESCA avait besoin d'un site pour présenter et faire connaître ses services de Bâtiment et Travaux Publics : travaux de voirie et réseaux divers, construction de bâtiments, réhabilitation et rénovation.",
+      solution:
+        "Un site vitrine sous WordPress qui présente l'entreprise et ses trois domaines d'intervention : les travaux de voirie et réseaux divers (routes, trottoirs, réseaux d'assainissement, d'eau potable, d'électricité, de télécommunications), la construction de bâtiments publics et privés, et la réhabilitation/rénovation de structures existantes — avec un bouton de demande de devis et les coordonnées de contact.",
+      role: "Conception et développement du site sous WordPress.",
+      technologies: ["WordPress"],
+      imageUrl: "/projets/Tresca.png",
+      publie: true,
+      ordre: 3,
+    },
   ];
 
   // Nettoie les exemples fictifs de la première version du seed.
