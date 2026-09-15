@@ -36,7 +36,7 @@ async function main() {
       role: "Co-fondatrice · Responsable administrative & financière",
       presentation:
         "Elle gère le suivi administratif et financier de l'agence et cadre chaque projet côté organisation.",
-      photoUrl: "/equipe/Mame_Diarra_Nardev.jpg",
+      photoUrl: "/equipe/Mame_Diarra_Nardev.jpeg",
       ordre: 2,
     },
     {
@@ -44,7 +44,7 @@ async function main() {
       role: "Co-fondatrice · Développement & communication",
       presentation:
         "Elle participe au développement des projets et à la présentation du travail de l'agence.",
-      photoUrl: "/equipe/Rokhaya_Nardev.jpg",
+      photoUrl: "/equipe/Rokhaya_Nardev.jpeg",
       ordre: 3,
     },
     {
