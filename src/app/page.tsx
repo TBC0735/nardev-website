@@ -18,7 +18,7 @@ export const dynamic = "force-dynamic";
 
 async function getServices() {
   try {
-    return await prisma.service.findMany({ orderBy: { ordre: "asc" }, take: 4 });
+    return await prisma.service.findMany({ orderBy: { ordre: "asc" } });
   } catch {
     return [];
   }

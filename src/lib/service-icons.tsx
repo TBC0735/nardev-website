@@ -3,6 +3,7 @@ import {
   LayersIcon,
   PaletteIcon,
   MapPinIcon,
+  ShoppingBagIcon,
 } from "@/components/icons";
 
 const map: Record<string, (p: React.SVGProps<SVGSVGElement>) => JSX.Element> = {
@@ -10,6 +11,7 @@ const map: Record<string, (p: React.SVGProps<SVGSVGElement>) => JSX.Element> = {
   "sites-dynamiques": LayersIcon,
   "flyers-affiches": PaletteIcon,
   "visibilite-google": MapPinIcon,
+  "e-commerce": ShoppingBagIcon,
 };
 
 /** Icône SVG associée à un service (par son slug). */
