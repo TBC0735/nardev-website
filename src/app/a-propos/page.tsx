@@ -108,8 +108,19 @@ export default async function AProposPage() {
           eyebrow={t.teamEyebrow}
           title={t.teamTitle}
           lead={t.teamText}
-          align="center"
         />
+        <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-3">
+          {expertises.map((e, i) => (
+            <RevealItem key={e.title} index={i}>
+              <div className="flex h-full items-center gap-3 rounded-xl border border-bordure bg-white p-5 shadow-card">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ciel text-bleu">
+                  <e.Icon className="h-5 w-5" />
+                </span>
+                <p className="font-semibold text-marine">{e.title}</p>
+              </div>
+            </RevealItem>
+          ))}
+        </RevealGroup>
       </Section>
 
       {/* 7 — Nos valeurs */}
