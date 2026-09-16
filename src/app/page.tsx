@@ -19,10 +19,7 @@ export const dynamic = "force-dynamic";
 
 async function getServices(locale: ReturnType<typeof getLocale>) {
   try {
-    const rows = await prisma.service.findMany({
-      orderBy: { ordre: "asc" },
-      take: 4,
-    });
+    const rows = await prisma.service.findMany({ orderBy: { ordre: "asc" } });
     return rows.map((s) => localizeService(s, locale));
   } catch {
     return [];

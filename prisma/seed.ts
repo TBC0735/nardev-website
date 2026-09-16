@@ -162,6 +162,27 @@ async function main() {
       imageUrl: null,
       ordre: 4,
     },
+    {
+      slug: "e-commerce",
+      titre: "E-commerce",
+      resume: "Une boutique en ligne pour vendre vos produits directement sur internet.",
+      description:
+        "Un site marchand complet pour vendre vos produits en ligne : catalogue, panier, paiement et gestion des commandes. Vous gardez la main sur votre catalogue et vos commandes, en toute autonomie.",
+      avantages: [
+        "Vendez en ligne 24h/24 et 7j/7",
+        "Élargissez votre clientèle au-delà de votre zone",
+        "Paiements sécurisés intégrés (mobile money, carte)",
+        "Suivi des commandes et des stocks en temps réel",
+      ],
+      pointsCles: [
+        "Catalogue produits avec photos et variantes",
+        "Panier et tunnel de paiement sécurisé",
+        "Paiements mobiles (Wave, Orange Money) et/ou carte",
+        "Back-office pour gérer commandes, stock et clients",
+      ],
+      imageUrl: null,
+      ordre: 5,
+    },
   ];
 
   for (const service of services) {
