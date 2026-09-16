@@ -166,6 +166,44 @@ export function CloseIcon(props: P) {
   );
 }
 
+export function HomeIcon(props: P) {
+  return (
+    <Svg {...props}>
+      <path d="M4 11 12 4l8 7" />
+      <path d="M6 9.5V20h12V9.5" />
+      <path d="M10 20v-6h4v6" />
+    </Svg>
+  );
+}
+
+export function FolderIcon(props: P) {
+  return (
+    <Svg {...props}>
+      <path d="M4 6.5a1.5 1.5 0 0 1 1.5-1.5h4l2 2h7A1.5 1.5 0 0 1 20 8.5v9A1.5 1.5 0 0 1 18.5 19h-13A1.5 1.5 0 0 1 4 17.5v-11Z" />
+    </Svg>
+  );
+}
+
+export function LogOutIcon(props: P) {
+  return (
+    <Svg {...props}>
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <path d="M16 17l5-5-5-5" />
+      <path d="M21 12H9" />
+    </Svg>
+  );
+}
+
+export function ExternalLinkIcon(props: P) {
+  return (
+    <Svg {...props}>
+      <path d="M18 13v6a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 19V8a1.5 1.5 0 0 1 1.5-1.5H12" />
+      <path d="M14.5 4H20v5.5" />
+      <path d="M20 4 11 13" />
+    </Svg>
+  );
+}
+
 /* — Réseaux — */
 
 export function PhoneIcon(props: P) {
