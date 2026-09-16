@@ -5,7 +5,8 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { CheckIcon, MailIcon, PhoneIcon, WhatsappIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
-import { getDict } from "@/i18n/server";
+import { getDict, getLocale } from "@/i18n/server";
+import { localizeService } from "@/lib/content-en";
 import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -22,22 +23,23 @@ const servicesParDefaut = [
   { slug: "visibilite-google", titre: "Visibilité Google" },
 ];
 
-async function getServices() {
+async function getServices(locale: ReturnType<typeof getLocale>) {
   try {
     const services = await prisma.service.findMany({
       orderBy: { ordre: "asc" },
       select: { slug: true, titre: true },
     });
-    return services.length > 0 ? services : servicesParDefaut;
+    const rows = services.length > 0 ? services : servicesParDefaut;
+    return rows.map((s) => localizeService(s, locale));
   } catch {
-    return servicesParDefaut;
+    return servicesParDefaut.map((s) => localizeService(s, locale));
   }
 }
 
 export default async function ContactPage() {
   const dict = getDict();
   const t = dict.contact;
-  const services = await getServices();
+  const services = await getServices(getLocale());
 
   return (
     <>

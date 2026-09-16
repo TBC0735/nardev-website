@@ -9,16 +9,22 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/motion/Reveal";
 import { ArrowRightIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
-import { getDict } from "@/i18n/server";
+import { getDict, getLocale } from "@/i18n/server";
+import { localizeProjet, localizeService } from "@/lib/content-en";
 
 export const dynamic = "force-dynamic";
 
-async function getProjet(slug: string) {
+async function getProjet(slug: string, locale: ReturnType<typeof getLocale>) {
   try {
-    return await prisma.projet.findFirst({
+    const row = await prisma.projet.findFirst({
       where: { slug, publie: true },
       include: { service: { select: { slug: true, titre: true } } },
     });
+    if (!row) return null;
+    return {
+      ...localizeProjet(row, locale),
+      service: row.service ? localizeService(row.service, locale) : row.service,
+    };
   } catch {
     return null;
   }
@@ -29,7 +35,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const projet = await getProjet(params.slug);
+  const projet = await getProjet(params.slug, getLocale());
   if (!projet) return { title: getDict().portfolio.notFound };
   return {
     title: projet.nom,
@@ -44,7 +50,7 @@ export default async function ProjetDetailPage({
 }) {
   const dict = getDict();
   const t = dict.portfolio;
-  const projet = await getProjet(params.slug);
+  const projet = await getProjet(params.slug, getLocale());
   if (!projet) notFound();
 
   const galerie = [projet.imageUrl, ...projet.images].filter(

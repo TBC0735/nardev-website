@@ -12,26 +12,35 @@ import { FeatureGrid } from "@/components/FeatureGrid";
 import { CtaPanel } from "@/components/CtaPanel";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { UserIcon, EyeIcon, ShieldIcon, LayersIcon } from "@/components/icons";
-import { getDict } from "@/i18n/server";
+import { getDict, getLocale } from "@/i18n/server";
+import { localizeProjet, localizeService } from "@/lib/content-en";
 
 export const dynamic = "force-dynamic";
 
-async function getServices() {
+async function getServices(locale: ReturnType<typeof getLocale>) {
   try {
-    return await prisma.service.findMany({ orderBy: { ordre: "asc" }, take: 4 });
+    const rows = await prisma.service.findMany({
+      orderBy: { ordre: "asc" },
+      take: 4,
+    });
+    return rows.map((s) => localizeService(s, locale));
   } catch {
     return [];
   }
 }
 
-async function getProjetsRecents() {
+async function getProjetsRecents(locale: ReturnType<typeof getLocale>) {
   try {
-    return await prisma.projet.findMany({
+    const rows = await prisma.projet.findMany({
       where: { publie: true },
       orderBy: [{ ordre: "asc" }, { createdAt: "desc" }],
       take: 3,
       include: { service: { select: { slug: true, titre: true } } },
     });
+    return rows.map((p) => ({
+      ...localizeProjet(p, locale),
+      service: p.service ? localizeService(p.service, locale) : p.service,
+    }));
   } catch {
     return [];
   }
@@ -39,10 +48,11 @@ async function getProjetsRecents() {
 
 export default async function HomePage() {
   const dict = getDict();
+  const locale = getLocale();
   const t = dict.home;
   const [services, projets] = await Promise.all([
-    getServices(),
-    getProjetsRecents(),
+    getServices(locale),
+    getProjetsRecents(locale),
   ]);
 
   const whyIcons = [UserIcon, LayersIcon, EyeIcon, ShieldIcon];

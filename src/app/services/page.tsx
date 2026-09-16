@@ -14,7 +14,8 @@ import { SmoothAnchors } from "@/components/SmoothAnchors";
 import { ServiceIcon } from "@/lib/service-icons";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
-import { getDict } from "@/i18n/server";
+import { getDict, getLocale } from "@/i18n/server";
+import { localizeService } from "@/lib/content-en";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -23,9 +24,10 @@ export const metadata: Metadata = {
 };
 export const dynamic = "force-dynamic";
 
-async function getServices() {
+async function getServices(locale: ReturnType<typeof getLocale>) {
   try {
-    return await prisma.service.findMany({ orderBy: { ordre: "asc" } });
+    const rows = await prisma.service.findMany({ orderBy: { ordre: "asc" } });
+    return rows.map((s) => localizeService(s, locale));
   } catch {
     return [];
   }
@@ -33,8 +35,9 @@ async function getServices() {
 
 export default async function ServicesPage() {
   const dict = getDict();
+  const locale = getLocale();
   const t = dict.services;
-  const services = await getServices();
+  const services = await getServices(locale);
 
   return (
     <>
