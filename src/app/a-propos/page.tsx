@@ -15,10 +15,7 @@ import {
   ChatIcon,
   CheckIcon,
 } from "@/components/icons";
-import { prisma } from "@/lib/prisma";
-import { getDict, getLocale } from "@/i18n/server";
-import { localizeMembre } from "@/lib/content-en";
-import { TeamCard } from "./TeamCard";
+import { getDict } from "@/i18n/server";
 
 export const metadata: Metadata = {
   title: "À propos",
@@ -27,19 +24,9 @@ export const metadata: Metadata = {
 };
 export const dynamic = "force-dynamic";
 
-async function getMembres(locale: ReturnType<typeof getLocale>) {
-  try {
-    const rows = await prisma.membre.findMany({ orderBy: { ordre: "asc" } });
-    return rows.map((m) => localizeMembre(m, locale));
-  } catch {
-    return [];
-  }
-}
-
 export default async function AProposPage() {
   const dict = getDict();
   const t = dict.about;
-  const membres = await getMembres(getLocale());
 
   const expertiseIcons = [MonitorIcon, PaletteIcon, ChatIcon];
   const expertises = t.expertise.map((e, i) => ({
@@ -115,26 +102,14 @@ export default async function AProposPage() {
         <Steps steps={t.process} />
       </Section>
 
-      {/* 6 — L'équipe */}
+      {/* 6 — L'équipe (sans identités individuelles) */}
       <Section>
         <SectionHeading
           eyebrow={t.teamEyebrow}
           title={t.teamTitle}
           lead={t.teamText}
+          align="center"
         />
-        {membres.length === 0 ? (
-          <p className="mt-8 rounded-xl border border-bordure bg-fond-alt p-4 text-sm text-texte-secondaire">
-            {t.teamEmpty}
-          </p>
-        ) : (
-          <RevealGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {membres.map((membre, i) => (
-              <RevealItem key={membre.id} index={i}>
-                <TeamCard membre={membre} />
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        )}
       </Section>
 
       {/* 7 — Nos valeurs */}
