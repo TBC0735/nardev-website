@@ -158,7 +158,7 @@ const fr = {
     teamEyebrow: "L'équipe",
     teamTitle: "Une équipe à taille humaine",
     teamText:
-      "Nardev est porté par quatre personnes qui réunissent développement, design et communication. On préfère mettre en avant notre travail plutôt que des profils individuels — c'est sur nos réalisations et notre façon de travailler qu'on veut être jugés.",
+      "Nardev, c'est une équipe qui se répartit le développement, le design et la communication. On suit chaque projet de bout en bout, du premier échange jusqu'à la mise en ligne, et on reste disponibles à chaque étape pour ajuster le travail selon vos retours.",
     teamEmpty:
       "La présentation de l'équipe sera visible dès que les membres auront été ajoutés depuis le back-office.",
 
@@ -558,7 +558,7 @@ const en: Dict = {
     teamEyebrow: "The team",
     teamTitle: "A small, hands-on team",
     teamText:
-      "Nardev is run by four people who bring together development, design and communication. We'd rather let our work speak than put individual profiles forward — judge us on what we deliver and how we work with you.",
+      "Nardev is a team covering development, design and communication. We follow each project from the first conversation through to launch, and stay available at every step to adjust the work based on your feedback.",
     teamEmpty:
       "The team will appear here as soon as members are added from the back office.",
 
