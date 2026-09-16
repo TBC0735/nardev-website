@@ -56,7 +56,7 @@ const fr = {
       { value: "0", label: "coût caché, jamais" },
     ],
     servicesEyebrow: "Ce qu'on fait",
-    servicesTitle: "Quatre façons de vous rendre visible",
+    servicesTitle: "Plusieurs façons de vous rendre visible",
     servicesLead:
       "Du site vitrine à la fiche Google, chaque prestation se commande directement en ligne et se construit avec vous, sur devis.",
     servicesEmpty: "Les services seront bientôt disponibles ici.",
@@ -219,7 +219,7 @@ const fr = {
     eyebrow: "Nos services",
     title: "Des prestations claires, un tarif sur devis",
     intro:
-      "Quatre façons de vous accompagner, du site vitrine à la visibilité locale. Chaque service peut être demandé directement depuis cette page — le tarif se construit avec vous.",
+      "Plusieurs façons de vous accompagner, du site vitrine à la visibilité locale. Chaque service peut être demandé directement depuis cette page — le tarif se construit avec vous.",
     empty: "Les services seront bientôt disponibles ici.",
     whyTitle: "Pourquoi ce service",
     receiveTitle: "Ce que vous recevez",
@@ -456,7 +456,7 @@ const en: Dict = {
       { value: "0", label: "hidden costs, ever" },
     ],
     servicesEyebrow: "What we do",
-    servicesTitle: "Four ways to get you seen",
+    servicesTitle: "Several ways to get you seen",
     servicesLead:
       "From a showcase site to a Google listing, every service is ordered online and built with you, on a quote basis.",
     servicesEmpty: "Services will be available here soon.",
@@ -619,7 +619,7 @@ const en: Dict = {
     eyebrow: "Our services",
     title: "Clear services, quote-based pricing",
     intro:
-      "Four ways to support you, from a showcase site to local visibility. Every service can be requested right from this page — pricing is built with you.",
+      "Several ways to support you, from a showcase site to local visibility. Every service can be requested right from this page — pricing is built with you.",
     empty: "Services will be available here soon.",
     whyTitle: "Why this service",
     receiveTitle: "What you get",

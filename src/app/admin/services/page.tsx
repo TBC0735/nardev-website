@@ -20,7 +20,7 @@ export default async function AdminServicesPage() {
     <div>
       <h1 className="text-2xl">Services</h1>
       <p className="mt-2 text-sm text-texte-secondaire">
-        Les 4 services affichés sur <code>/</code> et <code>/services</code>.
+        Les services affichés sur <code>/</code> et <code>/services</code>.
         L&apos;ordre d&apos;affichage suit le champ « ordre » (croissant).
       </p>
       <ServicesManager servicesInitiaux={services} />
