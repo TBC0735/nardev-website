@@ -16,7 +16,8 @@ import {
   CheckIcon,
 } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
-import { getDict } from "@/i18n/server";
+import { getDict, getLocale } from "@/i18n/server";
+import { localizeMembre } from "@/lib/content-en";
 import { TeamCard } from "./TeamCard";
 
 export const metadata: Metadata = {
@@ -26,9 +27,10 @@ export const metadata: Metadata = {
 };
 export const dynamic = "force-dynamic";
 
-async function getMembres() {
+async function getMembres(locale: ReturnType<typeof getLocale>) {
   try {
-    return await prisma.membre.findMany({ orderBy: { ordre: "asc" } });
+    const rows = await prisma.membre.findMany({ orderBy: { ordre: "asc" } });
+    return rows.map((m) => localizeMembre(m, locale));
   } catch {
     return [];
   }
@@ -37,7 +39,7 @@ async function getMembres() {
 export default async function AProposPage() {
   const dict = getDict();
   const t = dict.about;
-  const membres = await getMembres();
+  const membres = await getMembres(getLocale());
 
   const expertiseIcons = [MonitorIcon, PaletteIcon, ChatIcon];
   const expertises = t.expertise.map((e, i) => ({

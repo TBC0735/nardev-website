@@ -155,34 +155,29 @@ const membresEn: Record<string, MembreOverride> = {
   },
 };
 
-function merge<T extends object>(
-  row: T,
-  overrides: Record<string, Partial<T>>,
-  key: string,
-  locale: Locale,
-): T {
-  if (locale !== "en") return row;
-  const override = overrides[key];
-  return override ? { ...row, ...override } : row;
-}
-
 export function localizeService<T extends { slug: string }>(
   service: T,
   locale: Locale,
 ): T {
-  return merge(service, servicesEn, service.slug, locale);
+  if (locale !== "en") return service;
+  const override = servicesEn[service.slug] as Partial<T> | undefined;
+  return override ? { ...service, ...override } : service;
 }
 
 export function localizeProjet<T extends { slug: string }>(
   projet: T,
   locale: Locale,
 ): T {
-  return merge(projet, projetsEn, projet.slug, locale);
+  if (locale !== "en") return projet;
+  const override = projetsEn[projet.slug] as Partial<T> | undefined;
+  return override ? { ...projet, ...override } : projet;
 }
 
 export function localizeMembre<T extends { nom: string }>(
   membre: T,
   locale: Locale,
 ): T {
-  return merge(membre, membresEn, membre.nom, locale);
+  if (locale !== "en") return membre;
+  const override = membresEn[membre.nom] as Partial<T> | undefined;
+  return override ? { ...membre, ...override } : membre;
 }

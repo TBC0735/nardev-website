@@ -8,7 +8,8 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { CtaPanel } from "@/components/CtaPanel";
 import { EyeIcon, PenRulerIcon, RocketIcon } from "@/components/icons";
 import { prisma } from "@/lib/prisma";
-import { getDict } from "@/i18n/server";
+import { getDict, getLocale } from "@/i18n/server";
+import { localizeProjet, localizeService } from "@/lib/content-en";
 import { PortfolioGrid } from "./PortfolioGrid";
 
 export const metadata: Metadata = {
@@ -18,9 +19,9 @@ export const metadata: Metadata = {
 };
 export const dynamic = "force-dynamic";
 
-async function getData() {
+async function getData(locale: ReturnType<typeof getLocale>) {
   try {
-    const [projets, services] = await Promise.all([
+    const [projetsRows, servicesRows] = await Promise.all([
       prisma.projet.findMany({
         where: { publie: true },
         orderBy: [{ ordre: "asc" }, { createdAt: "desc" }],
@@ -31,6 +32,11 @@ async function getData() {
         select: { slug: true, titre: true },
       }),
     ]);
+    const projets = projetsRows.map((p) => ({
+      ...localizeProjet(p, locale),
+      service: p.service ? localizeService(p.service, locale) : p.service,
+    }));
+    const services = servicesRows.map((s) => localizeService(s, locale));
     return { projets, services };
   } catch {
     return { projets: [], services: [] };
@@ -39,8 +45,9 @@ async function getData() {
 
 export default async function PortfolioPage() {
   const dict = getDict();
+  const locale = getLocale();
   const t = dict.portfolio;
-  const { projets, services } = await getData();
+  const { projets, services } = await getData(locale);
 
   const slugsUtilises = new Set(
     projets.map((p) => p.service?.slug).filter(Boolean),
