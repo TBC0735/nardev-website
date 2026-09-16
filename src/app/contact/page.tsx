@@ -71,20 +71,20 @@ export default async function ContactPage() {
               <ul className="mt-4 space-y-3 text-sm">
                 <li>
                   <a
-                    href="mailto:contact@nardev.sn"
+                    href="mailto:nardev.agency@gmail.com"
                     className="inline-flex items-center gap-2 font-medium text-texte no-underline hover:text-bleu"
                   >
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
                       <MailIcon className="h-4 w-4" />
                     </span>
-                    contact@nardev.sn
+                    nardev.agency@gmail.com
                   </a>
                 </li>
                 <li className="inline-flex items-center gap-2 font-medium text-texte">
                   <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
                     <PhoneIcon className="h-4 w-4" />
                   </span>
-                  +221 —
+                  +221 71 130 46 34
                 </li>
                 <li className="inline-flex items-center gap-2 text-texte-secondaire">
                   <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
