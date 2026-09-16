@@ -127,7 +127,7 @@ export function ServicesManager({ servicesInitiaux }: { servicesInitiaux: Servic
 
         {servicesInitiaux.length === 0 ? (
           <p className="mt-3 rounded border border-bordure bg-fond-alt p-4 text-sm text-texte-secondaire">
-            Aucun service pour le moment. Ajoutez les 4 services avec le
+            Aucun service pour le moment. Ajoutez vos services avec le
             formulaire.
           </p>
         ) : (
