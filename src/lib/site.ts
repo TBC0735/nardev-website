@@ -9,8 +9,8 @@ export const site = {
     "Nardev conçoit des sites vitrines, des sites dynamiques, des supports print et améliore votre visibilité sur Google. Une équipe à Dakar, un interlocuteur unique.",
   descriptionEn:
     "Nardev builds showcase sites, dynamic sites and print materials, and improves your Google visibility. A team in Dakar, one point of contact.",
-  email: "contact@nardev.sn",
-  // telephone: "+221 ...",   // à ajouter
+  email: "nardev.agency@gmail.com",
+  telephone: "+221 71 130 46 34",
   city: "Dakar",
   country: "SN",
   // Liens réseaux sociaux — à remplir quand les comptes existent (utilisés dans le JSON-LD `sameAs`).
@@ -26,6 +26,7 @@ export function organizationJsonLd() {
     url: site.url,
     logo: `${site.url}/logo.png`,
     email: site.email,
+    telephone: site.telephone,
     description: site.descriptionFr,
     areaServed: { "@type": "Country", name: "Sénégal" },
     address: {

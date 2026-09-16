@@ -107,14 +107,14 @@ export function Footer({ dict }: { dict: Dict }) {
             <ul className="mt-4 space-y-2.5 text-sm text-white/65">
               <li>
                 <a
-                  href="mailto:contact@nardev.sn"
+                  href="mailto:nardev.agency@gmail.com"
                   className="inline-flex items-center gap-2 no-underline hover:text-white"
                 >
-                  <MailIcon className="h-4 w-4" /> contact@nardev.sn
+                  <MailIcon className="h-4 w-4" /> nardev.agency@gmail.com
                 </a>
               </li>
               <li className="inline-flex items-center gap-2">
-                <PhoneIcon className="h-4 w-4" /> +221 —
+                <PhoneIcon className="h-4 w-4" /> +221 71 130 46 34
               </li>
               <li className="inline-flex items-center gap-2">
                 <WhatsappIcon className="h-4 w-4" /> WhatsApp {t.soon}
