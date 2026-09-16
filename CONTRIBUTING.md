@@ -25,6 +25,13 @@ Exemples : `feature/auth-admin`, `feature/api-portfolio`, `feature/page-accueil`
    - être liée à son Issue (`Closes #12`).
 6. Fusion en **Squash and merge**. Supprimer la branche après fusion.
 
+## Version de Node
+
+Utiliser la version indiquée dans `.nvmrc` (`nvm use`). La CI lit ce même fichier.
+Si `npm ci` échoue en CI juste après un changement de dépendances, c'est que le
+`package-lock.json` a été généré avec une version de npm différente : régénère-le
+avec la bonne version (`nvm use` puis `rm -rf node_modules package-lock.json && npm install`).
+
 ## Règles
 
 - Aucune fusion directe vers `dev` ou `main` : toujours une PR.

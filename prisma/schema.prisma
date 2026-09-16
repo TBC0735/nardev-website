@@ -26,9 +26,17 @@ model Service {
   id          String   @id @default(cuid())
   slug        String   @unique
   titre       String
+  /// Phrase courte pour la carte service sur l'accueil.
+  resume      String
+  /// Texte long (3-4 phrases) pour la page /services.
   description String
+  /// Pourquoi choisir ce service — bénéfices pour le client.
+  avantages   String[]
   /// Liste à puces « ce que le client reçoit » — un élément par ligne.
-  livrables   String[]
+  pointsCles  String[]
+  /// Photo/illustration du service. Nullable : un dégradé de remplacement
+  /// s'affiche tant que la vraie photo n'a pas été ajoutée depuis l'admin.
+  imageUrl    String?
   ordre       Int      @default(0)
   projets     Projet[]
   createdAt   DateTime @default(now())
@@ -41,13 +49,28 @@ model Projet {
   id           String   @id @default(cuid())
   slug         String   @unique
   nom          String
+  /// Image de couverture (carte + haut de fiche). Nullable : dégradé de
+  /// remplacement tant qu'aucune vraie image n'est fournie depuis l'admin.
   imageUrl     String?
-  /// Besoin client + solution apportée.
-  description  String
+  /// Images supplémentaires de la fiche projet (galerie).
+  images       String[] @default([])
+  /// Phrase courte affichée sur la carte et l'aperçu accueil.
+  resume       String   @default("")
+  /// Contexte / besoin exprimé par le client.
+  besoin       String   @default("")
+  /// Solution apportée par Nardev.
+  solution     String   @default("")
+  /// Le rôle de Nardev sur le projet (conception, dev, design…).
+  role         String   @default("")
+  /// Lien vers le projet en ligne, si disponible.
+  lienUrl      String?
+  /// Résumé libre (déprécié : conservé pour compat, utiliser resume/besoin/solution).
+  description  String   @default("")
   technologies String[]
   service      Service? @relation(fields: [serviceId], references: [id])
   serviceId    String?
   publie       Boolean  @default(true)
+  ordre        Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -55,13 +78,17 @@ model Projet {
 /// Messages reçus via le formulaire /contact.
 /// Domaine : Awa Ndao
 model Message {
-  id        String   @id @default(cuid())
-  nom       String
+  id         String   @id @default(cuid())
+  nom        String
+  /// Email de la personne — indispensable pour lui répondre.
+  email      String   @default("")
+  telephone  String?
   entreprise String?
-  service   String?
-  contenu   String
-  lu        Boolean  @default(false)
-  createdAt DateTime @default(now())
+  /// Slug ou libellé du service souhaité (menu déroulant du formulaire).
+  service    String?
+  contenu    String
+  lu         Boolean  @default(false)
+  createdAt  DateTime @default(now())
 }
 
 /// Fondateurs présentés sur /a-propos.

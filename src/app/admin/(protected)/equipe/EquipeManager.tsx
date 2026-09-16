@@ -141,7 +141,7 @@ export function EquipeManager({ membresInitiaux }: { membresInitiaux: Membre[] }
                     type="button"
                     onClick={() => supprimer(membre.id)}
                     disabled={enCours}
-                    className="text-sm font-medium text-red-600 hover:underline disabled:opacity-50"
+                    className="text-sm font-medium text-erreur hover:underline disabled:opacity-50"
                   >
                     Supprimer
                   </button>
@@ -199,7 +199,7 @@ export function EquipeManager({ membresInitiaux }: { membresInitiaux: Membre[] }
           />
         </div>
 
-        {erreur && <p className="mt-3 text-sm text-red-600">{erreur}</p>}
+        {erreur && <p className="mt-3 text-sm text-erreur">{erreur}</p>}
 
         <div className="mt-4 flex gap-2">
           <Button type="submit" disabled={enCours}>

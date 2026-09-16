@@ -25,30 +25,34 @@ async function main() {
   const membres = [
     {
       nom: "Ndiawar Thiaw",
-      role: "Développement & infrastructure",
+      role: "Co-fondateur · Responsable technique",
       presentation:
-        "Met en place les fondations techniques du projet et gère le déploiement continu du site.",
+        "Il met en place les fondations techniques des projets et suit le développement jusqu'à la mise en ligne.",
+      photoUrl: "/equipe/ndiawar-thiaw.jpg",
       ordre: 1,
     },
     {
       nom: "Mame Diarra",
-      role: "Services & contenu",
+      role: "Co-fondatrice · Responsable administrative & financière",
       presentation:
-        "Traduit les besoins des clients en offres claires et fait vivre le contenu du site.",
+        "Elle gère le suivi administratif et financier de l'agence et cadre chaque projet côté organisation.",
+      photoUrl: "/equipe/Mame_Diarra_Nardev.jpeg",
       ordre: 2,
     },
     {
       nom: "Rokhaya",
-      role: "Réalisations & design",
+      role: "Co-fondatrice · Développement & communication",
       presentation:
-        "Documente les projets livrés et veille à la cohérence visuelle de chaque réalisation.",
+        "Elle participe au développement des projets et à la présentation du travail de l'agence.",
+      photoUrl: "/equipe/Rokhaya_Nardev.jpeg",
       ordre: 3,
     },
     {
       nom: "Awa Ndao",
-      role: "Relation client & communication",
+      role: "Co-fondatrice · Développement & communication",
       presentation:
-        "Premier point de contact de l'agence, elle assure le suivi des demandes entrantes.",
+        "Elle contribue au développement des projets et au suivi des échanges avec les clients.",
+      photoUrl: "/equipe/Awa_Nardev.jpg",
       ordre: 4,
     },
   ];
@@ -63,6 +67,218 @@ async function main() {
   }
 
   console.log(`✔ ${membres.length} membres de l'équipe en base`);
+
+  // Services (domaine « Services & Accueil » — Mame Diarra).
+  // Modifiables ensuite depuis /admin/services.
+  // imageUrl volontairement null : les vrais visuels (projets Nardev ou photos
+  // libres de droits) seront ajoutés depuis l'admin. En attendant, un aplat
+  // dégradé aux couleurs de la charte s'affiche.
+  const services = [
+    {
+      slug: "sites-vitrines",
+      titre: "Sites vitrines",
+      resume: "Une présence en ligne claire et accueillante, prête en quelques semaines.",
+      description:
+        "Un site simple et soigné pour présenter votre activité, vos services et vos coordonnées. Idéal pour être visible en ligne rapidement, avec un design qui inspire confiance dès la première visite.",
+      avantages: [
+        "Accroître votre visibilité en ligne",
+        "Faire connaître votre activité et vos valeurs",
+        "Des informations accessibles 24h/24 et 7j/7",
+        "Renforcer la confiance de vos clients",
+        "Attirer de nouveaux clients",
+      ],
+      pointsCles: [
+        "Maquette validée avec vous avant développement",
+        "Site responsive (mobile, tablette, ordinateur)",
+        "Jusqu'à 5 pages (accueil, services, contact, etc.)",
+        "Mise en ligne incluse",
+      ],
+      // Capture TBCode (site d'auto-formation HTML/CSS/JS avec quiz).
+      imageUrl: "/services/tbcode.png",
+      ordre: 1,
+    },
+    {
+      slug: "sites-dynamiques",
+      titre: "Sites dynamiques",
+      resume: "Un site que vous faites vivre vous-même, sans dépendre de personne.",
+      description:
+        "Un site avec un back-office qui vous permet de gérer votre contenu sans dépendre d'un développeur. Parfait pour un catalogue, un blog, ou toute activité qui évolue régulièrement.",
+      avantages: [
+        "Autonomie totale sur vos contenus, sans coder",
+        "Un site qui évolue avec votre activité",
+        "Idéal pour un catalogue, un blog ou des projets à jour",
+        "Aucune dépendance à un développeur pour publier",
+      ],
+      pointsCles: [
+        "Back-office simple pour gérer vos contenus",
+        "Base de données pour vos produits, articles ou projets",
+        "Formation à l'utilisation de l'admin",
+        "Hébergement et mise en ligne accompagnés",
+      ],
+      // Capture SunuEtude, exemple de site dynamique réel livré par l'équipe.
+      imageUrl: "/projets/sunuetude.png",
+      ordre: 2,
+    },
+    {
+      slug: "flyers-affiches",
+      titre: "Flyers & affiches",
+      resume: "Des supports imprimés et digitaux qui vous ressemblent vraiment.",
+      description:
+        "Des supports print alignés sur votre image de marque, prêts à imprimer ou à diffuser sur les réseaux sociaux. Nous adaptons le message et le visuel à votre cible.",
+      avantages: [
+        "Une image de marque cohérente sur tous vos supports",
+        "Des visuels prêts pour l'impression comme pour le web",
+        "Un message adapté à votre cible",
+        "Idéal pour vos événements et promotions",
+      ],
+      pointsCles: [
+        "Design sur mesure aux couleurs de votre marque",
+        "Fichiers prêts pour l'impression (haute résolution)",
+        "Version adaptée aux réseaux sociaux",
+        "1 à 2 allers-retours de retouches inclus",
+      ],
+      // Affiche promotionnelle réelle (abonnements Netflix).
+      imageUrl: "/services/flyer-netflix.jpg",
+      ordre: 3,
+    },
+    {
+      slug: "visibilite-google",
+      titre: "Visibilité Google",
+      resume: "Être trouvé facilement par les clients qui cherchent près de chez eux.",
+      description:
+        "Nous optimisons votre fiche entreprise Google pour que les clients vous trouvent facilement lorsqu'ils cherchent vos services près de chez eux. Un levier simple et efficace pour gagner en visibilité locale.",
+      avantages: [
+        "Apparaître dans les recherches locales et sur Google Maps",
+        "Rassurer grâce aux avis clients mis en valeur",
+        "Un levier simple, sans budget publicitaire",
+        "Des informations à jour en permanence (horaires, photos)",
+      ],
+      pointsCles: [
+        "Création ou optimisation de votre fiche Google Entreprise",
+        "Ajout de photos, horaires et informations clés",
+        "Conseils pour obtenir des avis clients",
+        "Suivi de la visibilité sur un mois",
+      ],
+      imageUrl: null,
+      ordre: 4,
+    },
+    {
+      slug: "e-commerce",
+      titre: "E-commerce",
+      resume: "Une boutique en ligne pour vendre vos produits directement sur internet.",
+      description:
+        "Un site marchand complet pour vendre vos produits en ligne : catalogue, panier, paiement et gestion des commandes. Vous gardez la main sur votre catalogue et vos commandes, en toute autonomie.",
+      avantages: [
+        "Vendez en ligne 24h/24 et 7j/7",
+        "Élargissez votre clientèle au-delà de votre zone",
+        "Paiements sécurisés intégrés (mobile money, carte)",
+        "Suivi des commandes et des stocks en temps réel",
+      ],
+      pointsCles: [
+        "Catalogue produits avec photos et variantes",
+        "Panier et tunnel de paiement sécurisé",
+        "Paiements mobiles (Wave, Orange Money) et/ou carte",
+        "Back-office pour gérer commandes, stock et clients",
+      ],
+      imageUrl: null,
+      ordre: 5,
+    },
+  ];
+
+  for (const service of services) {
+    await prisma.service.upsert({
+      where: { slug: service.slug },
+      update: service,
+      create: service,
+    });
+  }
+
+  console.log(`✔ ${services.length} services en base`);
+
+  // Réalisations (domaine « Portfolio »). Chez Nardev on met en commun les
+  // projets menés par chacun des associés. Ajouter les captures d'écran dans
+  // /public/projets/ puis renseigner imageUrl (ou via /admin/portfolio).
+  const projets = [
+    {
+      slug: "sunuetude",
+      nom: "SunuEtude",
+      serviceSlug: "sites-dynamiques",
+      resume:
+        "Plateforme web pour accompagner les étudiants au Sénégal dans leurs démarches : inscription, choix d'établissement, logement et accueil.",
+      besoin:
+        "Les étudiants au Sénégal doivent gérer séparément plusieurs démarches liées à leurs études : s'inscrire, choisir un établissement, trouver un logement et organiser leur arrivée. Il n'existait pas d'outil unique pour suivre tout cela.",
+      solution:
+        "Une plateforme web qui réunit ces démarches au même endroit : authentification et gestion des utilisateurs, gestion des étudiants et des écoles, inscriptions en ligne, gestion des logements et des bailleurs, paiements en ligne, notifications, tableaux de bord selon les profils et gestion administrative.",
+      role: "Conception et développement de la plateforme web, de l'architecture technique jusqu'aux différentes fonctionnalités.",
+      technologies: ["Laravel", "Angular", "PostgreSQL"],
+      lienUrl: "https://memoire-ndiawar-thiaw.vercel.app/",
+      imageUrl: "/projets/sunuetude.png",
+      publie: true,
+      ordre: 1,
+    },
+    {
+      // Brouillon : à compléter par l'équipe (besoin, solution, rôle, techno,
+      // lien, capture) puis publier depuis /admin/portfolio.
+      slug: "nattbi",
+      nom: "NattBi",
+      serviceSlug: "sites-dynamiques",
+      resume:
+        "Plateforme de gestion des tontines, avec paiements mobiles intégrés (Wave, Orange Money).",
+      besoin:
+        "Les tontines se gèrent le plus souvent à la main : calculs sur cahier, suivi des cotisations et des tours de paiement peu fiable, risque d'erreurs.",
+      solution:
+        "Une application qui simplifie la gestion d'une tontine au quotidien : suivi des membres, des cotisations et des tours de paiement, avec les paiements mobiles (Wave, Orange Money) intégrés directement, sans plus dépendre du calcul manuel.",
+      role:
+        "Développement de la plateforme : architecture MVC avec Laravel 12 (PHP 8.2) et Blade, Tailwind CSS pour le frontend, MySQL pour la base de données, intégration des paiements mobiles Wave et Orange Money via PayTech.",
+      technologies: ["Laravel 12", "PHP", "Blade", "Tailwind CSS", "MySQL", "PayTech"],
+      lienUrl: "https://nattbi.onrender.com/",
+      imageUrl: "/projets/nattbi.png",
+      publie: true,
+      ordre: 2,
+    },
+    {
+      slug: "tresca",
+      nom: "TRESCA",
+      serviceSlug: "sites-vitrines",
+      resume:
+        "Site vitrine pour TRESCA, entreprise de Bâtiment et Travaux Publics (BTP).",
+      besoin:
+        "TRESCA avait besoin d'un site pour présenter et faire connaître ses services de Bâtiment et Travaux Publics : travaux de voirie et réseaux divers, construction de bâtiments, réhabilitation et rénovation.",
+      solution:
+        "Un site vitrine sous WordPress qui présente l'entreprise et ses trois domaines d'intervention : les travaux de voirie et réseaux divers (routes, trottoirs, réseaux d'assainissement, d'eau potable, d'électricité, de télécommunications), la construction de bâtiments publics et privés, et la réhabilitation/rénovation de structures existantes — avec un bouton de demande de devis et les coordonnées de contact.",
+      role: "Conception et développement du site sous WordPress.",
+      technologies: ["WordPress"],
+      imageUrl: "/projets/Tresca.png",
+      publie: true,
+      ordre: 3,
+    },
+  ];
+
+  // Nettoie les exemples fictifs de la première version du seed.
+  await prisma.projet.deleteMany({
+    where: {
+      slug: {
+        in: [
+          "boutique-mariama-couture",
+          "catalogue-ndiaye-electronique",
+          "flyers-festival-gospel",
+        ],
+      },
+    },
+  });
+
+  for (const { serviceSlug, ...projet } of projets) {
+    const service = await prisma.service.findUnique({
+      where: { slug: serviceSlug },
+    });
+    await prisma.projet.upsert({
+      where: { slug: projet.slug },
+      update: { ...projet, serviceId: service?.id ?? null },
+      create: { ...projet, serviceId: service?.id ?? null },
+    });
+  }
+
+  console.log(`✔ ${projets.length} projets en base`);
 }
 
 main()

@@ -31,22 +31,19 @@ export function LoginForm() {
     router.push(params.get("callbackUrl") ?? "/admin");
   }
 
+  const field =
+    "mt-1.5 w-full rounded-lg border border-bordure bg-white px-3.5 py-2.5 text-sm transition-colors focus:border-bleu focus:outline-none focus:ring-2 focus:ring-bleu/20";
+
   return (
     <form onSubmit={onSubmit} className="mt-6 space-y-4">
       <div>
-        <label htmlFor="email" className="block text-sm font-medium">
+        <label htmlFor="email" className="block text-sm font-medium text-marine">
           Email
         </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          className="mt-1 w-full rounded border border-bordure px-3 py-2 text-sm"
-        />
+        <input id="email" name="email" type="email" required className={field} />
       </div>
       <div>
-        <label htmlFor="password" className="block text-sm font-medium">
+        <label htmlFor="password" className="block text-sm font-medium text-marine">
           Mot de passe
         </label>
         <input
@@ -54,11 +51,11 @@ export function LoginForm() {
           name="password"
           type="password"
           required
-          className="mt-1 w-full rounded border border-bordure px-3 py-2 text-sm"
+          className={field}
         />
       </div>
-      {error && <p className="text-sm text-red-600">{error}</p>}
-      <Button type="submit" disabled={loading}>
+      {error && <p className="text-sm text-erreur">{error}</p>}
+      <Button type="submit" disabled={loading} className="w-full">
         {loading ? "Connexion…" : "Se connecter"}
       </Button>
     </form>

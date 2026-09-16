@@ -1,144 +1,193 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
-import { Button } from "@/components/Button";
-import { prisma } from "@/lib/prisma";
+import { PageHero } from "@/components/ui/PageHero";
+import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Stat } from "@/components/ui/Stat";
+import { Steps } from "@/components/Steps";
+import { FeatureGrid } from "@/components/FeatureGrid";
+import { CtaPanel } from "@/components/CtaPanel";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import {
+  MonitorIcon,
+  PaletteIcon,
+  ChatIcon,
+  CheckIcon,
+} from "@/components/icons";
+import { getDict } from "@/i18n/server";
 
-export const metadata: Metadata = { title: "À propos" };
-
-// La liste des fondateurs vient de la base (table Membre, gérée depuis /admin/equipe).
+export const metadata: Metadata = {
+  title: "À propos",
+  description:
+    "Nardev, agence web à Dakar fondée par quatre associés pour rendre le web professionnel accessible aux petites structures du Sénégal.",
+};
 export const dynamic = "force-dynamic";
 
-const valeurs = [
-  {
-    titre: "Proximité",
-    texte:
-      "Un seul interlocuteur, des échanges clairs et des points réguliers, du premier rendez-vous jusqu'à la mise en ligne.",
-  },
-  {
-    titre: "Travail soigné",
-    texte:
-      "Des sites rapides, lisibles sur mobile et faciles à faire évoluer — sans effets inutiles ni surcharge.",
-  },
-  {
-    titre: "Transparence",
-    texte:
-      "Des devis détaillés, des délais annoncés et tenus, et aucun coût caché en cours de route.",
-  },
-];
-
-async function getMembres() {
-  try {
-    return await prisma.membre.findMany({ orderBy: { ordre: "asc" } });
-  } catch {
-    // La base n'est pas encore disponible (ex. build CI) — on affiche la page sans l'équipe.
-    return [];
-  }
-}
-
-function initiales(nom: string) {
-  return nom
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((mot) => mot[0]?.toUpperCase() ?? "")
-    .join("");
-}
-
 export default async function AProposPage() {
-  const membres = await getMembres();
+  const dict = getDict();
+  const t = dict.about;
+
+  const expertiseIcons = [MonitorIcon, PaletteIcon, ChatIcon];
+  const expertises = t.expertise.map((e, i) => ({
+    ...e,
+    Icon: expertiseIcons[i] ?? MonitorIcon,
+  }));
 
   return (
     <>
-      <section className="border-b border-bordure bg-fond-alt">
-        <Container className="py-16">
-          <h1 className="max-w-3xl text-3xl sm:text-4xl">À propos de Nardev</h1>
-          <p className="mt-4 max-w-2xl text-texte-secondaire">
-            Nardev est née de l&apos;envie de rendre le web professionnel
-            accessible aux petites structures : commerces, artisans,
-            associations et jeunes entreprises. Plutôt que de sous-traiter
-            chacun de notre côté, nous avons réuni nos compétences —
-            développement, design et communication — dans une seule équipe, avec
-            un
-            interlocuteur unique pour chaque client.
-          </p>
-        </Container>
-      </section>
+      <PageHero eyebrow={t.eyebrow} title={t.title} lead={t.intro} />
 
-      <section>
-        <Container className="py-16">
-          <h2 className="text-2xl">L&apos;équipe</h2>
-          <p className="mt-2 max-w-2xl text-texte-secondaire">
-            Quatre fondateurs, chacun responsable d&apos;un pan du projet de bout
-            en bout.
-          </p>
-
-          {membres.length === 0 ? (
-            <p className="mt-8 rounded border border-bordure bg-fond-alt p-4 text-sm text-texte-secondaire">
-              La présentation de l&apos;équipe sera visible dès que les membres
-              auront été ajoutés depuis le back-office.
-            </p>
-          ) : (
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {membres.map((membre) => (
-                <article
-                  key={membre.id}
-                  className="rounded border border-bordure p-5"
-                >
-                  {membre.photoUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={membre.photoUrl}
-                      alt={membre.nom}
-                      className="h-16 w-16 rounded-full object-cover"
-                    />
-                  ) : (
-                    <span
-                      aria-hidden
-                      className="flex h-16 w-16 items-center justify-center rounded-full bg-bleu/10 text-lg font-semibold text-bleu"
-                    >
-                      {initiales(membre.nom)}
-                    </span>
-                  )}
-                  <p className="mt-4 font-semibold text-marine">{membre.nom}</p>
-                  <p className="text-sm font-medium text-bleu">{membre.role}</p>
-                  <p className="mt-2 text-sm text-texte-secondaire">
-                    {membre.presentation}
-                  </p>
-                </article>
+      {/* 2 — Notre histoire (éditorial : texte + citation) */}
+      <Section>
+        <div className="grid gap-12 lg:grid-cols-[1.35fr_1fr] lg:items-start">
+          <Reveal>
+            <Eyebrow>{t.storyEyebrow}</Eyebrow>
+            <h2 className="mt-4 text-2xl font-bold tracking-tight text-marine sm:text-3xl">
+              {t.storyTitle}
+            </h2>
+            <div className="mt-5 space-y-4 leading-relaxed text-texte-secondaire">
+              {t.storyText.split("\n\n").map((p) => (
+                <p key={p}>{p}</p>
               ))}
             </div>
-          )}
+          </Reveal>
+          <Reveal
+            delay={120}
+            className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-marine via-marine-700 to-bleu-600 p-8 text-white lg:sticky lg:top-24"
+          >
+            <div aria-hidden className="bg-dots absolute inset-0 opacity-40" />
+            <p className="relative text-5xl font-serif leading-none text-white/25">
+              &ldquo;
+            </p>
+            <blockquote className="relative -mt-4 text-lg font-medium leading-relaxed">
+              {t.storyQuote}
+            </blockquote>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* 3 — Notre mission (déclaration pleine largeur, fond tinté) */}
+      <section className="bg-ciel py-16 sm:py-20">
+        <Container>
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <Eyebrow className="justify-center">{t.missionEyebrow}</Eyebrow>
+            <p className="mt-5 text-2xl font-semibold leading-snug text-marine sm:text-[1.9rem]">
+              {t.missionTitle}
+            </p>
+            <p className="mt-4 leading-relaxed text-texte-secondaire">
+              {t.missionText}
+            </p>
+          </Reveal>
         </Container>
       </section>
 
-      <section className="bg-fond-alt">
-        <Container className="py-16">
-          <h2 className="text-2xl">Nos valeurs</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {valeurs.map((valeur) => (
-              <div
-                key={valeur.titre}
-                className="rounded border border-bordure bg-white p-5"
-              >
-                <p className="font-semibold text-marine">{valeur.titre}</p>
-                <p className="mt-2 text-sm text-texte-secondaire">
-                  {valeur.texte}
-                </p>
+      {/* 4 — Nos trois expertises */}
+      <Section>
+        <SectionHeading
+          eyebrow={t.expertiseEyebrow}
+          title={t.expertiseTitle}
+          lead={t.expertiseLead}
+        />
+        <FeatureGrid features={expertises} columns={3} />
+      </Section>
+
+      {/* 5 — Comment nous travaillons (timeline) */}
+      <Section tone="muted">
+        <SectionHeading
+          eyebrow={t.processEyebrow}
+          title={t.processTitle}
+          lead={t.processLead}
+        />
+        <Steps steps={t.process} />
+      </Section>
+
+      {/* 6 — L'équipe (sans identités individuelles) */}
+      <Section>
+        <SectionHeading
+          eyebrow={t.teamEyebrow}
+          title={t.teamTitle}
+          lead={t.teamText}
+          align="center"
+        />
+      </Section>
+
+      {/* 7 — Nos valeurs */}
+      <Section tone="muted">
+        <SectionHeading eyebrow={t.valuesEyebrow} title={t.valuesTitle} />
+        <RevealGroup className="mt-12 grid gap-6 sm:grid-cols-2">
+          {t.values.map((valeur, i) => (
+            <RevealItem key={valeur.title} index={i}>
+              <div className="flex h-full gap-4 rounded-xl border border-bordure bg-white p-6 shadow-card">
+                <span className="mt-0.5 text-lg font-bold text-bleu/40">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p className="font-semibold text-marine">{valeur.title}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-texte-secondaire">
+                    {valeur.text}
+                  </p>
+                </div>
               </div>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </Section>
+
+      {/* 8 — Pourquoi Nardev (éditorial : titre sticky + liste) */}
+      <Section>
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:gap-16">
+          <Reveal className="lg:sticky lg:top-24 lg:self-start">
+            <Eyebrow>{t.whyEyebrow}</Eyebrow>
+            <h2 className="mt-4 text-2xl font-bold tracking-tight text-marine sm:text-3xl">
+              {t.whyTitle}
+            </h2>
+          </Reveal>
+          <RevealGroup className="divide-y divide-bordure border-y border-bordure">
+            {t.why.map((item, i) => (
+              <RevealItem key={item.title} index={i}>
+                <div className="flex gap-4 py-6">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-ciel text-bleu">
+                    <CheckIcon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-marine">{item.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-texte-secondaire">
+                      {item.text}
+                    </p>
+                  </div>
+                </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
+        </div>
+      </Section>
+
+      {/* 9 — Quelques chiffres */}
+      <section className="border-y border-bordure bg-fond-alt py-14">
+        <Container>
+          <Reveal>
+            <Eyebrow>{t.statsEyebrow}</Eyebrow>
+          </Reveal>
+          <RevealGroup className="mt-6 grid grid-cols-1 divide-y divide-bordure sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {t.stats.map((s, i) => (
+              <RevealItem key={s.label} index={i} className="py-6 sm:px-8 sm:py-0">
+                <Stat value={s.value} label={s.label} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </Container>
       </section>
 
-      <section>
-        <Container className="flex flex-col items-start gap-4 py-16">
-          <h2 className="text-2xl">Envie de travailler avec nous ?</h2>
-          <p className="max-w-xl text-texte-secondaire">
-            Présentez-nous votre projet, on revient vers vous rapidement.
-          </p>
-          <Button href="/contact">Nous contacter</Button>
-        </Container>
-      </section>
+      {/* 10 — CTA */}
+      <CtaPanel
+        title={t.ctaTitle}
+        text={t.ctaText}
+        primaryLabel={dict.cta.contactUs}
+        primaryHref="/contact"
+        secondaryLabel={dict.cta.seeWork}
+        secondaryHref="/portfolio"
+      />
     </>
   );
 }
