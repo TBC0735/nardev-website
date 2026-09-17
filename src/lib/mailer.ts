@@ -1,8 +1,8 @@
-// Envoi d'email via le compte Yahoo de l'agence (SMTP), pour une
-// délivrabilité fiable puisque l'email est envoyé et reçu sur le même
-// compte. Si EMAIL_USER ou EMAIL_APP_PASSWORD ne sont pas configurés,
-// l'envoi est ignoré silencieusement : le message reste enregistré en
-// base et consultable depuis /admin/messages.
+// Envoi d'email via un compte SMTP (Gmail, Yahoo, ...) utilisé comme
+// expéditeur technique — le destinataire réel (CONTACT_TO_EMAIL) peut être
+// une autre adresse. Si EMAIL_USER ou EMAIL_APP_PASSWORD ne sont pas
+// configurés, l'envoi est ignoré silencieusement : le message reste
+// enregistré en base et consultable depuis /admin/messages.
 
 import nodemailer from "nodemailer";
 
@@ -20,7 +20,7 @@ function getTransporteur() {
   if (!user || !pass) return null;
 
   transporteur ??= nodemailer.createTransport({
-    service: "yahoo",
+    service: process.env.EMAIL_SERVICE ?? "gmail",
     auth: { user, pass },
   });
   return transporteur;
