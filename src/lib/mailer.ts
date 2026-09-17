@@ -1,6 +1,10 @@
-// Envoi d'email via l'API REST de Resend (pas de SDK à installer).
-// Si RESEND_API_KEY n'est pas configuré, l'envoi est ignoré silencieusement :
-// le message reste enregistré en base et consultable depuis /admin/messages.
+// Envoi d'email via un compte SMTP (Gmail, Yahoo, ...) utilisé comme
+// expéditeur technique — le destinataire réel (CONTACT_TO_EMAIL) peut être
+// une autre adresse. Si EMAIL_USER ou EMAIL_APP_PASSWORD ne sont pas
+// configurés, l'envoi est ignoré silencieusement : le message reste
+// enregistré en base et consultable depuis /admin/messages.
+
+import nodemailer from "nodemailer";
 
 type Envoi = {
   sujet: string;
@@ -8,42 +12,43 @@ type Envoi = {
   repondreA?: string;
 };
 
-const FROM = process.env.CONTACT_FROM_EMAIL ?? "Nardev <onboarding@resend.dev>";
+let transporteur: ReturnType<typeof nodemailer.createTransport> | null = null;
+
+function getTransporteur() {
+  const user = process.env.EMAIL_USER;
+  const pass = process.env.EMAIL_APP_PASSWORD;
+  if (!user || !pass) return null;
+
+  transporteur ??= nodemailer.createTransport({
+    service: process.env.EMAIL_SERVICE ?? "gmail",
+    auth: { user, pass },
+  });
+  return transporteur;
+}
 
 export async function envoyerEmailEquipe({ sujet, texte, repondreA }: Envoi) {
-  const cle = process.env.RESEND_API_KEY;
-  const destinataire = process.env.CONTACT_TO_EMAIL;
+  const user = process.env.EMAIL_USER;
+  const destinataire = process.env.CONTACT_TO_EMAIL ?? user;
+  const transport = getTransporteur();
 
-  if (!cle || !destinataire) {
+  if (!transport || !destinataire) {
     console.warn(
-      "[contact] RESEND_API_KEY ou CONTACT_TO_EMAIL absent — email non envoyé (message tout de même enregistré).",
+      "[contact] EMAIL_USER/EMAIL_APP_PASSWORD ou CONTACT_TO_EMAIL absent — email non envoyé (message tout de même enregistré).",
     );
     return { envoye: false as const };
   }
 
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${cle}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: FROM,
-        to: [destinataire],
-        subject: sujet,
-        text: texte,
-        ...(repondreA ? { reply_to: repondreA } : {}),
-      }),
+    await transport.sendMail({
+      from: `Nardev <${user}>`,
+      to: destinataire,
+      subject: sujet,
+      text: texte,
+      ...(repondreA ? { replyTo: repondreA } : {}),
     });
-
-    if (!res.ok) {
-      console.error("[contact] Échec envoi Resend :", res.status, await res.text());
-      return { envoye: false as const };
-    }
     return { envoye: true as const };
   } catch (error) {
-    console.error("[contact] Erreur réseau Resend :", error);
+    console.error("[contact] Erreur envoi email :", error);
     return { envoye: false as const };
   }
 }
