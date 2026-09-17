@@ -394,7 +394,7 @@ const fr = {
     dataRetention:
       "Conservation : les messages sont conservés le temps nécessaire au suivi de la demande, puis supprimés au plus tard 24 mois après le dernier échange.",
     dataRights:
-      "Vos droits : conformément à la loi sénégalaise n° 2008-12 du 25 janvier 2008 sur la protection des données à caractère personnel, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Écrivez à nardev.agency@gmail.com. Vous pouvez également saisir la Commission de protection des données personnelles (CDP) du Sénégal.",
+      "Vos droits : conformément à la loi sénégalaise n° 2008-12 du 25 janvier 2008 sur la protection des données à caractère personnel, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Écrivez à nardev.contact@gmail.com. Vous pouvez également saisir la Commission de protection des données personnelles (CDP) du Sénégal.",
     cookiesTitle: "Cookies",
     cookiesBody:
       "Le site public ne dépose aucun cookie de mesure d'audience ni de publicité. Un cookie de session est utilisé uniquement dans l'espace d'administration réservé à l'équipe, pour maintenir la connexion.",
@@ -794,7 +794,7 @@ const en: Dict = {
     dataRetention:
       "Retention: messages are kept as long as needed to handle the request, then deleted at the latest 24 months after the last exchange.",
     dataRights:
-      "Your rights: under Senegalese law no. 2008-12 of 25 January 2008 on personal data protection, you have a right of access, rectification and deletion of your data. Write to nardev.agency@gmail.com. You may also contact Senegal's Personal Data Protection Commission (CDP).",
+      "Your rights: under Senegalese law no. 2008-12 of 25 January 2008 on personal data protection, you have a right of access, rectification and deletion of your data. Write to nardev.contact@gmail.com. You may also contact Senegal's Personal Data Protection Commission (CDP).",
     cookiesTitle: "Cookies",
     cookiesBody:
       "The public site sets no analytics or advertising cookies. A session cookie is used only in the team's admin area, to keep you signed in.",
