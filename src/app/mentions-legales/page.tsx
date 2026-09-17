@@ -29,10 +29,10 @@ export default function MentionsLegalesPage() {
                 <li>
                   {t.editorContact}{" "}
                   <a
-                    href="mailto:nardev.contact@gmail.com"
+                    href="mailto:nardev.contact@yahoo.com"
                     className="no-underline hover:underline"
                   >
-                    nardev.contact@gmail.com
+                    nardev.contact@yahoo.com
                   </a>
                 </li>
               </ul>

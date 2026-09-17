@@ -1,8 +1,8 @@
-// Envoi d'email via le compte Gmail de l'agence (SMTP), pour une délivrabilité
-// fiable puisque l'email est envoyé et reçu sur le même compte. Si GMAIL_USER
-// ou GMAIL_APP_PASSWORD ne sont pas configurés, l'envoi est ignoré
-// silencieusement : le message reste enregistré en base et consultable
-// depuis /admin/messages.
+// Envoi d'email via un compte SMTP (Gmail, Yahoo, ...) utilisé comme
+// expéditeur technique — le destinataire réel (CONTACT_TO_EMAIL) peut être
+// une autre adresse. Si EMAIL_USER ou EMAIL_APP_PASSWORD ne sont pas
+// configurés, l'envoi est ignoré silencieusement : le message reste
+// enregistré en base et consultable depuis /admin/messages.
 
 import nodemailer from "nodemailer";
 
@@ -15,25 +15,25 @@ type Envoi = {
 let transporteur: ReturnType<typeof nodemailer.createTransport> | null = null;
 
 function getTransporteur() {
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_APP_PASSWORD;
+  const user = process.env.EMAIL_USER;
+  const pass = process.env.EMAIL_APP_PASSWORD;
   if (!user || !pass) return null;
 
   transporteur ??= nodemailer.createTransport({
-    service: "gmail",
+    service: process.env.EMAIL_SERVICE ?? "gmail",
     auth: { user, pass },
   });
   return transporteur;
 }
 
 export async function envoyerEmailEquipe({ sujet, texte, repondreA }: Envoi) {
-  const user = process.env.GMAIL_USER;
+  const user = process.env.EMAIL_USER;
   const destinataire = process.env.CONTACT_TO_EMAIL ?? user;
   const transport = getTransporteur();
 
   if (!transport || !destinataire) {
     console.warn(
-      "[contact] GMAIL_USER/GMAIL_APP_PASSWORD ou CONTACT_TO_EMAIL absent — email non envoyé (message tout de même enregistré).",
+      "[contact] EMAIL_USER/EMAIL_APP_PASSWORD ou CONTACT_TO_EMAIL absent — email non envoyé (message tout de même enregistré).",
     );
     return { envoye: false as const };
   }

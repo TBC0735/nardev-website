@@ -73,13 +73,13 @@ export default async function ContactPage() {
               <ul className="mt-4 space-y-3 text-sm">
                 <li>
                   <a
-                    href="mailto:nardev.contact@gmail.com"
+                    href="mailto:nardev.contact@yahoo.com"
                     className="inline-flex items-center gap-2 font-medium text-texte no-underline hover:text-bleu"
                   >
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
                       <MailIcon className="h-4 w-4" />
                     </span>
-                    nardev.contact@gmail.com
+                    nardev.contact@yahoo.com
                   </a>
                 </li>
                 <li className="inline-flex items-center gap-2 font-medium text-texte">
