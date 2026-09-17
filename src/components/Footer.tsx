@@ -116,8 +116,15 @@ export function Footer({ dict }: { dict: Dict }) {
               <li className="inline-flex items-center gap-2">
                 <PhoneIcon className="h-4 w-4" /> +221 77 313 29 87
               </li>
-              <li className="inline-flex items-center gap-2">
-                <WhatsappIcon className="h-4 w-4" /> WhatsApp {t.soon}
+              <li>
+                <a
+                  href="https://wa.me/221773132987"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 no-underline hover:text-white"
+                >
+                  <WhatsappIcon className="h-4 w-4" /> WhatsApp
+                </a>
               </li>
             </ul>
           </div>
