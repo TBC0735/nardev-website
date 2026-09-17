@@ -88,11 +88,18 @@ export default async function ContactPage() {
                   </span>
                   +221 77 313 29 87
                 </li>
-                <li className="inline-flex items-center gap-2 text-texte-secondaire">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
-                    <WhatsappIcon className="h-4 w-4" />
-                  </span>
-                  WhatsApp {dict.footer.soon}
+                <li>
+                  <a
+                    href="https://wa.me/221773132987"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-medium text-texte no-underline hover:text-bleu"
+                  >
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-bleu ring-1 ring-bordure">
+                      <WhatsappIcon className="h-4 w-4" />
+                    </span>
+                    WhatsApp
+                  </a>
                 </li>
               </ul>
             </div>
